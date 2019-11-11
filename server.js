@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/dist/video-portfolio-app'));
 
 // Send all requests to index.html
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/video-portfolio-app/index.html'));
 });
 
 // default Heroku PORT
