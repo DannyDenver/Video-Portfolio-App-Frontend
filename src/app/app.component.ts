@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private usersService: UsersService) {}
 
   ngOnInit() {
-    this.usersService.getGreeting().subscribe((greeting: string) => this.greeting = greeting)
+    this.usersService.getGreeting().subscribe(greeting => this.greeting = greeting)
   }
   title = 'video-portfolio-app';
 }
