@@ -1,10 +1,9 @@
 const express = require('express');
-const path = require('path');
 const app = express();
 
 // Serve static files....
-// app.use(express.static(__dirname + '/dist/video-portfolio-app'));
-// app.use(express.static('build'));
+ app.use(express.static(__dirname + '/dist'));
+ //app.use(express.static('build'));
 
 // Send all requests to index.html
 // app.get('*', function (req, res) {
