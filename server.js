@@ -3,19 +3,8 @@ const app = express();
 
 // Serve static files....
  app.use(express.static(__dirname + '/dist'));
- //app.use(express.static('build'));
 
-// Send all requests to index.html
-// app.get('*', function (req, res) {
-//   const index = path.join(__dirname, 'build', 'index.html');
-//   res.sendFile(index);
-// });
-
-// app.get('/*', function(req, res) {
-//   res.sendFile(path.join(__dirname + '/dist/video-portfolio-app/index.html'));
-// });
-
-app.get('*', function (req, res) {
+ app.get('*', function (req, res) {
   res.sendFile('index.html');
 });
 
