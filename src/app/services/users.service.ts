@@ -11,6 +11,6 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getGreeting() {
-    return this.http.get(this.url + '/coolkids', {responseType: 'text'})
+    return this.http.get(this.url + '/hello', {responseType: 'text'})
   }
 }
