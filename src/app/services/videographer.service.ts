@@ -19,9 +19,9 @@ export class VideographerService {
 
   getVideographer(firstName: string, lastName: string) {
     const videogoo = this.videographers.find(function(vid) {
-        return vid.lastName.toLowerCase() === lastName && vid.lastName.toLowerCase() === lastName;
+        return vid.firstName.toLowerCase() === firstName && vid.lastName.toLowerCase() === lastName;
     }); 
-    //const videogoo = this.videographers[0];
+
     return observableOf(videogoo);
   }
 }
