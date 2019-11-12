@@ -9,11 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from './core/header/header.component';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
+import { VideographerListComponent } from './pages/videographer-list/videographer-list.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    PortfolioComponent,
+    VideographerListComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +26,8 @@ import { HeaderComponent } from './core/header/header.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule
   ],
   providers: [
     UsersService

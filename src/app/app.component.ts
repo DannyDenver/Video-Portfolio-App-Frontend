@@ -7,21 +7,7 @@ import { Videographer } from './shared/models/videographer';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  greeting = "";
-  videographers: Videographer[] = [];
+export class AppComponent {
 
-  constructor(private usersService: UsersService) {}
 
-  ngOnInit() {
-    this.usersService.getGreeting().subscribe(greeting => this.greeting = greeting)
-
-    this.videographers = [new Videographer('Brad', 'Taylor', 'Tallahassee, FL', 'Videographer at FSU', null),
-    new Videographer('Daniel', 'Taylor', 'Denver, Co', 'Videographer in Denver', null),
-    new Videographer('Michael', 'Bubley', 'LA, CA', 'Videographer in LA', null),
-    new Videographer('Arnold', 'Schwarz', 'SF, CA', 'Videographer in SF', null)
-  ]
-
-  }
-  title = 'video-portfolio-app';
 }
