@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { VideographerListComponent } from './pages/videographer-list/videographer-list.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 
 const routes: Routes = [
+  { path: 'edit-profile', component: EditProfileComponent},
   { path: ':name', component: PortfolioComponent },
-  { path: '', component: VideographerListComponent}
+  { path: '', component: VideographerListComponent},
 
 ];
 

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiServerUrl: 'https://dan-man-api-test.herokuapp.com/'
+  apiServerUrl: 'https://video-portfolio-backend.herokuapp.com'
 };
 
 /*

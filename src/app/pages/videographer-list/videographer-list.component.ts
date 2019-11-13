@@ -16,7 +16,7 @@ export class VideographerListComponent implements OnInit {
   constructor(private usersService: UsersService, private videographerService: VideographerService) {}
 
   ngOnInit() {
-    this.usersService.getGreeting().subscribe(greeting => this.greeting = greeting)
+    // this.usersService.getGreeting().subscribe(greeting => this.greeting = greeting)
 
     this.videographerService.getVideographers().subscribe(videogoos => this.videographers = videogoos);
   }
