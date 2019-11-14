@@ -19,9 +19,15 @@ export class VideographerListComponent implements OnInit {
     private videographerService: VideographerService) {}
 
   ngOnInit() {
-    // this.usersService.getGreeting().subscribe(greeting => this.greeting = greeting)
-
     this.videographerService.getVideographers().subscribe(videogoos => this.videographers = videogoos);
+  }
+
+  deletePortfolio(id: number, index: number) {
+    this.videographerService.deleteVideographer(id).subscribe(res => {
+      if(res['success'] == true) {
+        this.videographers.splice(index, 1)
+      }
+    })
   }
 
   getLink(vg: Videographer) {

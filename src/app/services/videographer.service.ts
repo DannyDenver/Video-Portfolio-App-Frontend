@@ -34,8 +34,12 @@ constructor(private http: HttpClient, private authService: AuthService) { }
     return this.http.get<Videographer>(this.url + '/videographers/' + name)
   }
 
+  deleteVideographer(id: number) {
+    return this.http.delete(this.url + '/videographers/' + id, this.getHeaders())
+  }
+
   addVideographer(videographer: Videographer) {  
     const options = {headers: {'Content-Type': 'application/json'}};
-    return this.http.post(this.url + '/videographers', videographer, options)
+    return this.http.post(this.url + '/videographers', videographer, this.getHeaders())
   }
 }

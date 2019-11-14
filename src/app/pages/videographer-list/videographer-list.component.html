@@ -7,23 +7,25 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-sm-offset-3 col-sm-6 col-xs-12">
-        <mat-card>            
+        <mat-card>
             <mat-card-header>
                 <mat-card-title>
-                        Check out one of our videographer portfolios:
+                    Check out one of our videographer portfolios:
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <mat-list>
-                        <mat-list-item *ngFor="let vg of videographers" class="pointer">
-                          <img  routerLink="{{getLink(vg)}}" matListAvatar src="{{ vg.profilePictureUrl}}" alt="{{vg.firstName + ' ' + vg.lastName}}">
-                          <h3 routerLink="{{getLink(vg)}}" matLine> {{vg.firstName + ' ' + vg.lastName}} </h3>
-                          <p matLine>
-                                <span> {{vg.location}} </span>
-                            </p>
-                            <mat-icon *ngIf="auth.can('post:videographer')" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
-                        </mat-list-item>
-                </mat-list>                
+                    <mat-list-item *ngFor="let vg of videographers; let i = index" class="pointer">
+                        <img routerLink="{{getLink(vg)}}" matListAvatar src="{{ vg.profilePictureUrl}}"
+                            alt="{{vg.firstName + ' ' + vg.lastName}}">
+                        <h3 routerLink="{{getLink(vg)}}" matLine> {{vg.firstName + ' ' + vg.lastName}} </h3>
+                        <p matLine routerLink="{{getLink(vg)}}">
+                            <span>{{vg.location}}</span>
+                        </p>
+                        <mat-icon *ngIf="auth.can('post:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
+                            aria-label="Example delete icon">delete</mat-icon>
+                    </mat-list-item>
+                </mat-list>
             </mat-card-content>
         </mat-card>
     </div>
