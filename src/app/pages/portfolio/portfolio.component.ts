@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Videographer } from 'src/app/shared/models/videographer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideographerService } from 'src/app/services/videographer.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -13,7 +14,11 @@ export class PortfolioComponent implements OnInit {
   videographerName: string;
   editLink = "";
 
-  constructor(private route: ActivatedRoute, private router: Router, private videographerService: VideographerService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private videographerService: VideographerService,
+    private auth: AuthService
+    ) { }
 
   ngOnInit() {
     let name = this.route.snapshot.paramMap.get('name');

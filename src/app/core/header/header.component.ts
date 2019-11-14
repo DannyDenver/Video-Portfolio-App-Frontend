@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor() { }
-
+  loginURL: string;
+  constructor(public auth: AuthService) {
+    this.loginURL = auth.build_login_link();
+   }
 }

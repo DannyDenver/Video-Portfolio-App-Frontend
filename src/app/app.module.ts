@@ -16,6 +16,7 @@ import { EditProfileComponent } from './pages/edit-profile/edit-profile.componen
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule
   ],
   providers: [
-    UsersService
+    UsersService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

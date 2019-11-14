@@ -1,10 +1,9 @@
-
 <div class="container">
-    <div class="row justify-content-end">
-            <div class="col-sm-2">
-                <a mat-raised-button routerLink="edit">Edit Profile</a>
-            </div>
+    <div *ngIf="auth.can('patch:videographer')"class="row justify-content-end">
+        <div class="col-sm-2">
+            <a mat-raised-button routerLink="edit">Edit Profile</a>
         </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-10">
             <mat-card *ngIf="videographer">
@@ -27,41 +26,26 @@
                 </mat-card-content>
             </mat-card>
 
-            <mat-card>
+            <!-- <mat-card>
                 <mat-card-title>
                     The Baddest Lil' Show
                 </mat-card-title>
-                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/q6PtKbPiPX4"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                        <mat-card-content>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/q6PtKbPiPX4" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <mat-card-content>
 
                     <div class="row">
                         <div class="col-sm-10 offset-md-1">
-                            Departure so attention pronounce satisfied daughters am. But shy tedious pressed studied opinion entered windows off. Advantage dependent suspicion convinced provision him yet. Timed balls match at by rooms we. Fat not boy neat left had with past here call. Court nay merit few nor party learn. Why our year her eyes know even how. Mr immediate remaining conveying allowance do or.
+                            Departure so attention pronounce satisfied daughters am. But shy tedious pressed studied
+                            opinion entered windows off. Advantage dependent suspicion convinced provision him yet.
+                            Timed balls match at by rooms we. Fat not boy neat left had with past here call. Court nay
+                            merit few nor party learn. Why our year her eyes know even how. Mr immediate remaining
+                            conveying allowance do or.
                         </div>
                     </div>
                 </mat-card-content>
-            </mat-card>
-
-            <mat-card>
-                    <mat-card-title>
-                        Cutting PSA- it hurts
-                    </mat-card-title>
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/zUDpdSu2PGQ"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                            <mat-card-content>
-    
-                        <div class="row">
-                            <div class="col-sm-10 offset-md-1">
-                                Departure so attention pronounce satisfied daughters am. But shy tedious pressed studied opinion entered windows off. Advantage dependent suspicion convinced provision him yet. Timed balls match at by rooms we. Fat not boy neat left had with past here call. Court nay merit few nor party learn. Why our year her eyes know even how. Mr immediate remaining conveying allowance do or.
-                            </div>
-                        </div>
-                    </mat-card-content>
-                </mat-card>
+            </mat-card> -->
         </div>
     </div>
 </div>
