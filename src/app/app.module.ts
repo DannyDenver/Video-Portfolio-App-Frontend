@@ -17,6 +17,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from './services/auth.service';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AuthService } from './services/auth.service';
     MatButtonModule,
     MatInputModule,
     MatListModule,
+    MatIconModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule
