@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, RequiredValidator, FormGroup, Validators } from '@angular/forms';
 import { Videographer } from 'src/app/shared/models/videographer';
 import { VideographerService } from 'src/app/services/videographer.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,10 +12,24 @@ import { VideographerService } from 'src/app/services/videographer.service';
 export class EditProfileComponent implements OnInit {
   profileForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private videoService: VideographerService) { }
+  constructor(private fb: FormBuilder,
+          private route: ActivatedRoute,
+          private videoService: VideographerService) { }
 
   ngOnInit() {
-    this.profileForm = this.fb.group({
+    let name = this.route.snapshot.paramMap.get('name');
+    if (name) {
+      this.videoService.getVideographer(name).subscribe((videogoo: Videographer) =>  {
+        this.profileForm = this.fb.group({
+          firstName: [videogoo.firstName, Validators.required],
+          lastName: [videogoo.lastName, Validators.required],
+          location: [videogoo.location, Validators.required],
+          bio: [videogoo.bio, Validators.required],
+          profilePictureUrl: [videogoo.profilePictureUrl, Validators.required]
+        })
+    })
+  }else {
+      this.profileForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       location: ['', Validators.required],
@@ -23,18 +38,26 @@ export class EditProfileComponent implements OnInit {
     })
   }
 
+
+  }
+
   onSubmit() {
     if (this.profileForm.valid) {
       const videogoo = new Videographer(null,
-        this.profileForm.get('firstName').value,
-        this.profileForm.get('lastName').value,
-        this.profileForm.get('location').value,
-        this.profileForm.get('bio').value,
-        this.profileForm.get('profilePictureUrl').value)
+        this.getValue('firstName'),
+        this.getValue('lastName'),
+        this.getValue('location'),
+        this.getValue('bio'),
+        this.getValue('profilePictureUrl'))
 
         this.videoService.addVideographer(videogoo).subscribe(res => {
           console.log(res)
         })
     }
   }
+
+  private getValue(field: string) {
+    return this.profileForm.get(field).value.trim();
+  }
+
 }

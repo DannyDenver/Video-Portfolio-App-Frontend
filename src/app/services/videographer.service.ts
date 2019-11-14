@@ -20,12 +20,8 @@ export class VideographerService {
     return this.http.get<Videographer[]>(this.url + '/videographers')
   }
 
-  getVideographer(firstName: string, lastName: string) {
-    const videogoo = this.videographers.find(function(vid) {
-        return vid.firstName.toLowerCase() === firstName && vid.lastName.toLowerCase() === lastName;
-    }); 
-
-    return observableOf(videogoo);
+  getVideographer(name: string) {
+    return this.http.get<Videographer>(this.url + '/videographers/' + name)
   }
 
   addVideographer(videographer: Videographer) {  

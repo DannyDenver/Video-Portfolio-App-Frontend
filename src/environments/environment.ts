@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiServerUrl: 'https://video-portfolio-backend.herokuapp.com'
+  apiServerUrl: 'http://127.0.0.1:5000'
 };
 
 /*

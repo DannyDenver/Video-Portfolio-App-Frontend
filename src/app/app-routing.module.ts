@@ -7,7 +7,11 @@ import { EditProfileComponent } from './pages/edit-profile/edit-profile.componen
 
 const routes: Routes = [
   { path: 'edit-profile', component: EditProfileComponent},
-  { path: ':name', component: PortfolioComponent },
+  { path: ':name',
+  children: [
+    { path: 'edit', component: EditProfileComponent },
+    { path: '', component: PortfolioComponent }
+  ]},
   { path: '', component: VideographerListComponent},
 
 ];
