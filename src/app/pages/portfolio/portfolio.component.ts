@@ -17,7 +17,7 @@ export class PortfolioComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private videographerService: VideographerService,
-    private auth: AuthService
+    public auth: AuthService
     ) { }
 
   ngOnInit() {

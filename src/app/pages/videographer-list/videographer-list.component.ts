@@ -15,7 +15,7 @@ export class VideographerListComponent implements OnInit {
   title = 'video-portfolio-app';
 
   constructor(private usersService: UsersService,
-    private auth: AuthService,
+    public auth: AuthService,
     private videographerService: VideographerService) {}
 
   ngOnInit() {
