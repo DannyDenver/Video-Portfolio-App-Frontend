@@ -1,3 +1,5 @@
+import { Video } from './video';
+
 export class Videographer {
     constructor(id, firstName, lastName, location, bio, profilePictureUrl) {
         this.id = id;
@@ -14,4 +16,5 @@ export class Videographer {
     location: string;
     bio: string;
     profilePictureUrl: string;
+    videos: Video[]
 }

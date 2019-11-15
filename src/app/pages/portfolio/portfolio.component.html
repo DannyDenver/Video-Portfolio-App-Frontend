@@ -1,15 +1,16 @@
 <div class="container">
-    <div *ngIf="auth.can('patch:videographer') || auth.can('delete:videographer')" class="row justify-content-center">
+    <div *ngIf="auth.can('patch:videographer')" class="row justify-content-center">
         <div class="col-sm-12 col-md-10">
             <mat-card>
                 <a mat-raised-button class="ml-auto" routerLink="edit">Edit Portfolio</a>
-                <a mat-raised-button class="ml-auto" (click)="deletePortfolio()" >Delete Portfolio</a>
+                <a mat-raised-button class="ml-auto" (click)="addVideo()">Add Video</a>
+                <a mat-raised-button class="ml-auto" *ngIf="auth.can('delete:videographer')" (click)="deletePortfolio()" >Delete Portfolio</a>
             </mat-card>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div *ngIf="videographer" class="row justify-content-center">
         <div class="col-sm-12 col-md-10">
-            <mat-card *ngIf="videographer">
+            <mat-card>
                 <mat-card-content>
                     <div class="row">
                         <div class="col-sm-12 col-md-3">
@@ -29,26 +30,24 @@
                 </mat-card-content>
             </mat-card>
 
-            <!-- <mat-card>
+            <mat-card *ngFor="let vd of videographer.videos">
                 <mat-card-title>
-                    The Baddest Lil' Show
+                    {{vd.title}}
                 </mat-card-title>
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/q6PtKbPiPX4" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
+                <iframe width="100%" height="315" class="e2e-iframe-trusted-src" [src]="getVideoLink(vd.url)" frameborder="0"
+                   ></iframe>
                 <mat-card-content>
 
                     <div class="row">
                         <div class="col-sm-10 offset-md-1">
-                            Departure so attention pronounce satisfied daughters am. But shy tedious pressed studied
-                            opinion entered windows off. Advantage dependent suspicion convinced provision him yet.
-                            Timed balls match at by rooms we. Fat not boy neat left had with past here call. Court nay
-                            merit few nor party learn. Why our year her eyes know even how. Mr immediate remaining
-                            conveying allowance do or.
+                            {{vd.description}}
                         </div>
                     </div>
                 </mat-card-content>
-            </mat-card> -->
+                <mat-card-footer *ngIf="auth.can('delete:video')">
+                        <a mat-raised-button class="ml-auto" (click)="removeVideo(vd.id)">Remove Video</a>
+                </mat-card-footer>
+            </mat-card>
         </div>
     </div>
 </div>

@@ -3,6 +3,8 @@ import { Videographer } from 'src/app/shared/models/videographer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideographerService } from 'src/app/services/videographer.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { VideosService } from 'src/app/services/videos.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-portfolio',
@@ -12,18 +14,24 @@ import { AuthService } from 'src/app/services/auth.service';
 export class PortfolioComponent implements OnInit {
   videographer: Videographer;
   videographerName: string;
+  name: string;
   editLink = "";
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private videographerService: VideographerService,
-    public auth: AuthService
+    private videosService: VideosService,
+    public auth: AuthService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
-    let name = this.route.snapshot.paramMap.get('name');
-    this.editLink = name + '/edit';
-    this.videographerService.getVideographer(name).subscribe(videogoo => this.videographer = videogoo);
+    this.name = this.route.snapshot.paramMap.get('name');
+    this.editLink = this.name + '/edit';
+    this.videographerService.getVideographer(this.name).subscribe(videogoo => {
+      
+      this.videographer = videogoo
+    });
   }
 
   editProfile() {
@@ -36,5 +44,20 @@ export class PortfolioComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
+  }
+
+  addVideo() {
+    this.router.navigate([this.videographer.id, 'add-video'], { relativeTo: this.route })
+  }
+
+  removeVideo(id: number){
+    this.videosService.deleteVideo(id).subscribe(() => {
+      this.videographer.videos = this.videographer.videos.filter(x => x.id !== id);
+    })
+  }
+
+  getVideoLink(url: string) {
+    let dangerousVideoUrl = 'https://www.youtube.com/embed/' + url
+    return this.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
   }
 }

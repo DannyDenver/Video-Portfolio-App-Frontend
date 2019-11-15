@@ -74,5 +74,4 @@ export class EditProfileComponent implements OnInit {
   private getValue(field: string) {
     return this.profileForm.get(field).value.trim();
   }
-
 }

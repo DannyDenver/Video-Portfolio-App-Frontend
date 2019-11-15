@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from './services/auth.service';
 import {MatIconModule} from '@angular/material/icon';
+import { AddVideoComponent } from './pages/add-video/add-video.component';
+import { VideosService } from './services/videos.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {MatIconModule} from '@angular/material/icon';
     HeaderComponent,
     PortfolioComponent,
     VideographerListComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    AddVideoComponent
   ],
   imports: [
     BrowserModule,
@@ -39,11 +42,12 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     UsersService,
-    AuthService
+    AuthService,
+    VideosService
   ],
   bootstrap: [AppComponent]
 })

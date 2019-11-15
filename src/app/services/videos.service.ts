@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { Video } from '../shared/models/video';
 import { environment } from 'src/environments/environment';
+import { Video } from '../shared/models/video';
 
 @Injectable({
   providedIn: 'root'
