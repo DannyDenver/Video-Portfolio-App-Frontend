@@ -43,7 +43,6 @@ constructor(private http: HttpClient, private authService: AuthService) { }
   }
 
   addVideographer(videographer: Videographer) {  
-    const options = {headers: {'Content-Type': 'application/json'}};
     return this.http.post(this.url + '/videographers', videographer, this.getHeaders())
   }
 }
