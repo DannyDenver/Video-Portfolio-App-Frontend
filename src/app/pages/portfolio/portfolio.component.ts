@@ -18,11 +18,11 @@ export class PortfolioComponent implements OnInit {
     private router: Router,
     private videographerService: VideographerService,
     public auth: AuthService
-    ) { }
+  ) { }
 
   ngOnInit() {
     let name = this.route.snapshot.paramMap.get('name');
-    this.editLink = name +'/edit';
+    this.editLink = name + '/edit';
     this.videographerService.getVideographer(name).subscribe(videogoo => this.videographer = videogoo);
   }
 
@@ -30,4 +30,11 @@ export class PortfolioComponent implements OnInit {
     this.router.navigate([name, 'edit'])
   }
 
+  deletePortfolio() {
+    this.videographerService.deleteVideographer(this.videographer.id).subscribe(res => {
+      if (res['success'] == true) {
+        this.router.navigate(['/']);
+      }
+    });
+  }
 }

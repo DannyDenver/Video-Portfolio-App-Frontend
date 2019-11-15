@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, RequiredValidator, FormGroup, Validators } from '@angular/forms';
 import { Videographer } from 'src/app/shared/models/videographer';
 import { VideographerService } from 'src/app/services/videographer.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,15 +11,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditProfileComponent implements OnInit {
   profileForm: FormGroup;
+  private videogoo: Videographer;
+  
 
   constructor(private fb: FormBuilder,
-          private route: ActivatedRoute,
-          private videoService: VideographerService) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private videoService: VideographerService) { }
 
   ngOnInit() {
     let name = this.route.snapshot.paramMap.get('name');
     if (name) {
-      this.videoService.getVideographer(name).subscribe((videogoo: Videographer) =>  {
+      this.videoService.getVideographer(name).subscribe((videogoo: Videographer) => {
+        this.videogoo = videogoo;
         this.profileForm = this.fb.group({
           firstName: [videogoo.firstName, Validators.required],
           lastName: [videogoo.lastName, Validators.required],
@@ -27,18 +31,20 @@ export class EditProfileComponent implements OnInit {
           bio: [videogoo.bio, Validators.required],
           profilePictureUrl: [videogoo.profilePictureUrl, Validators.required]
         })
-    })
-  }else {
+      })
+    } else {
       this.profileForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      location: ['', Validators.required],
-      bio: ['', Validators.required],
-      profilePictureUrl: ['', Validators.required]
-    })
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        location: ['', Validators.required],
+        bio: ['', Validators.required],
+        profilePictureUrl: ['', Validators.required]
+      })
+    }
   }
 
-
+  cancelEdits() {
+    this.router.navigate(name)
   }
 
   onSubmit() {
@@ -50,9 +56,18 @@ export class EditProfileComponent implements OnInit {
         this.getValue('bio'),
         this.getValue('profilePictureUrl'))
 
+      if (this.videogoo) {
+        videogoo.id = this.videogoo.id
+        this.videoService.patchVideographer(videogoo).subscribe(res => {
+          console.log(res)
+          this.router.navigate(['../'], { relativeTo: this.route })
+        })
+      } else {
         this.videoService.addVideographer(videogoo).subscribe(res => {
           console.log(res)
+          this.router.navigate(['/'])
         })
+      }
     }
   }
 

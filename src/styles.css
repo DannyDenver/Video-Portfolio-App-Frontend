@@ -7,6 +7,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     cursor: pointer;
 }
 
+.mat-button-base {
+    margin: 5px !important;
+}
+
 mat-card {
     margin-bottom: 15px;
     margin-top: 15px;

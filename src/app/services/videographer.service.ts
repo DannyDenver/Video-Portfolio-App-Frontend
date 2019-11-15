@@ -34,6 +34,10 @@ constructor(private http: HttpClient, private authService: AuthService) { }
     return this.http.get<Videographer>(this.url + '/videographers/' + name)
   }
 
+  patchVideographer(videographer: Videographer) {
+    return this.http.patch(this.url + '/videographers', videographer, this.getHeaders())
+  }
+
   deleteVideographer(id: number) {
     return this.http.delete(this.url + '/videographers/' + id, this.getHeaders())
   }
