@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EditProfileComponent implements OnInit {
   profileForm: FormGroup;
-  private videogoo: Videographer;
+  videogoo: Videographer;
   
 
   constructor(private fb: FormBuilder,
