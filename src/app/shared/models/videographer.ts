@@ -11,6 +11,7 @@ export class Videographer {
     }
 
     id: number;
+    createdBy: string;
     firstName: string;
     lastName: string;
     location: string;

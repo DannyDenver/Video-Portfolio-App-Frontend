@@ -17,9 +17,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from './services/auth.service';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { AddVideoComponent } from './pages/add-video/add-video.component';
 import { VideosService } from './services/videos.service';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { VideosService } from './services/videos.service';
     MatListModule,
     MatIconModule,
     MatFormFieldModule,
+    MatTabsModule,
     ReactiveFormsModule,
     FormsModule,
   ],

@@ -8,13 +8,43 @@
 <div class="row justify-content-center">
     <div class="col-sm-offset-3 col-sm-6 col-xs-12">
         <mat-card>
-            <mat-card-header>
+            <mat-card-header  *ngIf="!auth.can('post:videographer')">
                 <mat-card-title>
                     Check out one of our videographer portfolios:
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <mat-list>
+                <mat-tab-group *ngIf="auth.can('post:videographer')">
+                    <mat-tab label="Your Portfolios"> 
+                    <mat-list>
+                            <mat-list-item *ngFor="let vg of usersVideographers(); let i = index" class="pointer">
+                                <img routerLink="{{getLink(vg)}}" matListAvatar src="{{ vg.profilePictureUrl}}"
+                                    alt="{{vg.firstName + ' ' + vg.lastName}}">
+                                <h3 routerLink="{{getLink(vg)}}" matLine> {{vg.firstName + ' ' + vg.lastName}} </h3>
+                                <p matLine routerLink="{{getLink(vg)}}">
+                                    <span>{{vg.location}}</span>
+                                </p>
+                                <mat-icon *ngIf="auth.createdBy(vg.createdBy) && auth.can('delete:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
+                                    aria-label="Example delete icon">delete</mat-icon>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-tab>
+                    <mat-tab label="Other Portfolios">                        
+                        <mat-list>
+                                <mat-list-item *ngFor="let vg of otherVideographers(); let i = index" class="pointer">
+                                    <img routerLink="{{getLink(vg)}}" matListAvatar src="{{ vg.profilePictureUrl}}"
+                                        alt="{{vg.firstName + ' ' + vg.lastName}}">
+                                    <h3 routerLink="{{getLink(vg)}}" matLine> {{vg.firstName + ' ' + vg.lastName}} </h3>
+                                    <p matLine routerLink="{{getLink(vg)}}">
+                                        <span>{{vg.location}}</span>
+                                    </p>
+                                    <mat-icon *ngIf="auth.createdBy(vg.createdBy) && auth.can('delete:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
+                                        aria-label="Example delete icon">delete</mat-icon>
+                                </mat-list-item>
+                            </mat-list></mat-tab>
+                </mat-tab-group>
+
+                <mat-list *ngIf="!auth.can('post:videographer')">
                     <mat-list-item *ngFor="let vg of videographers; let i = index" class="pointer">
                         <img routerLink="{{getLink(vg)}}" matListAvatar src="{{ vg.profilePictureUrl}}"
                             alt="{{vg.firstName + ' ' + vg.lastName}}">
@@ -22,7 +52,7 @@
                         <p matLine routerLink="{{getLink(vg)}}">
                             <span>{{vg.location}}</span>
                         </p>
-                        <mat-icon *ngIf="auth.can('delete:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
+                        <mat-icon *ngIf="auth.createdBy(vg.createdBy) && auth.can('delete:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
                             aria-label="Example delete icon">delete</mat-icon>
                     </mat-list-item>
                 </mat-list>

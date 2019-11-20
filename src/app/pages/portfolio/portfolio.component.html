@@ -1,5 +1,5 @@
 <div class="container">
-    <div *ngIf="auth.can('patch:videographer')" class="row justify-content-center">
+    <div *ngIf="videographer && auth.createdBy(videographer.createdBy) && auth.can('patch:videographer')" class="row justify-content-center">
         <div class="col-sm-12 col-md-10">
             <mat-card>
                 <a mat-raised-button class="ml-auto" routerLink="edit">Edit Portfolio</a>

@@ -75,6 +75,10 @@ export class AuthService {
     document.location.href= 'https://'+ this.url + '.auth0.com/v2/logout?returnTo=https%3A%2F%2Fvideo-portfolio.herokuapp.com/';
   }
 
+  createdBy(createdBy:string) {
+    return this.payload && this.payload.sub && this.payload.sub === createdBy;
+  }
+
   can(permission: string) {
     return this.payload && this.payload.permissions && this.payload.permissions.length && this.payload.permissions.indexOf(permission) >= 0;
   }
