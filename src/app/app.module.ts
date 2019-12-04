@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from './services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { AddVideoComponent } from './pages/add-video/add-video.component';
 import { VideosService } from './services/videos.service';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -45,6 +47,7 @@ import { AuthErrorHandler } from './services/auth-error-handler';
     MatIconModule,
     MatFormFieldModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     FormsModule,
   ],

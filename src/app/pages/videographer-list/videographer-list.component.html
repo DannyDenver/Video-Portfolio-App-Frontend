@@ -43,7 +43,6 @@
                                 </mat-list-item>
                             </mat-list></mat-tab>
                 </mat-tab-group>
-
                 <mat-list *ngIf="!auth.can('post:videographer')">
                     <mat-list-item *ngFor="let vg of videographers; let i = index" class="pointer">
                         <img routerLink="{{getLink(vg)}}" matListAvatar src="{{ vg.profilePictureUrl}}"
@@ -56,6 +55,9 @@
                             aria-label="Example delete icon">delete</mat-icon>
                     </mat-list-item>
                 </mat-list>
+                <div class="row justify-content-center" *ngIf="!videographers">
+                    <mat-spinner></mat-spinner>
+                </div>
             </mat-card-content>
         </mat-card>
     </div>
