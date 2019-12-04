@@ -3,6 +3,7 @@ import { Videographer } from 'src/app/shared/models/videographer';
 import { UsersService } from 'src/app/services/users.service';
 import { VideographerService } from 'src/app/services/videographer.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-videographer-list',
@@ -13,13 +14,14 @@ export class VideographerListComponent implements OnInit {
   greeting = "";
   videographers: Videographer[] = [];
   title = 'video-portfolio-app';
+  loading = true;
 
   constructor(private usersService: UsersService,
     public auth: AuthService,
     private videographerService: VideographerService) {}
 
   ngOnInit() {
-    this.videographerService.getVideographers().subscribe(videogoos => this.videographers = videogoos);
+    this.videographerService.getVideographers().pipe(finalize(() => this.loading = false)).subscribe(videogoos => this.videographers = videogoos);
   }
 
   deletePortfolio(id: number, index: number) {
