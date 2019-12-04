@@ -4,15 +4,25 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { VideographerListComponent } from './pages/videographer-list/videographer-list.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { AddVideoComponent } from './pages/add-video/add-video.component';
+import { AuthGuard } from './services/auth.guard';
 
 
 const routes: Routes = [
-  { path: 'edit-profile', component: EditProfileComponent},
+  { path: 'edit-profile',
+    component: EditProfileComponent,
+    canActivate: [AuthGuard]
+  },
   { path: ':name',
   children: [
-    { path: 'edit', component: EditProfileComponent },
+    { path: 'edit',
+      component: EditProfileComponent,
+      canActivate: [AuthGuard] 
+    },
     { path: ':id', children: [
-      { path: 'add-video', component: AddVideoComponent }
+      { path: 'add-video',
+        component: AddVideoComponent,
+        canActivate: [AuthGuard]
+      }
     ]},
     { path: '', component: PortfolioComponent }    
   ]},

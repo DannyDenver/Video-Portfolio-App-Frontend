@@ -82,4 +82,24 @@ export class AuthService {
   can(permission: string) {
     return this.payload && this.payload.permissions && this.payload.permissions.length && this.payload.permissions.indexOf(permission) >= 0;
   }
+
+  getTokenExpirationDate(token: string): Date {
+    const jwtservice = new JwtHelperService();
+    const decoded = jwtservice.decodeToken(token);
+
+    if (decoded.exp === undefined) return null;
+
+    const date = new Date(0); 
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+
+  isTokenExpired(token?: string): boolean {
+    if(!token) token = this.token;
+    if(!token) return true;
+
+    const date = this.getTokenExpirationDate(token);
+    if(date === undefined) return false;
+    return !(date.valueOf() > new Date().valueOf());
+  }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AddVideoComponent } from './pages/add-video/add-video.component';
 import { VideosService } from './services/videos.service';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AuthGuard } from './services/auth.guard';
+import { AuthErrorHandler } from './services/auth-error-handler';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     PortfolioComponent,
     VideographerListComponent,
     EditProfileComponent,
-    AddVideoComponent
+    AddVideoComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,11 @@ import { MatTabsModule } from '@angular/material/tabs';
   providers: [
     UsersService,
     AuthService,
-    VideosService
+    AuthGuard,
+    VideosService, {
+      provide: ErrorHandler,
+      useClass: AuthErrorHandler
+    }
   ],
   bootstrap: [AppComponent]
 })
