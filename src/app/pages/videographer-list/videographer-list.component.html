@@ -28,7 +28,7 @@
                                 <p matLine routerLink="{{getLink(vg)}}">
                                     <span>{{vg.location}}</span>
                                 </p>
-                                <mat-icon *ngIf="auth.createdBy(vg.createdBy) && auth.can('delete:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
+                                <mat-icon *ngIf="auth.can('delete:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
                                     aria-label="Example delete icon">delete</mat-icon>
                             </mat-list-item>
                         </mat-list>
@@ -42,7 +42,7 @@
                                     <p matLine routerLink="{{getLink(vg)}}">
                                         <span>{{vg.location}}</span>
                                     </p>
-                                    <mat-icon *ngIf="auth.createdBy(vg.createdBy) && auth.can('delete:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
+                                    <mat-icon *ngIf="auth.can('delete:videographer')" (click)="deletePortfolio(vg.id, i)" aria-hidden="false"
                                         aria-label="Example delete icon">delete</mat-icon>
                                 </mat-list-item>
                             </mat-list></mat-tab>
