@@ -80,6 +80,7 @@ export class PortfolioComponent implements OnInit {
         const userId = this.auth.activeUserId();
         this.videosService.deleteVideo(userId, video.id).subscribe((deletedUrl: string) => {
           this.videos = this.videos.filter(vid => vid.id !== video.id);
+          this.cd.detectChanges();
         })
       }
     });

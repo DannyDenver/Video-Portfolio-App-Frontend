@@ -31,6 +31,7 @@ export class VideosService {
   }
   
   deleteVideo(userId: string, videoId: string) {
+    userId = encodeURI(userId)
     return this.http.delete(this.url +'/videographers/' + userId + '/videos/'+ videoId, this.getHeaders()).pipe(map((res) => res['deletedVideoUrl']));
   }
 }
