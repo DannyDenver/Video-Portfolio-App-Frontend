@@ -1,14 +1,14 @@
 export class Video {
-    constructor(videographerId, url, title, description) {
+    constructor(videographerId, title, description) {
         this.videographerId = videographerId;
-        this.url = url;
         this.title = title;
         this.description = description
     }
 
-    id: number;
-    videographerId: number;
+    id: string;
+    videographerId: string;
     url: string;
     title: string;
     description: string;
+    timestamp: string;
 }

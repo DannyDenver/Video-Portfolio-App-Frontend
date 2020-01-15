@@ -17,6 +17,7 @@ export class AuthService {
 
   token: string;
   payload: any;
+  userId: string;
 
   constructor() { }
 
@@ -62,9 +63,14 @@ export class AuthService {
     return this.token;
   }
 
+  activeUserId() {
+    return this.userId
+  }
+
   decodeJWT(token: string) {
     const jwtservice = new JwtHelperService();
     this.payload = jwtservice.decodeToken(token);
+    this.userId = this.payload.sub
     return this.payload;
   }
 

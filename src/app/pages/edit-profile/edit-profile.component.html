@@ -24,10 +24,16 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-6">
-                        <mat-form-field>
-                            <input matInput placeholder="Profile Picture Url" type="text"
-                                formControlName="profilePictureUrl">
-                        </mat-form-field>
+                        <button mat-raised-button color="primary"
+                            (click)="selectPhoto($event)">Upload Profile Pic</button>
+                            <ng-container *ngIf="file">
+                                    <span>{{file.name}}</span>
+                                    <button mat-icon-button
+                                            color="primary"
+                                            (click)="removePhoto(event,f)">
+                                      <mat-icon>close</mat-icon>
+                                    </button>
+                            </ng-container>
                     </div>
                 </div>
                 <mat-form-field>
@@ -43,3 +49,4 @@
         </mat-card>
     </div>
 </div>
+<input #fileUpload type="file" (change)="onPictureSelect($event)" class="hide" >

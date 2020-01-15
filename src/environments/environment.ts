@@ -4,12 +4,12 @@
 
 export const environment = {
   production: false,
-  apiServerUrl: 'http://127.0.0.1:5000',
+  apiServerUrl: 'https://co9fey3jkg.execute-api.us-east-1.amazonaws.com/dev',
   auth0: {
     url: 'dannydenver', // the auth0 domain prefix
     audience: 'videoportfolio', // the audience set for the auth0 app
     clientId: 'Qz3CL88tGpZYJQFqXQNjdzgXW0QCmtcp', // the client id generated for the auth0 app
-    callbackURL: 'http://localhost:5050', // the base url of the running ionic application. 
+    callbackURL: 'http://localhost:4200', // the base url of the running ionic application. 
   }
 };
 

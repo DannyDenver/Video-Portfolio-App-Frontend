@@ -1,10 +1,11 @@
 <div class="container">
-    <div *ngIf="videographer && auth.createdBy(videographer.createdBy) && auth.can('patch:videographer')" class="row justify-content-center">
+    <div *ngIf="videographer && videographer.id === auth.activeUserId()" class="row justify-content-center">
         <div class="col-sm-12 col-md-10">
             <mat-card>
-                <a mat-raised-button class="ml-auto" routerLink="edit">Edit Portfolio</a>
+                <a mat-raised-button class="ml-auto" routerLink="edit">Edit Profile</a>
                 <a mat-raised-button class="ml-auto" (click)="addVideo()">Add Video</a>
-                <a mat-raised-button class="ml-auto" *ngIf="auth.can('delete:videographer')" (click)="deletePortfolio()" >Delete Portfolio</a>
+                <a mat-raised-button class="ml-auto" *ngIf="auth.can('delete:videographer')"
+                    (click)="deletePortfolio()">Delete Portfolio</a>
             </mat-card>
         </div>
     </div>
@@ -15,39 +16,44 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-3">
                             <mat-list-item>
-                                <h3 matLine> {{videographer.firstName + ' ' + videographer.lastName}} </h3>
+                                <h3 matLine> {{ videographer.firstName || null }} {{videographer.lastName || null}}
+                                </h3>
                                 <p matLine>
-                                    <span> {{videographer.location}} </span>
+                                    <span> {{videographer.location || null}} </span>
                                 </p>
                             </mat-list-item>
-                            <img src="{{ videographer.profilePictureUrl}}"
-                                alt="{{videographer.firstName + ' ' + videographer.lastName}}" class="avatar" />
+                            <img *ngIf="videographer.pictureUrl" [src]="videographer.pictureUrl"
+                                alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}"
+                                class="avatar" />
                         </div>
                         <div class="col-sm-12 col-md-9">
-                            {{videographer.bio}}
+                            {{videographer.bio || null}}
                         </div>
                     </div>
                 </mat-card-content>
             </mat-card>
 
-            <mat-card *ngFor="let vd of videographer.videos">
-                <mat-card-title>
-                    {{vd.title}}
-                </mat-card-title>
-                <iframe width="100%" height="315" class="e2e-iframe-trusted-src" [src]="getVideoLink(vd.url)" frameborder="0"
-                   ></iframe>
-                <mat-card-content>
-
-                    <div class="row">
-                        <div class="col-sm-10 offset-md-1">
-                            {{vd.description}}
-                        </div>
-                    </div>
-                </mat-card-content>
-                <mat-card-footer *ngIf="auth.can('delete:video')">
-                        <a mat-raised-button class="ml-auto" (click)="removeVideo(vd.id)">Remove Video</a>
-                </mat-card-footer>
-            </mat-card>
+            <ng-container *ngIf="videos">
+                <ng-container *ngFor="let vd of videos">
+                    <mat-card>
+                        <mat-card-title>
+                            {{vd.title}}
+                        </mat-card-title>
+                        <mat-card-content>
+                            <iframe width="100%" height="315" class="e2e-iframe-trusted-src"
+                                [src]="getVideoLink(vd.url)" frameborder="0"></iframe>
+                            <div class="row">
+                                <div class="col-sm-10 offset-md-1">
+                                    {{vd.description}}
+                                </div>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-footer *ngIf="videographer && videographer.id === auth.activeUserId()">
+                            <a mat-raised-button class="mr-auto" (click)="removeVideo(vd, $event)">Remove Video</a>
+                        </mat-card-footer>
+                    </mat-card>
+                </ng-container>
+            </ng-container>
         </div>
     </div>
 </div>

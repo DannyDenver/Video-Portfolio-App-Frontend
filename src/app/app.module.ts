@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from './core/header/header.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { VideographerListComponent } from './pages/videographer-list/videographer-list.component';
-import { MatListModule } from '@angular/material/list';
+import { MatListModule, MatListAvatarCssMatStyler } from '@angular/material/list';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +25,10 @@ import { VideosService } from './services/videos.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthGuard } from './services/auth.guard';
 import { AuthErrorHandler } from './services/auth-error-handler';
+import { UsersPortfolioComponent } from './pages/users-portfolio/users-portfolio.component';
+import { BucketService } from './services/bucket.service';
+import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { AuthErrorHandler } from './services/auth-error-handler';
     VideographerListComponent,
     EditProfileComponent,
     AddVideoComponent,
+    UsersPortfolioComponent,
+    ConfirmationDialog
   ],
   imports: [
     BrowserModule,
@@ -50,16 +56,19 @@ import { AuthErrorHandler } from './services/auth-error-handler';
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDialogModule
   ],
   providers: [
     UsersService,
     AuthService,
     AuthGuard,
+    BucketService,
     VideosService, {
       provide: ErrorHandler,
       useClass: AuthErrorHandler
-    }
+    },
   ],
+  entryComponents: [ConfirmationDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

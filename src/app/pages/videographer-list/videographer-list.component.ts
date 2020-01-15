@@ -18,15 +18,20 @@ export class VideographerListComponent implements OnInit {
 
   constructor(private usersService: UsersService,
     public auth: AuthService,
-    private videographerService: VideographerService) {}
+    private videographerService: VideographerService) { }
 
   ngOnInit() {
-    this.videographerService.getVideographers().pipe(finalize(() => this.loading = false)).subscribe(videogoos => this.videographers = videogoos);
+    this.videographerService.getVideographers().pipe(finalize(() => this.loading = false))
+      .subscribe(response => {
+        const videographers = response as Videographer[]
+        console.log(videographers)
+        this.videographers = videographers.filter(x => x.id !== this.auth.activeUserId())
+      });
   }
 
-  deletePortfolio(id: number, index: number) {
+  deletePortfolio(id: string, index: number) {
     this.videographerService.deleteVideographer(id).subscribe(res => {
-      if(res['success'] == true) {
+      if (res['success'] == true) {
         this.videographers.splice(index, 1)
       }
     })
@@ -41,6 +46,6 @@ export class VideographerListComponent implements OnInit {
   }
 
   getLink(vg: Videographer) {
-    return vg.firstName.toLowerCase() + '-' + vg.lastName.toLowerCase();
+    return vg.id;
   }
 }

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, RequiredValidator, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Videographer } from 'src/app/shared/models/videographer';
 import { VideographerService } from 'src/app/services/videographer.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { BucketService } from 'src/app/services/bucket.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,62 +14,66 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditProfileComponent implements OnInit {
   profileForm: FormGroup;
   videogoo: Videographer;
-  
+  file: File;
+  loading = false;
+
+  @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private videoService: VideographerService) { }
+    private videoService: VideographerService,
+    private authService: AuthService,
+    private bucketService: BucketService) { }
 
   ngOnInit() {
-    let name = this.route.snapshot.paramMap.get('name');
-    if (name) {
-      this.videoService.getVideographer(name).subscribe((videogoo: Videographer) => {
-        this.videogoo = videogoo;
-        this.profileForm = this.fb.group({
-          firstName: [videogoo.firstName, Validators.required],
-          lastName: [videogoo.lastName, Validators.required],
-          location: [videogoo.location, Validators.required],
-          bio: [videogoo.bio, Validators.required],
-          profilePictureUrl: [videogoo.profilePictureUrl, Validators.required]
-        })
-      })
-    } else {
+    const userId = this.authService.activeUserId();
+    this.videoService.getVideographer(userId).subscribe((videogoo: Videographer) => {
+      this.videogoo = videogoo;
       this.profileForm = this.fb.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        location: ['', Validators.required],
-        bio: ['', Validators.required],
-        profilePictureUrl: ['', Validators.required]
+        firstName: [videogoo.firstName, Validators.required],
+        lastName: [videogoo.lastName, Validators.required],
+        location: [videogoo.location, Validators.required],
+        bio: [videogoo.bio, Validators.required],
       })
-    }
+    })
   }
 
-  cancelEdits() {
-    this.router.navigate(name)
+  selectPhoto(event) {
+    event.preventDefault()
+
+    if (this.fileUpload)
+      this.fileUpload.nativeElement.click()
   }
 
-  onSubmit() {
-    if (this.profileForm.valid) {
-      const videogoo = new Videographer(null,
+  removePhoto(event) {
+    this.file = null;
+  }
+
+  onPictureSelect(event) {
+    this.file = event.target.files[0]
+  }
+
+  async onSubmit() {
+    if (this.profileForm.valid && this.videogoo.id === this.authService.activeUserId()) {
+      this.loading = true;
+      
+      const videogoo = new Videographer(this.videogoo.id,
         this.getValue('firstName'),
         this.getValue('lastName'),
         this.getValue('location'),
         this.getValue('bio'),
-        this.getValue('profilePictureUrl'))
+        null,
+        null)
 
-      if (this.videogoo) {
-        videogoo.id = this.videogoo.id
-        this.videoService.patchVideographer(videogoo).subscribe(res => {
-          console.log(res)
-          this.router.navigate(['../'], { relativeTo: this.route })
+      this.videoService.addProfilePicture().subscribe((url:string) => {
+        this.bucketService.uploadFile(url, this.file).subscribe(() => {
+          this.videoService.patchVideographer(videogoo).subscribe(res => {
+            this.loading = false
+            this.router.navigate(['../'], { relativeTo: this.route })
+          })
         })
-      } else {
-        this.videoService.addVideographer(videogoo).subscribe(res => {
-          console.log(res)
-          this.router.navigate(['/'])
-        })
-      }
+      })
     }
   }
 

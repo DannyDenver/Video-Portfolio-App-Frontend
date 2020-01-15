@@ -12,7 +12,7 @@ export class AuthErrorHandler implements ErrorHandler {
 
   handleError(error) {
     const router = this.injector.get(Router);
-    if (error.rejection.status === 401) {
+    if (error && error.rejection && error.rejection.status === 401) {
       const loginLink = this.authService.build_login_link()
 
       window.open(loginLink, '_self');

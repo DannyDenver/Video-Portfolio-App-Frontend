@@ -8,8 +8,8 @@ import { AuthGuard } from './services/auth.guard';
 
 
 const routes: Routes = [
-  { path: 'edit-profile',
-    component: EditProfileComponent,
+  { path: 'your-portfolio',
+    component: PortfolioComponent,
     canActivate: [AuthGuard]
   },
   { path: ':name',
