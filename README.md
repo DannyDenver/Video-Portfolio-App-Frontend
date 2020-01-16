@@ -1,6 +1,9 @@
-# AngularFront
+# Serverless Videographer Site Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.18.
+
+This videographer site enables aspiring videographers to log in, create a profile, and upload their videos. Profiles can be viewed and shared. 
+
+The frontend utilizes Angular 8, Angular Material, Typescript, Bootstrap and Heroku Deployment.
 
 ## Development server
 
@@ -22,6 +25,8 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Relevant Links
+- https://www.heroku.com/
+- https://angular.io/
+- https://material.angular.io/
+- https://getbootstrap.com/
