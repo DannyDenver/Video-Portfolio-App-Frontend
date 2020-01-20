@@ -24,4 +24,7 @@ mat-form-field {
 .hide {
     display:none;
   }
-  
+
+.bold {
+    font-weight: bold !important;
+}
