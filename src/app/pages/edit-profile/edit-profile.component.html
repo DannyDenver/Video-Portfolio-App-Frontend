@@ -25,12 +25,12 @@
                     </div>
                     <div class="col-sm-6">
                         <button mat-raised-button color="primary"
-                            (click)="selectPhoto($event)">Upload Profile Pic</button>
+                            (click)="selectPhoto()">Upload Profile Pic</button>
                             <ng-container *ngIf="file">
                                     <span>{{file.name}}</span>
                                     <button mat-icon-button
                                             color="primary"
-                                            (click)="removePhoto(event,f)">
+                                            (click)="removePhoto()">
                                       <mat-icon>close</mat-icon>
                                     </button>
                             </ng-container>
