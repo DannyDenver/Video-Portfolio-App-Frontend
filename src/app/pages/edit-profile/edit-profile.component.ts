@@ -39,7 +39,7 @@ export class EditProfileComponent implements OnInit {
     })
   }
 
-  selectPhotot() {
+  selectPhoto() {
     if (this.fileUpload)
       this.fileUpload.nativeElement.click()
   }
