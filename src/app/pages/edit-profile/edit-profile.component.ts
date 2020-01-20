@@ -39,19 +39,19 @@ export class EditProfileComponent implements OnInit {
     })
   }
 
-  selectPhoto(event) {
-    event.preventDefault()
+  selectPhoto($event: Event) {
+    $event.preventDefault()
 
     if (this.fileUpload)
       this.fileUpload.nativeElement.click()
   }
 
-  removePhoto(event) {
+  removePhoto($event: Event) {
     this.file = null;
   }
 
-  onPictureSelect(event) {
-    this.file = event.target.files[0]
+  onPictureSelect($event) {
+    this.file = $event.target.files[0];
   }
 
   async onSubmit() {
