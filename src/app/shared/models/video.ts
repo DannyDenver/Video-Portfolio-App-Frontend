@@ -1,8 +1,9 @@
 export class Video {
-    constructor(videographerId, title, description) {
+    constructor(videographerId, title, description, videoId?) {
         this.videographerId = videographerId;
         this.title = title;
-        this.description = description
+        this.description = description,
+        this.id = videoId
     }
 
     id: string;

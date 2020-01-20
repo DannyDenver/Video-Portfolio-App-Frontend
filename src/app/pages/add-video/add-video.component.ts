@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BucketService } from 'src/app/services/bucket.service';
 import { Video } from 'src/app/shared/models/video';
 import { VideosService } from 'src/app/services/videos.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-add-video',
@@ -23,14 +24,15 @@ export class AddVideoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private videoService: VideosService,
-    private bucketService: BucketService) { }
+    private bucketService: BucketService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.createForm();
   }
 
   createForm() {
-    this.videogooId = this.route.snapshot.paramMap.get('id')
+    this.videogooId = this.authService.activeUserId();
     this.videoForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required]
@@ -64,7 +66,7 @@ export class AddVideoComponent implements OnInit {
       this.videoService.addVideo(video).subscribe((url: string) => {
         this.bucketService.uploadFile(url, this.file).subscribe(() => {
           this.uploading = false;
-          this.router.navigate(['../..'], { relativeTo: this.route })
+          this.router.navigate(['../'], { relativeTo: this.route })
         })
       })
     }

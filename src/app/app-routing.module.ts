@@ -5,29 +5,32 @@ import { VideographerListComponent } from './pages/videographer-list/videographe
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { AddVideoComponent } from './pages/add-video/add-video.component';
 import { AuthGuard } from './services/auth.guard';
+import { EditVideoComponent } from './pages/edit-video/edit-video.component';
 
 
 const routes: Routes = [
-  { path: 'your-portfolio',
-    component: PortfolioComponent,
-    canActivate: [AuthGuard]
-  },
-  { path: ':name',
-  children: [
-    { path: 'edit',
-      component: EditProfileComponent,
-      canActivate: [AuthGuard] 
-    },
-    { path: ':id', children: [
-      { path: 'add-video',
+  {
+    path: ':name',
+    children: [
+      {
+        path: 'videos/:id/edit',
+        component: EditVideoComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'edit',
+        component: EditProfileComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'add-video',
         component: AddVideoComponent,
         canActivate: [AuthGuard]
-      }
-    ]},
-    { path: '', component: PortfolioComponent }    
-  ]},
-  { path: '', component: VideographerListComponent},
-
+      },
+      { path: '', component: PortfolioComponent }
+    ]
+  },
+  { path: '', component: VideographerListComponent }
 ];
 
 @NgModule({

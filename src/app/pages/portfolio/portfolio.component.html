@@ -3,7 +3,7 @@
         <div class="col-sm-12 col-md-10">
             <mat-card>
                 <a mat-raised-button class="ml-auto" routerLink="edit">Edit Profile</a>
-                <a mat-raised-button class="ml-auto" (click)="addVideo()">Add Video</a>
+                <a mat-raised-button class="ml-auto" routerLink="add-video">Add Video</a>
                 <a mat-raised-button class="ml-auto" *ngIf="auth.can('delete:videographer')"
                     (click)="deletePortfolio()">Delete Portfolio</a>
             </mat-card>
@@ -49,6 +49,7 @@
                             </div>
                         </mat-card-content>
                         <mat-card-footer *ngIf="videographer && videographer.id === auth.activeUserId()">
+                            <a mat-raised-button class="mr-auto" routerLink="{{'videos/' + vd.id + '/edit'}}">Edit Video</a>
                             <a mat-raised-button class="mr-auto" (click)="removeVideo(vd, $event)">Remove Video</a>
                         </mat-card-footer>
                     </mat-card>

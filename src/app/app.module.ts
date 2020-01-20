@@ -25,10 +25,10 @@ import { VideosService } from './services/videos.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthGuard } from './services/auth.guard';
 import { AuthErrorHandler } from './services/auth-error-handler';
-import { UsersPortfolioComponent } from './pages/users-portfolio/users-portfolio.component';
 import { BucketService } from './services/bucket.service';
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditVideoComponent } from './pages/edit-video/edit-video.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +38,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     VideographerListComponent,
     EditProfileComponent,
     AddVideoComponent,
-    UsersPortfolioComponent,
-    ConfirmationDialog
+    ConfirmationDialog,
+    EditVideoComponent
   ],
   imports: [
     BrowserModule,

@@ -33,11 +33,12 @@ export class PortfolioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.route.snapshot.routeConfig.path.includes('your-portfolio')) {
+    this.name = this.route.snapshot.paramMap.get('name');
+
+    if (this.name === 'your-portfolio') {
       this.name = this.auth.activeUserId();
-    } else {
-      this.name = this.route.snapshot.paramMap.get('name');
     }
+
 
     this.videographerService.getVideographer(this.name).subscribe(videogoo => {
       this.videographer = videogoo
@@ -50,20 +51,12 @@ export class PortfolioComponent implements OnInit {
     });
   }
 
-  editProfile() {
-    this.router.navigate([name, 'edit']);
-  };
-
   deletePortfolio() {
     this.videographerService.deleteVideographer(this.videographer.id).subscribe(res => {
       if (res['success'] == true) {
         this.router.navigate(['/']);
       };
     });
-  };
-
-  addVideo() {
-    this.router.navigate([this.videographer.id, 'add-video'], { relativeTo: this.route });
   };
 
   removeVideo(video: Video, $event) {
