@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from './services/users.service';
-import { Videographer } from './shared/models/videographer';
 import { AuthService } from './services/auth.service';
 
 @Component({
