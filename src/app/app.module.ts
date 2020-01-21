@@ -3,7 +3,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UsersService } from './services/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
@@ -59,7 +58,6 @@ import { EditVideoComponent } from './pages/edit-video/edit-video.component';
     MatDialogModule
   ],
   providers: [
-    UsersService,
     AuthService,
     AuthGuard,
     BucketService,
