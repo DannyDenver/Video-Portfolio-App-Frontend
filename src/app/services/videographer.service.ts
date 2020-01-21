@@ -33,7 +33,7 @@ constructor(private http: HttpClient, private authService: AuthService) { }
   }
 
   getVideographer(id:string): Observable<any> {
-    return this.http.get<any>(this.url + '/videographers/' + id).pipe(map((res) => res['videographer']))
+    return this.http.get<any>(this.url + '/videographers/' + encodeURI(id)).pipe(map((res) => res['videographer']))
   }
 
   getVideographers(): Observable<any> {
@@ -42,7 +42,7 @@ constructor(private http: HttpClient, private authService: AuthService) { }
 
   addProfilePicture(): Observable<string> {
     const id = this.authService.activeUserId()
-    return this.http.post<string>(this.url + '/videographers/' + id + '/profilePicture', null, this.getHeaders()).pipe(map((res) => res['uploadUrl']))
+    return this.http.post<string>(this.url + '/videographers/' + encodeURI(id) + '/profilePicture', null, this.getHeaders()).pipe(map((res) => res['uploadUrl']))
   }
 
   patchVideographer(videographer: Videographer) {
@@ -50,7 +50,7 @@ constructor(private http: HttpClient, private authService: AuthService) { }
   }
 
   deleteVideographer(id: string) {
-    return this.http.delete(this.url + '/videographers/' + id, this.getHeaders())
+    return this.http.delete(this.url + '/videographers/' + encodeURI(id), this.getHeaders())
   }
 
   addVideographer(videographer: Videographer) {  

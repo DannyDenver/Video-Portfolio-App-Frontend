@@ -27,20 +27,19 @@ export class VideosService {
   }
 
   getVideos(id: string) {
-    return this.http.get(this.url + '/videographers/' + id + '/videos', this.getHeaders()).pipe(map((res) => res['videos']));
+    return this.http.get(this.url + '/videographers/' + encodeURI(id) + '/videos', this.getHeaders()).pipe(map((res) => res['videos']));
   }
 
   addVideo(video: Video) {
     const id = this.authService.activeUserId()
-    return this.http.post(this.url + '/videographers/' + id + '/videos', video, this.getHeaders()).pipe(map((res) => res['uploadUrl']));
+    return this.http.post(this.url + '/videographers/' + encodeURI(id) + '/videos', video, this.getHeaders()).pipe(map((res) => res['uploadUrl']));
   }
 
   editVideo(video: Video) {
     return this.http.patch(this.url + '/videos/' + video.id, video, this.getHeaders())
   }
   
-  deleteVideo(userId: string, videoId: string) {
-    userId = encodeURI(userId)
-    return this.http.delete(this.url +'/videographers/' + userId + '/videos/'+ videoId, this.getHeaders()).pipe(map((res) => res['deletedVideoUrl']));
+  deleteVideo(id: string, videoId: string) {
+    return this.http.delete(this.url +'/videographers/' + encodeURI(id) + '/videos/'+ videoId, this.getHeaders()).pipe(map((res) => res['deletedVideoUrl']));
   }
 }
