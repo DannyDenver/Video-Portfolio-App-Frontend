@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Videographer } from 'src/app/shared/models/videographer';
-import { UsersService } from 'src/app/services/users.service';
 import { VideographerService } from 'src/app/services/videographer.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { finalize } from 'rxjs/operators';
@@ -16,7 +15,7 @@ export class VideographerListComponent implements OnInit {
   title = 'video-portfolio-app';
   loading = true;
 
-  constructor(private usersService: UsersService,
+  constructor(
     public auth: AuthService,
     private videographerService: VideographerService) { }
 
