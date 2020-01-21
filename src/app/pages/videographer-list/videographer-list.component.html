@@ -18,7 +18,7 @@
                             alt="{{vg.firstName + ' ' + vg.lastName}}">
                         <h2 matLine class="bold"> {{vg.firstName + ' ' + vg.lastName}} </h2>
                         <p matLine>
-                            <span>{{vg.location}}</span>
+                            <span *ngIf="vg.location">{{vg.location}}</span>
                         </p>
                     </mat-list-item>
                 </mat-list>

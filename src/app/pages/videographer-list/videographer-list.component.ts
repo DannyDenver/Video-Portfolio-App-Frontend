@@ -23,8 +23,7 @@ export class VideographerListComponent implements OnInit {
     this.videographerService.getVideographers().pipe(finalize(() => this.loading = false))
       .subscribe(response => {
         const videographers = response as Videographer[]
-        console.log(videographers)
-        this.videographers = videographers.filter(x => x.id !== this.auth.activeUserId())
+        this.videographers = videographers.filter(x => x.id !== this.auth.activeUserId() && x.firstName && x.lastName)
       });
   }
 
