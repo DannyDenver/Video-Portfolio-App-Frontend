@@ -40,8 +40,11 @@
                             {{vd.title}}
                         </mat-card-title>
                         <mat-card-content>
-                            <iframe width="100%" height="315" class="e2e-iframe-trusted-src"
-                                [src]="getVideoLink(vd.url)" frameborder="0"></iframe>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <video controls="true" class="embed-responsive-item">
+                                    <source src="{{vd.url}}" type="video/mp4" />
+                                </video>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-10 offset-md-1">
                                     {{vd.description}}
@@ -49,7 +52,8 @@
                             </div>
                         </mat-card-content>
                         <mat-card-footer *ngIf="videographer && videographer.id === auth.activeUserId()">
-                            <a mat-raised-button class="mr-auto" routerLink="{{'videos/' + vd.id + '/edit'}}">Edit Video</a>
+                            <a mat-raised-button class="mr-auto" routerLink="{{'videos/' + vd.id + '/edit'}}">Edit
+                                Video</a>
                             <a mat-raised-button class="mr-auto" (click)="removeVideo(vd, $event)">Remove Video</a>
                         </mat-card-footer>
                     </mat-card>
