@@ -31,6 +31,19 @@
                         </div>
                     </div>
                 </mat-card-content>
+                <mat-card-footer>
+                    <form [formGroup]="emailForm" (ngSubmit)="subscribe()">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <mat-form-field>
+                                    <input matInput placeholder="Your Email" type="text" formControlName="email">
+                                </mat-form-field>
+                            </div>
+                            <button mat-raised-button type="submit">Subscribe to Portfolio</button>
+                        </div>
+                    </form>
+                
+                </mat-card-footer>
             </mat-card>
 
             <ng-container *ngIf="videos">

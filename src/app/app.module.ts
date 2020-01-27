@@ -28,6 +28,7 @@ import { BucketService } from './services/bucket.service';
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditVideoComponent } from './pages/edit-video/edit-video.component';
+import { EmailService } from './services/email.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { EditVideoComponent } from './pages/edit-video/edit-video.component';
     AuthService,
     AuthGuard,
     BucketService,
-    VideosService, {
+    VideosService,
+    EmailService, {
       provide: ErrorHandler,
       useClass: AuthErrorHandler
     },

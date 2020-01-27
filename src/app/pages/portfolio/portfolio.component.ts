@@ -8,6 +8,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Video } from 'src/app/shared/models/video';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmationDialog } from 'src/app/core/confirmation-dialog/confirmation-dialog.component';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -16,12 +18,14 @@ import { ConfirmationDialog } from 'src/app/core/confirmation-dialog/confirmatio
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PortfolioComponent implements OnInit {
+  emailForm: FormGroup;
   videographer: Videographer;
   videographerName: string;
   videos: Video[];
   name: string;
 
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private videographerService: VideographerService,
@@ -29,7 +33,8 @@ export class PortfolioComponent implements OnInit {
     public auth: AuthService,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private emailService: EmailService
   ) { }
 
   ngOnInit() {
@@ -49,6 +54,10 @@ export class PortfolioComponent implements OnInit {
       this.videos = videos;
       this.cd.detectChanges();
     });
+
+    this.emailForm = this.fb.group({
+      email: ["", Validators.required]
+    })
   }
 
   deletePortfolio() {
@@ -82,4 +91,11 @@ export class PortfolioComponent implements OnInit {
   getVideoLink(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   };
+
+  subscribe() {
+    const emailAddress = this.emailForm.get('email').value.trim();
+
+    this.emailService.verifyEmail(emailAddress).subscribe(x => console.log(x));
+
+  }
 }
