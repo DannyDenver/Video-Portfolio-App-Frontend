@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,18 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
   loginURL: string;
-  constructor(public auth: AuthService) {
+  usersPortfolio: boolean;
+
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+    private location: Location) {
     this.loginURL = auth.build_login_link();
-   }
+  }
+
+  ngOnInit() {
+    this.router.events.subscribe(() => {
+      this.usersPortfolio = this.location.path().includes('your-portfolio');
+    })
+  }
 }
