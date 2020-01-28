@@ -6,6 +6,7 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #ecf0f1 !important;
 }
 
 .pointer {
@@ -16,10 +17,15 @@ body {
   margin: 5px !important;
 }
 
-mat-card {
+h2 {
+    color: #3498DB !important;
+}
+
+.mat-card {
   margin-bottom: 15px;
   margin-top: 15px;
   width: 100%;
+  color: #212529
 }
 
 mat-form-field {
