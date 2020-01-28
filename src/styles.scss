@@ -1,0 +1,28 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.pointer{
+    cursor: pointer;
+}
+
+.mat-button-base {
+    margin: 5px !important;
+}
+
+mat-card {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.hide {
+    display:none;
+  }
+
+.bold {
+    font-weight: bold !important;
+}
