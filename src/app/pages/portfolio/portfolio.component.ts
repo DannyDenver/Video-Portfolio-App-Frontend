@@ -23,6 +23,7 @@ export class PortfolioComponent implements OnInit {
   videographerName: string;
   videos: Video[];
   name: string;
+  subscribed: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -90,8 +91,8 @@ export class PortfolioComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   };
 
-  subscribe() {
+  subscribeToPortfolio() {
     const emailAddress = this.emailForm.get('email').value.trim();
-    this.emailService.verifyEmail(emailAddress).subscribe(x => console.log(x));
+    this.emailService.verifyEmail(this.name, emailAddress).subscribe(subscribed => this.subscribed = subscribed);
   }
 }
