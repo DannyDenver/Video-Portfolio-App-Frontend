@@ -20,7 +20,7 @@ import { Observable } from 'rxjs';
         return header;
       }
 
-    verifyEmail(email:string):Observable<any> {
-        return this.http.post(this.url + '/verifyEmail/' + email, null).pipe(map((res) => res['verificationSent']))
+    verifyEmail(videographerId: string, email:string):Observable<any> {
+        return this.http.post(this.url + `/videographers/${videographerId}/addSubscriber/${email}`, null).pipe(map((res) => res['verificationSent']))
     }
   }
