@@ -44,7 +44,7 @@ export class PortfolioComponent implements OnInit {
       } else {
         this.name = name;
       }
-  
+      
   
       this.videographerService.getVideographer(this.name).subscribe(videogoo => {
         this.videographer = videogoo
