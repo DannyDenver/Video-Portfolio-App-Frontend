@@ -29,6 +29,8 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
     const userId = this.authService.activeUserId();
     this.videoService.getVideographer(userId).subscribe((videogoo: Videographer) => {
+
+      if (videogoo == null) return;
       this.videogoo = videogoo;
       this.profileForm = this.fb.group({
         firstName: [videogoo.firstName, Validators.required],
@@ -66,7 +68,8 @@ export class EditProfileComponent implements OnInit {
         null)
 
       this.videoService.addProfilePicture().subscribe((url:string) => {
-        this.bucketService.uploadFile(url, this.file).subscribe(() => {
+        console.log(url)
+        this.bucketService.uploadFile(url, this.file).subscribe((res) => {
           this.videoService.patchVideographer(videogoo).subscribe(res => {
             this.loading = false
             this.router.navigate(['../'], { relativeTo: this.route })
