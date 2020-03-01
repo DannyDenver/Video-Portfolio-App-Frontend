@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { environment } from '../../environments/environment';
+import createAuth0Client from '@auth0/auth0-spa-js';
 
 const JWTS_LOCAL_KEY = 'JWTS_LOCAL_KEY';
 const JWTS_ACTIVE_INDEX_KEY = 'JWTS_ACTIVE_INDEX_KEY';
@@ -9,17 +10,23 @@ const JWTS_ACTIVE_INDEX_KEY = 'JWTS_ACTIVE_INDEX_KEY';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit {
   url = environment.auth0.url;
   audience = environment.auth0.audience;
   clientId = environment.auth0.clientId;
   callbackURL = environment.auth0.callbackURL;
+  auth0;
 
   token: string;
   payload: any;
   userId: string;
 
-  constructor() { }
+  constructor() {
+   }
+
+   async ngOnInit() {
+
+   }
 
   build_login_link(callbackPath = '') {
     let link = 'https://';
@@ -32,6 +39,18 @@ export class AuthService {
     return link;
   }
 
+  build_signup_link(callbackPath = '') {
+    let link = 'https://';
+    link += this.url + '.auth0.com';
+    link += '/authorize?';
+    link += 'initialScreen=signUp&';
+    //link += 'prompt=login&'
+    link += 'audience=' + this.audience + '&';
+    link += 'response_type=token&';
+    link += 'client_id=' + this.clientId + '&';
+    link += 'redirect_uri=' + this.callbackURL + callbackPath;
+    return link;
+  }
   // invoked in app.component on load
   check_token_fragment() {
     // parse the fragment
@@ -50,6 +69,20 @@ export class AuthService {
     if (this.token) {
       this.decodeJWT(this.token);
     }
+  }
+
+  async loginBtn() {
+    this.auth0 = await createAuth0Client({
+      domain: this.url + '.auth0.com',
+      client_id: this.clientId
+    });
+    console.log('click')
+    await this.auth0.loginWithRedirect({
+      redirect_uri: 'http://localhost:4200/'
+    });
+    //logged in. you can get the user profile like this:
+    const user = await this.auth0.getUser();
+    console.log(user);
   }
 
   load_jwts() {

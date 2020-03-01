@@ -11,7 +11,7 @@
         <a class="nav-link" routerLink="your-portfolio">Your Portfolio</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" *ngIf="!auth.activeJWT()" [href]="loginURL">Sign Up
+          <a class="nav-link" *ngIf="!auth.activeJWT()" id="login" (click)="login()">Sign Up
           </a>
         </li>
       <li class="nav-item">
