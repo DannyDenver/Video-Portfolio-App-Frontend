@@ -22,8 +22,7 @@ export class VideographerListComponent implements OnInit {
   ngOnInit() {
     this.videographerService.getVideographers().pipe(finalize(() => this.loading = false))
       .subscribe(response => {
-        const videographers = response as Videographer[]
-        this.videographers = videographers.filter(x => x.id !== this.auth.activeUserId() && x.firstName && x.lastName)
+        this.videographers = response as Videographer[]
       });
   }
 

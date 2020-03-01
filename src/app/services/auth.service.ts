@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { environment } from '../../environments/environment';
@@ -10,7 +10,7 @@ const JWTS_ACTIVE_INDEX_KEY = 'JWTS_ACTIVE_INDEX_KEY';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService {
   url = environment.auth0.url;
   audience = environment.auth0.audience;
   clientId = environment.auth0.clientId;
@@ -21,12 +21,8 @@ export class AuthService implements OnInit {
   payload: any;
   userId: string;
 
-  constructor() {
-   }
+  constructor() { }
 
-   async ngOnInit() {
-
-   }
 
   build_login_link(callbackPath = '') {
     let link = 'https://';
@@ -97,7 +93,8 @@ export class AuthService implements OnInit {
   }
 
   activeUserId() {
-    return this.userId
+    if (!this.userId) return; 
+    return decodeURI(this.userId).includes("|") ? this.userId.split("|")[1] : this.userId;
   }
 
   decodeJWT(token: string) {
