@@ -5,6 +5,7 @@ import { VideographerService } from 'src/app/services/videographer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { BucketService } from 'src/app/services/bucket.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-profile',
@@ -65,17 +66,22 @@ export class EditProfileComponent implements OnInit {
         this.getValue('location'),
         this.getValue('bio'),
         null,
-        null)
+        null);
 
-      this.videoService.addProfilePicture().subscribe((url:string) => {
-        console.log(url)
-        this.bucketService.uploadFile(url, this.file).subscribe((res) => {
-          this.videoService.patchVideographer(videogoo).subscribe(res => {
+        if(this.file){
+          this.videoService.addProfilePicture().pipe(switchMap((url:string) => 
+             this.bucketService.uploadFile(url, this.file)), switchMap(() => 
+              this.videoService.patchVideographer(videogoo)
+            )).subscribe(x => {                
             this.loading = false
             this.router.navigate(['../'], { relativeTo: this.route })
-          })
-        })
-      })
+          });
+        }else {
+          this.videoService.patchVideographer(videogoo).subscribe(() => {
+            this.loading = false
+            this.router.navigate(['../'], { relativeTo: this.route })
+          });
+        }
     }
   }
 
