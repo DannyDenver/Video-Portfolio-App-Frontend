@@ -5,6 +5,8 @@ img.avatar {
     height: 140px;
     border-radius: 50%;
     margin: 20px;
+    border: 5px solid white;
+    background-color: white;
   }
 
 .cover-photo {
@@ -15,4 +17,8 @@ img.avatar {
   border-radius: 5px;
   background-repeat: no-repeat;
   background-position-y: 34%;
+}
+
+.profile-details-row {
+  margin-top: -50px;
 }
