@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   loginURL: string;
   singupURL: string;
+  logoutLink: string;
   usersPortfolio: boolean;
 
   constructor(
@@ -20,6 +21,7 @@ export class HeaderComponent {
     private location: Location) {
     this.loginURL = auth.build_login_link();
     this.singupURL = auth.build_signup_link();
+    this.logoutLink = auth.logoutLink();
   }
 
   ngOnInit() {

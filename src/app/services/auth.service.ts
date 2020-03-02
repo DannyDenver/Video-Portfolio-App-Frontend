@@ -74,7 +74,7 @@ export class AuthService {
     });
     console.log('click')
     await this.auth0.loginWithRedirect({
-      redirect_uri: 'http://localhost:4200/'
+      redirect_uri: 'http://www.reel-people.com'
     });
     //logged in. you can get the user profile like this:
     const user = await this.auth0.getUser();
@@ -104,11 +104,11 @@ export class AuthService {
     return this.payload;
   }
 
-  logout() {
+  logoutLink() {
     this.token = '';
     this.payload = null;
     this.set_jwt();
-    document.location.href= 'https://'+ this.url + '.auth0.com/v2/logout?returnTo=https%3A%2F%2Fvideo-portfolio.herokuapp.com/';
+    return 'https://'+ this.url + '.auth0.com/v2/logout?returnTo=https%3A%2F%2Fwww.reel-people.com/';
   }
 
   createdBy(createdBy:string) {
