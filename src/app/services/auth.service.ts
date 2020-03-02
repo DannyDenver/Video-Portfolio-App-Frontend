@@ -108,7 +108,7 @@ export class AuthService {
     this.token = '';
     this.payload = null;
     this.set_jwt();
-    return 'https://'+ this.url + '.auth0.com/v2/logout?returnTo=https%3A%2F%2Fwww.reel-people.com/';
+    window.location.href = 'https://'+ this.url + '.auth0.com/v2/logout?returnTo=https%3A%2F%2Fwww.reel-people.com/';
   }
 
   createdBy(createdBy:string) {

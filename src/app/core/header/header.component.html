@@ -14,7 +14,7 @@
         <a class="nav-link" *ngIf="!auth.activeJWT()" [href]="loginURL">Sign Up / Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="auth.activeJWT()" [href]="logoutLink">Log Out</a>
+        <a class="nav-link" *ngIf="auth.activeJWT()" (click)="auth.logoutLink()">Log Out</a>
       </li>
     </ul>
   </div>

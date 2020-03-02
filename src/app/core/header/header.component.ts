@@ -21,7 +21,6 @@ export class HeaderComponent {
     private location: Location) {
     this.loginURL = auth.build_login_link();
     this.singupURL = auth.build_signup_link();
-    this.logoutLink = auth.logoutLink();
   }
 
   ngOnInit() {
