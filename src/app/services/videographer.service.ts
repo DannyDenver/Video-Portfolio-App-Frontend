@@ -48,7 +48,7 @@ constructor(private http: HttpClient, private authService: AuthService) { }
     return this.http.delete(this.url + '/videographers/' + encodeURI(id), this.getHeaders())
   }
 
-  addVideographer(videographer: Videographer) {  
+  postVideographer(videographer: Videographer) {  
     return this.http.post(this.url + '/videographers', videographer, this.getHeaders())
   }
 }

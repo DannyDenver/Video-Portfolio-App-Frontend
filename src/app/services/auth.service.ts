@@ -35,18 +35,6 @@ export class AuthService {
     return link;
   }
 
-  build_signup_link(callbackPath = '') {
-    let link = 'https://';
-    link += this.url + '.auth0.com';
-    link += '/authorize?';
-    link += 'initialScreen=signUp&';
-    //link += 'prompt=login&'
-    link += 'audience=' + this.audience + '&';
-    link += 'response_type=token&';
-    link += 'client_id=' + this.clientId + '&';
-    link += 'redirect_uri=' + this.callbackURL + callbackPath;
-    return link;
-  }
   // invoked in app.component on load
   check_token_fragment() {
     // parse the fragment
@@ -65,20 +53,6 @@ export class AuthService {
     if (this.token) {
       this.decodeJWT(this.token);
     }
-  }
-
-  async loginBtn() {
-    this.auth0 = await createAuth0Client({
-      domain: this.url + '.auth0.com',
-      client_id: this.clientId
-    });
-    console.log('click')
-    await this.auth0.loginWithRedirect({
-      redirect_uri: 'http://www.reel-people.com'
-    });
-    //logged in. you can get the user profile like this:
-    const user = await this.auth0.getUser();
-    console.log(user);
   }
 
   load_jwts() {

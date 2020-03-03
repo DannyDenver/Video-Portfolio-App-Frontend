@@ -4,8 +4,9 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { VideographerListComponent } from './pages/videographer-list/videographer-list.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { AddVideoComponent } from './pages/add-video/add-video.component';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { EditVideoComponent } from './pages/edit-video/edit-video.component';
+import { CreateProfileComponent } from './pages/create-profile/create-profile.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'edit',
         component: EditProfileComponent,
+      },
+      {
+        path: 'create',
+        component: CreateProfileComponent,
         canActivate: [AuthGuard]
       },
       {

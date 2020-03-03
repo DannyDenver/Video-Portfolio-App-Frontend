@@ -23,14 +23,14 @@ export class EditProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private videoService: VideographerService,
+    private videographerService: VideographerService,
     private authService: AuthService,
     private bucketService: BucketService) { }
 
   ngOnInit() {
     const userId = this.authService.activeUserId();
-    this.videoService.getVideographer(userId).subscribe((videogoo: Videographer) => {
 
+    this.videographerService.getVideographer(userId).subscribe((videogoo: Videographer) => {
       if (videogoo == null) return;
       this.videogoo = videogoo;
       this.profileForm = this.fb.group({
@@ -39,7 +39,7 @@ export class EditProfileComponent implements OnInit {
         location: [videogoo.location, Validators.required],
         bio: [videogoo.bio, Validators.required],
       })
-    })
+    });
   }
 
   selectPhoto($event) {
@@ -57,10 +57,8 @@ export class EditProfileComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.profileForm.valid && this.videogoo.id === this.authService.activeUserId()) {
-      this.loading = true;
-      
-      const videogoo = new Videographer(this.videogoo.id,
+    if (this.profileForm.valid) {
+      const videogoo = new Videographer(null,
         this.getValue('firstName'),
         this.getValue('lastName'),
         this.getValue('location'),
@@ -68,24 +66,28 @@ export class EditProfileComponent implements OnInit {
         null,
         null);
 
-        if(this.file){
-          this.videoService.addProfilePicture().pipe(switchMap((url:string) => 
-             this.bucketService.uploadFile(url, this.file)), switchMap(() => 
-              this.videoService.patchVideographer(videogoo)
-            )).subscribe(x => {                
-            this.loading = false
-            this.router.navigate(['../'], { relativeTo: this.route })
-          });
-        }else {
-          this.videoService.patchVideographer(videogoo).subscribe(() => {
-            this.loading = false
-            this.router.navigate(['../'], { relativeTo: this.route })
-          });
+      if (this.videogoo && this.videogoo.id === this.authService.activeUserId()) {
+        videogoo.id = this.videogoo.id;
+        this.loading = true;
+
+        if (this.file) {
+          this.videographerService.addProfilePicture().pipe(switchMap((url: string) =>
+            this.bucketService.uploadFile(url, this.file)),
+             switchMap(() => this.videographerService.patchVideographer(videogoo)
+            )).subscribe(() => this.navigateAway(), () => this.authService.logoutLink());
+        } else{
+          this.videographerService.patchVideographer(videogoo).subscribe(() => this.navigateAway(), () => this.authService.logoutLink());
         }
+      }
     }
   }
 
-  private getValue(field: string) {
-    return this.profileForm.get(field).value.trim();
+  private navigateAway() {
+    this.loading = false
+    this.router.navigate(['../'], { relativeTo: this.route })
   }
+
+  private getValue(field: string) {
+  return this.profileForm.get(field).value.trim();
+}
 }

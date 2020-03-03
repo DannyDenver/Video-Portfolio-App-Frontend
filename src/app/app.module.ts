@@ -3,7 +3,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,13 +22,15 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AddVideoComponent } from './pages/add-video/add-video.component';
 import { VideosService } from './services/videos.service';
 import { MatTabsModule } from '@angular/material/tabs';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { AuthErrorHandler } from './services/auth-error-handler';
 import { BucketService } from './services/bucket.service';
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditVideoComponent } from './pages/edit-video/edit-video.component';
 import { EmailService } from './services/email.service';
+import { CreateProfileComponent } from './pages/create-profile/create-profile.component';
+import { AuthInterceptor } from './interceptors/NotAuthorizedInterceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { EmailService } from './services/email.service';
     EditProfileComponent,
     AddVideoComponent,
     ConfirmationDialog,
-    EditVideoComponent
+    EditVideoComponent,
+    CreateProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,11 @@ import { EmailService } from './services/email.service';
       provide: ErrorHandler,
       useClass: AuthErrorHandler
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   entryComponents: [ConfirmationDialog],
   bootstrap: [AppComponent]

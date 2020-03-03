@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { Video } from '../shared/models/video';
@@ -22,11 +22,16 @@ export class VideosService {
     return header;
   }
 
+  getVideos(timestamp = ''): Observable<any> {
+    let params = timestamp ? new HttpParams().set('timestamp', timestamp) : null;
+    return this.http.get(this.url + '/videos', { params });
+  }
+
   getVideo(videoId:string):Observable<Video> {
     return this.http.get(this.url + '/videos/' + videoId).pipe(map((res) => res['video']))
   }
 
-  getVideos(id: string) {
+  getVideographerVideos(id: string) {
     return this.http.get(this.url + '/videographers/' + encodeURI(id) + '/videos', this.getHeaders()).pipe(map((res) => res['videos']));
   }
 
