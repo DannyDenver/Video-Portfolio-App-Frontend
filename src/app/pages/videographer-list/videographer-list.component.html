@@ -43,11 +43,6 @@
                                 </div>
                             </div>
                         </mat-card-content>
-                        <mat-card-footer *ngIf="videographer && videographer.id === auth.activeUserId()">
-                            <a mat-raised-button class="mr-auto" routerLink="{{'videos/' + vd.id + '/edit'}}">Edit
-                                Video</a>
-                            <a mat-raised-button class="mr-auto" (click)="removeVideo(vd, $event)">Remove Video</a>
-                        </mat-card-footer>
                     </mat-card>
                 </ng-container>
             </ng-container>
