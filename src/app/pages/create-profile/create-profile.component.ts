@@ -89,7 +89,7 @@ export class CreateProfileComponent implements OnInit {
     this.loading = false
     this.router.navigate(['../'], { relativeTo: this.route })
   }
-  
+
   private getValue(field: string) {
     return this.profileForm.get(field).value.trim();
   }

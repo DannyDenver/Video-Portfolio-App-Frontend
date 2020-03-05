@@ -14,7 +14,7 @@
                 </div>
                 <mat-list *ngIf="!loading">
                     <mat-list-item *ngFor="let vg of videographers; let i = index" class="pointer"  routerLink="{{getLink(vg)}}">
-                        <img matListAvatar src="{{ vg.pictureUrl}}"
+                        <img matListAvatar src="{{ vg.profilePic}}"
                             alt="{{vg.firstName + ' ' + vg.lastName}}">
                         <h2 matLine class="bold"> {{vg.firstName + ' ' + vg.lastName}} </h2>
                         <p matLine>

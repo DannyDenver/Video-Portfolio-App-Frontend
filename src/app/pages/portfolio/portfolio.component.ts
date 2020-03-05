@@ -11,7 +11,7 @@ import { ConfirmationDialog } from 'src/app/core/confirmation-dialog/confirmatio
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
 import { map } from 'rxjs/operators';
-import { Observable, forkJoin } from 'rxjs';
+import { Portfolio } from 'src/app/shared/models/portfolio';
 
 @Component({
   selector: 'app-portfolio',
@@ -47,11 +47,10 @@ export class PortfolioComponent implements OnInit {
       }
       
   
-      forkJoin(this.videographerService.getVideographer(this.name), this.videosService.getVideographerVideos(this.name))
-      .subscribe((results) => {
-        if (results[0]) {
-          this.videographer = results[0];
-          this.videos = results[1];
+      this.videographerService.getPortfolio(this.name).subscribe((portfolio: Portfolio) => {
+        if (portfolio) {
+          this.videographer = portfolio.profile;
+          this.videos = portfolio.videos;
         }else {
           this.router.navigate(['./create'], { relativeTo: this.route })
         }

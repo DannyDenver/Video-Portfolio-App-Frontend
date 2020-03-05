@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
+import { Portfolio } from '../shared/models/portfolio';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ constructor(private http: HttpClient, private authService: AuthService) { }
     };
 
     return header;
+  }
+
+  getPortfolio(id: string):Observable<Portfolio>{
+    return this.http.get<any>(this.url + '/portfolio/' + encodeURI(id))
   }
 
   getVideographer(id:string): Observable<any> {

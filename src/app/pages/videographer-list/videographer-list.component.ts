@@ -42,14 +42,6 @@ export class VideographerListComponent implements OnInit {
     })
   }
 
-  usersVideographers() {
-    return this.videographers.filter(x => x.createdBy === this.auth.payload.sub)
-  }
-
-  otherVideographers() {
-    return this.videographers.filter(x => x.createdBy !== this.auth.payload.sub)
-  }
-
   getLink(vg: Videographer) {
     return vg.id;
   }

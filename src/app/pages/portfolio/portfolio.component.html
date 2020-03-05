@@ -13,9 +13,9 @@
         <div class="col-sm-12 col-md-10">
             <mat-card>
                 <mat-card-content>
-                    <div class="cover-photo" *ngIf="videographer.pictureUrl" style="background-image: url(https://inspirationfeed.com/wp-content/uploads/2017/03/Man-Picking-up-gopro-camera-on-tripod-1.jpg)"></div>
+                    <div class="cover-photo" *ngIf="videographer.profilePic" style="background-image: url(https://inspirationfeed.com/wp-content/uploads/2017/03/Man-Picking-up-gopro-camera-on-tripod-1.jpg)"></div>
                     <div class="row profile-details-row">
-                              <img *ngIf="videographer.pictureUrl" [src]="videographer.pictureUrl"
+                              <img *ngIf="videographer.profilePic" [src]="videographer.profilePic"
                                 alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}" class="avatar" />
 
                         <div class="col-sm-6 col-lg-8">
