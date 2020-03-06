@@ -4,6 +4,7 @@ import { VideographerService } from 'src/app/services/videographer.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { finalize } from 'rxjs/operators';
 import { VideosService } from 'src/app/services/videos.service';
+import { Video } from 'src/app/shared/models/video';
 
 @Component({
   selector: 'app-videographer-list',
@@ -15,7 +16,7 @@ export class VideographerListComponent implements OnInit {
   videographers: Videographer[] = [];
   title = 'video-portfolio-app';
   loading = true;
-  videos;
+  videos: Video[];
 
   constructor(
     public auth: AuthService,

@@ -27,24 +27,8 @@
 
         <ng-container *ngIf="videos">
                 <ng-container *ngFor="let vd of videos">
-                    <mat-card>
-                        <mat-card-title>
-                            {{vd.title}}
-                        </mat-card-title>
-                        <mat-card-content>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <video controls="true" class="embed-responsive-item">
-                                    <source src="{{vd.url}}" type="video/mp4" />
-                                </video>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-10 offset-md-1">
-                                    {{vd.description}}
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
+                    <video-card [video]="vd"></video-card>
                 </ng-container>
-            </ng-container>
+        </ng-container>
     </div>
 </div>

@@ -1,0 +1,34 @@
+<mat-card>
+    <mat-card-title class="container">
+        <div class="flex-container">
+            <div *ngIf="showAvatar">
+                <img mat-card-avatar src="{{ video.profilePic}}" alt="{{video.firstName + ' ' + video.lastName}}">
+            </div>
+            <div>
+                {{video.title}}
+                <div class="title-genre">{{video.genre}}</div>
+            </div>
+        </div>
+    </mat-card-title>
+    <mat-card-content>
+        <div class="embed-responsive embed-responsive-16by9">
+            <video controls="true" class="embed-responsive-item">
+                <source src="{{video.url}}" type="video/mp4" />
+            </video>
+        </div>
+    </mat-card-content>
+    <mat-card-footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    {{video.description}}
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="video.videographerId === auth.activeUserId()">
+            <a mat-raised-button class="mr-auto" routerLink="{{'videos/' + vd.id + '/edit'}}">Edit
+                Video</a>
+            <a mat-raised-button class="mr-auto" (click)="removeVideo(vd, $event)">Remove Video</a>
+        </ng-container>
+    </mat-card-footer>
+</mat-card>
