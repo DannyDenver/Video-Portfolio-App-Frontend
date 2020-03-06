@@ -61,7 +61,7 @@
 
             <ng-container *ngIf="videos">
                 <ng-container *ngFor="let vd of videos">
-                    <video-card [video]="vd" [showAvatar]="false" ></video-card>
+                    <video-card [video]="vd" [showAvatar]="false" (removeVideoEvent)="removeVideo($event)"></video-card>
                 </ng-container>
             </ng-container>
         </div>

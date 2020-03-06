@@ -70,8 +70,7 @@ export class PortfolioComponent implements OnInit {
     });
   };
 
-  removeVideo(video: Video, $event) {
-    $event.preventDefault();
+  removeVideo(video: Video) {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
       width: '250px',
       data: {

@@ -40,7 +40,7 @@ export class VideographerListComponent implements OnInit {
       if (res['success'] == true) {
         this.videographers.splice(index, 1)
       }
-    })
+    });
   }
 
   getLink(vg: Videographer) {
