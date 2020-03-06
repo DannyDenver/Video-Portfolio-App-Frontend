@@ -26,9 +26,9 @@
             </div>
         </div>
         <ng-container *ngIf="video.videographerId === auth.activeUserId()">
-            <a mat-raised-button class="mr-auto" routerLink="{{'videos/' + vd.id + '/edit'}}">Edit
+            <a mat-raised-button class="mr-auto" routerLink="{{'videos/' + video.id + '/edit'}}">Edit
                 Video</a>
-            <a mat-raised-button class="mr-auto" (click)="removeVideo(vd, $event)">Remove Video</a>
+            <a mat-raised-button class="mr-auto" (click)="removeVideo(video, $event)">Remove Video</a>
         </ng-container>
     </mat-card-footer>
 </mat-card>
