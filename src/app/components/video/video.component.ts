@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Video } from 'src/app/shared/models/video';
 import { AuthService } from 'src/app/services/auth.service';
-import { EventEmitter } from 'events';
-
+import { EventEmitter } from '@angular/core';
 @Component({
   selector: 'video-card',
   templateUrl: './video.component.html',
@@ -11,7 +10,7 @@ import { EventEmitter } from 'events';
 export class VideoComponent implements OnInit {
   @Input() video: Video;
   @Input() showAvatar = true;
-  @Output() removeVideoEvent: EventEmitter = new EventEmitter(null);
+  @Output() removeVideoEvent: EventEmitter<Video> = new EventEmitter();
 
   constructor(public auth: AuthService) { }
 
