@@ -21,4 +21,8 @@ export class VideoComponent implements OnInit {
     $event.preventDefault();
     this.removeVideoEvent.emit(video);
   }
+
+  getLink(id: string) {
+    return id;
+  }
 }

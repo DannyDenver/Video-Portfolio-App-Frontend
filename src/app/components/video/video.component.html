@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-title class="container">
         <div class="flex-container">
-            <div *ngIf="showAvatar">
+            <div *ngIf="showAvatar" routerLink="{{getLink(video.videographerId)}}">
                 <img mat-card-avatar src="{{ video.profilePic}}" alt="{{video.firstName + ' ' + video.lastName}}">
             </div>
             <div>
