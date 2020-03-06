@@ -11,7 +11,7 @@ import { EventEmitter } from 'events';
 export class VideoComponent implements OnInit {
   @Input() video: Video;
   @Input() showAvatar = true;
-  @Output() removeVideoEvent: EventEmitter = new EventEmitter();
+  @Output() removeVideoEvent: EventEmitter = new EventEmitter(null);
 
   constructor(public auth: AuthService) { }
 
