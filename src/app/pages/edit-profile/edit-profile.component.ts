@@ -19,7 +19,6 @@ export class EditProfileComponent implements OnInit {
   loading = false;
 
   @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
-
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,

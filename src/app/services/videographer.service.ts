@@ -33,11 +33,11 @@ constructor(private http: HttpClient, private authService: AuthService) { }
   }
 
   getVideographer(id:string): Observable<any> {
-    return this.http.get<any>(this.url + '/videographers/' + encodeURI(id)).pipe(map((res) => res['videographer']))
+    return this.http.get<any>(this.url + '/videographers/' + encodeURI(id)).pipe(map((res) => res['videographer']));
   }
 
-  getVideographers(): Observable<any> {
-    return this.http.get<any>(this.url + '/videographers', this.getHeaders()).pipe(map((res) => res['videographers']))
+  getVideographers(): Observable<Videographer[]> {
+    return this.http.get<any>(this.url + '/videographers', this.getHeaders()).pipe(map((res) => res['videographers']));
   }
 
   addProfilePicture(): Observable<string> {
