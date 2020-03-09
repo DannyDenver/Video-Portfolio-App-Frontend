@@ -40,6 +40,11 @@ constructor(private http: HttpClient, private authService: AuthService) { }
     return this.http.get<any>(this.url + '/videographers', this.getHeaders()).pipe(map((res) => res['videographers']));
   }
 
+  addCoverPhoto(): Observable<string> {
+    const id = this.authService.activeUserId()
+    return this.http.post<string>(this.url + '/videographers/' + encodeURI(id) + '/coverPhoto', null, this.getHeaders()).pipe(map((res) => res['uploadUrl']))
+  }
+
   addProfilePicture(): Observable<string> {
     const id = this.authService.activeUserId()
     return this.http.post<string>(this.url + '/videographers/' + encodeURI(id) + '/profilePicture', null, this.getHeaders()).pipe(map((res) => res['uploadUrl']))

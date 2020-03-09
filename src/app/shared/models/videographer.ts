@@ -17,5 +17,6 @@ export class Videographer {
     location?: string;
     bio?: string;
     profilePic?: string;
-    email?: string
+    email?: string;
+    coverPhoto?: string;
 }

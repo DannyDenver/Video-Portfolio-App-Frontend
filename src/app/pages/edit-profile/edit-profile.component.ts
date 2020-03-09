@@ -88,21 +88,21 @@ export class EditProfileComponent implements OnInit {
         videogoo.id = this.videogoo.id;
         this.loading = true;
 
-        
+        const observablesArray = [this.videographerService.patchVideographer(videogoo)];
+
+        if(this.coverPhotoFile) {
+          observablesArray.push(this.videographerService.addCoverPhoto().pipe(switchMap((url: string) => this.bucketService.uploadFile(url, this.coverPhotoFile))));
+        }
 
         if (this.file) {
-            const uploadPhoto = this.videographerService.addProfilePicture().pipe(switchMap((url: string) =>
-          this.bucketService.uploadFile(url, this.file)));
-
-          const updateVideographer = this.videographerService.patchVideographer(videogoo);
-
-          forkJoin(uploadPhoto, updateVideographer).subscribe((res) => {
-            console.log(res);
-            this.navigateAway()
-          });
-        } else{
-          this.videographerService.patchVideographer(videogoo).subscribe(() => this.navigateAway());
+          observablesArray.push(this.videographerService.addProfilePicture().pipe(switchMap((url: string) =>
+            this.bucketService.uploadFile(url, this.file))));
         }
+
+        forkJoin(...observablesArray).subscribe((res) => {
+          console.log(res);
+          this.navigateAway()
+        });
       }
     }
   }

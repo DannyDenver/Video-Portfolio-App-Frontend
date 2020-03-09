@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { VideographerService } from 'src/app/services/videographer.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { VideosService } from 'src/app/services/videos.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Video } from 'src/app/shared/models/video';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmationDialog } from 'src/app/core/confirmation-dialog/confirmation-dialog.component';
@@ -25,6 +25,7 @@ export class PortfolioComponent implements OnInit {
   videos: Video[];
   name: string;
   subscribed: boolean;
+  backgroundUrl: SafeStyle;
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +36,8 @@ export class PortfolioComponent implements OnInit {
     public auth: AuthService,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog,
-    private emailService: EmailService
+    private emailService: EmailService,
+    private sanitization: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -43,7 +45,13 @@ export class PortfolioComponent implements OnInit {
       this.videographerService.getPortfolio(name).subscribe((portfolio: Portfolio) => {
         if (portfolio) {
           this.videographer = portfolio.profile;
-          this.videos = portfolio.videos.sort((xVideo, yVide) => xVideo.order - yVideo.order);
+          if (this.videographer.coverPhoto) {
+            this.backgroundUrl = this.sanitization.bypassSecurityTrustStyle(`url(${this.videographer.coverPhoto})`);
+          }else {
+            this.backgroundUrl = this.sanitization.bypassSecurityTrustStyle(`url(https://inspirationfeed.com/wp-content/uploads/2017/03/Man-Picking-up-gopro-camera-on-tripod-1.jpg)`);
+          }
+          
+          this.videos = portfolio.videos.sort((xVideo, yVideo) => xVideo.order - yVideo.order);
         }else {
           this.router.navigate(['./create'], { relativeTo: this.route })
         }
