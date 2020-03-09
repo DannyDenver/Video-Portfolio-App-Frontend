@@ -29,7 +29,7 @@ constructor(private http: HttpClient, private authService: AuthService) { }
   }
 
   getPortfolio(id: string):Observable<Portfolio>{
-    return this.http.get<any>(this.url + '/portfolio/' + encodeURI(id))
+    return this.http.get<any>(this.url + '/portfolio/' + encodeURI(id), this.getHeaders())
   }
 
   getVideographer(id:string): Observable<any> {

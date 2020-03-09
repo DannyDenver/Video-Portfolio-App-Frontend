@@ -7,7 +7,7 @@ import { VideosService } from 'src/app/services/videos.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-add-video',
+  selector: 'add-video',
   templateUrl: './add-video.component.html',
   styleUrls: ['./add-video.component.scss']
 })

@@ -40,14 +40,7 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.pipe(map((params: ParamMap) => params.get('name'))).subscribe(name => {
-      if (name === 'your-portfolio') {
-        this.name = this.auth.activeUserId();
-      } else {
-        this.name = name;
-      }
-      
-  
-      this.videographerService.getPortfolio(this.name).subscribe((portfolio: Portfolio) => {
+      this.videographerService.getPortfolio(name).subscribe((portfolio: Portfolio) => {
         if (portfolio) {
           this.videographer = portfolio.profile;
           this.videos = portfolio.videos;
