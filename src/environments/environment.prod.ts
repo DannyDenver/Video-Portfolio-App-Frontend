@@ -6,5 +6,6 @@ export const environment = {
     audience: 'videoportfolio', // the audience set for the auth0 app
     clientId: 'Qz3CL88tGpZYJQFqXQNjdzgXW0QCmtcp', // the client id generated for the auth0 app
     callbackURL: 'https://www.reel-people.com/your-portfolio', // the base url of the running ionic application. 
+    logoutURL: 'https://www.reel-people.com/'
   }
 };

@@ -43,7 +43,7 @@ export class PortfolioComponent implements OnInit {
       this.videographerService.getPortfolio(name).subscribe((portfolio: Portfolio) => {
         if (portfolio) {
           this.videographer = portfolio.profile;
-          this.videos = portfolio.videos;
+          this.videos = portfolio.videos.sort((xVideo, yVide) => xVideo.order - yVideo.order);
         }else {
           this.router.navigate(['./create'], { relativeTo: this.route })
         }
@@ -74,7 +74,7 @@ export class PortfolioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const userId = this.auth.activeUserId();
-        this.videosService.deleteVideo(userId, video.id).subscribe((deletedUrl: string) => {
+        this.videosService.deleteVideo(userId, video.id).subscribe(() => {
           this.videos = this.videos.filter(vid => vid.id !== video.id);
         })
       }

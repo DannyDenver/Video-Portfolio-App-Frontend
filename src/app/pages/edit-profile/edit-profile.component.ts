@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { BucketService } from 'src/app/services/bucket.service';
 import { switchMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
@@ -16,9 +17,12 @@ export class EditProfileComponent implements OnInit {
   profileForm: FormGroup;
   videogoo: Videographer;
   file: File;
+  coverPhotoFile: File;
   loading = false;
 
   @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
+  @ViewChild('coverPhotoUpload', { static: false }) coverPhotoUpload: ElementRef
+
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -55,6 +59,21 @@ export class EditProfileComponent implements OnInit {
     this.file = $event.target.files[0];
   }
 
+  selectCoverPhoto($event) {
+    $event.preventDefault();
+    if (this.coverPhotoUpload) {
+      this.coverPhotoUpload.nativeElement.click();
+    }
+  }
+
+  removeCoverPhoto() {
+    this.coverPhotoFile = null;
+  }
+
+  onCoverPhotoSelect($event) {
+    this.coverPhotoFile = $event.target.files[0];
+  }
+
   async onSubmit() {
     if (this.profileForm.valid) {
       const videogoo = new Videographer(null,
@@ -69,13 +88,20 @@ export class EditProfileComponent implements OnInit {
         videogoo.id = this.videogoo.id;
         this.loading = true;
 
+        
+
         if (this.file) {
-          this.videographerService.addProfilePicture().pipe(switchMap((url: string) =>
-            this.bucketService.uploadFile(url, this.file)),
-             switchMap(() => this.videographerService.patchVideographer(videogoo)
-            )).subscribe(() => this.navigateAway(), () => this.authService.logoutLink());
+            const uploadPhoto = this.videographerService.addProfilePicture().pipe(switchMap((url: string) =>
+          this.bucketService.uploadFile(url, this.file)));
+
+          const updateVideographer = this.videographerService.patchVideographer(videogoo);
+
+          forkJoin(uploadPhoto, updateVideographer).subscribe((res) => {
+            console.log(res);
+            this.navigateAway()
+          });
         } else{
-          this.videographerService.patchVideographer(videogoo).subscribe(() => this.navigateAway(), () => this.authService.logoutLink());
+          this.videographerService.patchVideographer(videogoo).subscribe(() => this.navigateAway());
         }
       }
     }

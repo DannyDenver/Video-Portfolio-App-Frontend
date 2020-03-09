@@ -4,8 +4,8 @@
             <mat-card-title *ngIf="!videogoo">Finish your profile:</mat-card-title>
             <mat-card-title *ngIf="videogoo">Edit Profile:</mat-card-title>
             <div class="row justify-content-center" *ngIf="loading">
-                    <mat-spinner></mat-spinner>
-                </div>
+                <mat-spinner></mat-spinner>
+            </div>
             <form *ngIf="!loading" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                 <div class="row">
                     <div class="col-sm-6">
@@ -26,16 +26,27 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-6">
-                        <button mat-raised-button color="primary"
-                            (click)="selectPhoto($event)">Upload Profile Pic</button>
-                            <ng-container *ngIf="file">
-                                    <span>{{file.name}}</span>
-                                    <button mat-icon-button
-                                            color="primary"
-                                            (click)="removePhoto()">
-                                      <mat-icon>close</mat-icon>
-                                    </button>
+                            <button mat-raised-button color="primary" (click)="selectCoverPhoto($event)">Upload Cover
+                                Photo</button>
+                            <ng-container *ngIf="coverPhotoFile">
+                                <span>{{coverPhotoFile.name}}</span>
+                                <button mat-icon-button color="primary" (click)="removeCoverPhoto()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
                             </ng-container>
+                        </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button mat-raised-button color="primary" (click)="selectPhoto($event)">Upload Profile
+                            Pic</button>
+                        <ng-container *ngIf="file">
+                            <span>{{file.name}}</span>
+                            <button mat-icon-button color="primary" (click)="removePhoto()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </ng-container>
                     </div>
                 </div>
                 <mat-form-field>
@@ -44,7 +55,8 @@
                 <div class="row">
                     <div class="col-sm-12 justify-content-end">
                         <button mat-raised-button [routerLink]="['../']">Cancel</button>
-                        <button mat-raised-button type="submit">{{ videogoo ? 'Save Edits' : 'Update Profile'  }}</button>
+                        <button mat-raised-button
+                            type="submit">{{ videogoo ? 'Save Edits' : 'Update Profile'  }}</button>
                     </div>
                 </div>
                 <div class="row">
@@ -54,4 +66,5 @@
         </mat-card>
     </div>
 </div>
-<input #fileUpload type="file" (change)="onPictureSelect($event)" class="hide" >
+<input #fileUpload type="file" (change)="onPictureSelect($event)" class="hide">
+<input #coverPhotoUpload type="file" (change)="onCoverPhotoSelect($event)" class="hide">

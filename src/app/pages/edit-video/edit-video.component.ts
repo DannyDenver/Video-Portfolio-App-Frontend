@@ -12,6 +12,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class EditVideoComponent implements OnInit {
   video: Video;
   videoForm: FormGroup;
+  orderPreference: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -25,11 +26,14 @@ export class EditVideoComponent implements OnInit {
 
     this.videosService.getVideo(videoId).subscribe(video => {
       this.video = video;
+      this.orderPreference = video.order ? false : true;
+
       this.videoForm = this.fb.group({
         title: [video.title, Validators.required],
-        description: [video.description, Validators.required]
-      })
-
+        description: [video.description, Validators.required],
+        genre: [video.genre],
+        order: [{ value : video.order, disabled: video.order ? false : true}]
+      });
     });
   }
 
@@ -39,7 +43,9 @@ export class EditVideoComponent implements OnInit {
         this.video.videographerId,
         this.getValue('title'),
         this.getValue('description'),
-        this.video.id
+        this.video.id,
+        this.getValue('genre'),
+        this.videoForm.get("order").enabled ? this.getValue('order') : null
       )
       this.videosService.editVideo(video).subscribe((url: string) => {
         this.router.navigate(['../../..'], { relativeTo: this.route })
@@ -47,7 +53,21 @@ export class EditVideoComponent implements OnInit {
     }
   }
 
+  toggleOrderPreference() {
+    this.orderPreference != this.orderPreference;
+    if (this.videoForm.get("order").disabled) {
+      this.videoForm.get("order").enable();
+    }else {
+      this.videoForm.get("order").disable();
+    }
+  }
+
   private getValue(field: string) {
-    return this.videoForm.get(field).value.trim();
+    if (this.videoForm.get(field).value === null || this.videoForm.get(field).value === '') return null;
+    if (typeof this.videoForm.get(field).value == 'string') {
+      return this.videoForm.get(field).value.trim();
+    }
+
+    return this.videoForm.get(field).value
   }
 }

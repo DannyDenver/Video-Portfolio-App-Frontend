@@ -46,7 +46,7 @@ constructor(private http: HttpClient, private authService: AuthService) { }
   }
 
   patchVideographer(videographer: Videographer) {
-    return this.http.patch(this.url + '/videographers', videographer, this.getHeaders()).pipe(map((res) => res['updatedVideographer']))
+    return this.http.patch(this.url + '/videographers', videographer, this.getHeaders());
   }
 
   deleteVideographer(id: string) {

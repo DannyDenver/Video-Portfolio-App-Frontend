@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from './services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { AddVideoComponent } from './pages/add-video/add-video.component';
 import { VideosService } from './services/videos.service';
@@ -61,7 +62,8 @@ import { VideoComponent } from './components/video/video.component';
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [
     AuthService,
