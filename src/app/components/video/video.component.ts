@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { Video } from 'src/app/shared/models/video';
 import { AuthService } from 'src/app/services/auth.service';
 import { EventEmitter } from '@angular/core';
@@ -11,11 +11,14 @@ export class VideoComponent implements OnInit {
   @Input() video: Video;
   @Input() showAvatar = true;
   @Output() removeVideoEvent: EventEmitter<Video> = new EventEmitter();
+  showingVideo = false;
+  @ViewChild('videoPlayer', { static: true }) public videoPlayer: ElementRef;
 
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
-  }
+    if (!this.video.thumbnailUrl) this.showingVideo = true;
+   }
 
   removeVideo(video, $event) {
     $event.preventDefault();
@@ -24,5 +27,10 @@ export class VideoComponent implements OnInit {
 
   getLink(id: string) {
     return id;
+  }
+
+  showVideo() {
+    this.showingVideo = true;
+    this.videoPlayer.nativeElement.play();
   }
 }

@@ -11,8 +11,13 @@
         </div>
     </mat-card-title>
     <mat-card-content>
-        <div class="embed-responsive embed-responsive-16by9">
-            <video controls="true" class="embed-responsive-item">
+        <div *ngIf="!showingVideo" class="outer showing-thumbnail">
+            <div class="inner" title="Click to play video">
+                <img (click)="showVideo()" class="video-thumbnail pointer" [src]="video.thumbnailUrl">
+            </div>
+        </div>
+        <div [hidden]="!showingVideo" class="embed-responsive embed-responsive-16by9">
+            <video #videoPlayer controls="true" class="embed-responsive-item">
                 <source src="{{video.url}}" type="video/mp4" />
             </video>
         </div>

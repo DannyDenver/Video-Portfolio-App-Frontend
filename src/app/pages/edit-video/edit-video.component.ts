@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideosService } from 'src/app/services/videos.service';
 import { Video } from 'src/app/shared/models/video';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { BucketService } from 'src/app/services/bucket.service';
 
 @Component({
   selector: 'app-edit-video',
@@ -13,12 +16,16 @@ export class EditVideoComponent implements OnInit {
   video: Video;
   videoForm: FormGroup;
   orderPreference: boolean;
+  thumbnailPhoto: File;
+
+  @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private videosService: VideosService
+    private videosService: VideosService,
+    private bucketService: BucketService
   ) { }
 
   ngOnInit() {
@@ -32,9 +39,23 @@ export class EditVideoComponent implements OnInit {
         title: [video.title, Validators.required],
         description: [video.description, Validators.required],
         genre: [video.genre],
-        order: [{ value : video.order, disabled: video.order ? false : true}]
+        order: [{ value: video.order, disabled: video.order ? false : true }]
       });
     });
+  }
+
+  selectThumbnailPhoto($event) {
+    $event.preventDefault()
+    if (this.fileUpload)
+      this.fileUpload.nativeElement.click()
+  }
+
+  removeThumbnailPhoto() {
+    this.thumbnailPhoto = null;
+  }
+
+  onPictureSelect($event) {
+    this.thumbnailPhoto = $event.target.files[0];
   }
 
   onSubmit() {
@@ -47,7 +68,15 @@ export class EditVideoComponent implements OnInit {
         this.getValue('genre'),
         this.videoForm.get("order").enabled ? this.getValue('order') : null
       )
-      this.videosService.editVideo(video).subscribe((url: string) => {
+
+      const observableArray = [this.videosService.editVideo(video)];
+
+      if (this.thumbnailPhoto) {
+        observableArray.push(this.videosService.addVideoThumbnail(video.id).pipe(switchMap((url: string) => this.bucketService.uploadFile(url, this.thumbnailPhoto))));
+      }
+
+
+      forkJoin(...observableArray).subscribe((url: string) => {
         this.router.navigate(['../../..'], { relativeTo: this.route })
       })
     }
@@ -57,7 +86,7 @@ export class EditVideoComponent implements OnInit {
     this.orderPreference != this.orderPreference;
     if (this.videoForm.get("order").disabled) {
       this.videoForm.get("order").enable();
-    }else {
+    } else {
       this.videoForm.get("order").disable();
     }
   }

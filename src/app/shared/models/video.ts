@@ -19,4 +19,5 @@ export class Video {
     lastName: string;
     genre: string;
     order?: number;
+    thumbnailUrl?: string;
 }

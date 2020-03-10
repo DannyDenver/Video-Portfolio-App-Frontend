@@ -26,15 +26,15 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-6">
-                            <button mat-raised-button color="primary" (click)="selectCoverPhoto($event)">Upload Cover
-                                Photo</button>
-                            <ng-container *ngIf="coverPhotoFile">
-                                <span>{{coverPhotoFile.name}}</span>
-                                <button mat-icon-button color="primary" (click)="removeCoverPhoto()">
-                                    <mat-icon>close</mat-icon>
-                                </button>
-                            </ng-container>
-                        </div>
+                        <button mat-raised-button color="primary" (click)="selectCoverPhoto($event)">Upload Cover
+                            Photo</button>
+                        <ng-container *ngIf="coverPhotoFile">
+                            <span>{{coverPhotoFile.name}}</span>
+                            <button mat-icon-button color="primary" (click)="removeCoverPhoto()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </ng-container>
+                    </div>
                 </div>
 
                 <div class="row">

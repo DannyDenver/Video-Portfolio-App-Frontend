@@ -23,6 +23,16 @@
                                 <input matInput placeholder="Genre" type="text" formControlName="genre">
                             </mat-form-field>
                         </div>
+                        <div class="col-sm-6">
+                            <button mat-raised-button color="primary" (click)="selectThumbnailPhoto($event)">Upload Thumbnail
+                                Photo</button>
+                            <ng-container *ngIf="thumbnailPhoto">
+                                <span>{{thumbnailPhoto.name}}</span>
+                                <button mat-icon-button color="primary" (click)="removeThumbnailPhoto()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </ng-container>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -44,3 +54,4 @@
         </mat-card>
     </div>
 </div>
+<input #fileUpload type="file" (change)="onPictureSelect($event)" class="hide">

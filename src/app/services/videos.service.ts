@@ -43,6 +43,10 @@ export class VideosService {
   editVideo(video: Video) {
     return this.http.patch(this.url + '/videos/' + video.id, video, this.getHeaders())
   }
+
+  addVideoThumbnail(videoId: string) {
+    return this.http.post(this.url + `/videos/${videoId}/thumbnailPhoto`, null, this.getHeaders()).pipe(map((res) => res['uploadUrl']));
+  }
   
   deleteVideo(id: string, videoId: string) {
     return this.http.delete(this.url +'/videographers/' + encodeURI(id) + '/videos/'+ videoId, this.getHeaders()).pipe(map((res) => res['deletedVideoUrl']));
