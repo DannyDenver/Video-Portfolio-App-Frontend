@@ -17,6 +17,7 @@ export class EditVideoComponent implements OnInit {
   videoForm: FormGroup;
   orderPreference: boolean;
   thumbnailPhoto: File;
+  loading = false;
 
   @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
 
@@ -60,6 +61,7 @@ export class EditVideoComponent implements OnInit {
 
   onSubmit() {
     if (this.videoForm.valid) {
+      this.loading = true;
       const video = new Video(
         this.video.videographerId,
         this.getValue('title'),
@@ -78,7 +80,8 @@ export class EditVideoComponent implements OnInit {
 
       forkJoin(...observableArray).subscribe((url: string) => {
         this.router.navigate(['../../..'], { relativeTo: this.route })
-      })
+      }, error => console.log,
+      () => this.loading = false)
     }
   }
 
