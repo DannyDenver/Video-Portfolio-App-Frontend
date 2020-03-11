@@ -13,9 +13,9 @@
                     <mat-spinner></mat-spinner>
                 </div>
                 <mat-list *ngIf="!loading">
-                    <mat-list-item *ngFor="let vg of videographers; let i = index" class="pointer"  routerLink="{{getLink(vg)}}">
-                        <img matListAvatar src="{{ vg.profilePic}}"
-                            alt="{{vg.firstName + ' ' + vg.lastName}}">
+                    <mat-list-item *ngFor="let vg of videographers; let i = index" class="pointer"
+                        routerLink="{{getLink(vg)}}">
+                        <img matListAvatar src="{{ vg.profilePic}}" alt="{{vg.firstName + ' ' + vg.lastName}}">
                         <h2 matLine class="bold"> {{vg.firstName + ' ' + vg.lastName}} </h2>
                         <p matLine>
                             <span *ngIf="vg.location">{{vg.location}}</span>
@@ -26,14 +26,15 @@
         </mat-card>
 
         <ng-container *ngIf="videos">
-                <ng-container *ngFor="let vd of videos">
-                    <video-card [video]="vd"></video-card>
-                </ng-container>
+            <ng-container *ngFor="let vd of videos">
+                <video-card [video]="vd"></video-card>
+            </ng-container>
         </ng-container>
 
-        <div infiniteScroll
-            [infiniteScrollDistance]="2"
-            [infiniteScrollThrottle]="1000"
-            (scrolled)="onScroll()"></div>
+        <div class="row justify-content-center" *ngIf="loadingVideos">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()"></div>
     </div>
 </div>

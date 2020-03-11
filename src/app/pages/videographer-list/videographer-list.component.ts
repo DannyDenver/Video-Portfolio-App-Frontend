@@ -16,6 +16,7 @@ export class VideographerListComponent implements OnInit {
   videographers: Videographer[] = [];
   title = 'video-portfolio-app';
   loading = true;
+  loadingVideos = false;
   videos: Video[];
 
   constructor(
@@ -48,10 +49,11 @@ export class VideographerListComponent implements OnInit {
 
   onScroll() {
     if(this.videos){
+      this.loadingVideos = true;
       this.videosService.getVideos(this.videos[this.videos.length - 1]).subscribe((res) => {
         let newVideos = res.videos as Video[];
         this.videos.push(...newVideos);
-      });
+      }, (error) => console.log, () => this.loadingVideos = false);
     }
   }
 }
