@@ -37,7 +37,7 @@
                             </div>
                     </div>
                 </mat-card-content>
-                <mat-card-footer>
+                <mat-card-footer [hidden]="true">
                     <div class="container">
                         <form [formGroup]="emailForm" (ngSubmit)="subscribeToPortfolio()" *ngIf="!subscribed">
                             <div class="row">
