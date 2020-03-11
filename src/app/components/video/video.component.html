@@ -12,8 +12,9 @@
     </mat-card-title>
     <mat-card-content>
         <div *ngIf="!showingVideo" class="outer showing-thumbnail">
-            <div class="inner" title="Click to play video">
-                <img (click)="showVideo()" class="video-thumbnail pointer" [src]="video.thumbnailUrl">
+            <div class="inner img-overlay-wrap" title="Click to play video">
+                    <img class="play-svg" src="../../../assets/play-circle-regular.svg">
+                    <img (click)="showVideo()" class="video-thumbnail pointer" [src]="video.thumbnailUrl">
             </div>
         </div>
         <div [hidden]="!showingVideo" class="embed-responsive embed-responsive-16by9">
