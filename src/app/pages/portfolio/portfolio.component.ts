@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 import { Portfolio } from 'src/app/shared/models/portfolio';
 
 @Component({
-  selector: 'app-portfolio',
+  selector: 'portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
 })
@@ -51,7 +51,7 @@ export class PortfolioComponent implements OnInit {
             this.backgroundUrl = this.sanitization.bypassSecurityTrustStyle(`url(https://inspirationfeed.com/wp-content/uploads/2017/03/Man-Picking-up-gopro-camera-on-tripod-1.jpg)`);
           }
           
-          this.videos = portfolio.videos.sort((xVideo, yVideo) => xVideo.order - yVideo.order);
+          this.videos = portfolio.videos.sort((a, b) => (a.order != null ? a.order : Infinity) - (b.order != null ? b.order : Infinity));
         }else {
           this.router.navigate(['./create'], { relativeTo: this.route })
         }

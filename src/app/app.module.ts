@@ -33,6 +33,7 @@ import { EmailService } from './services/email.service';
 import { CreateProfileComponent } from './pages/create-profile/create-profile.component';
 import { AuthInterceptor } from './interceptors/NotAuthorizedInterceptor';
 import { VideoComponent } from './components/video/video.component';
+import { AddEditVideoComponent } from './components/add-edit-video/add-edit-video.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { VideoComponent } from './components/video/video.component';
     ConfirmationDialog,
     EditVideoComponent,
     CreateProfileComponent,
-    VideoComponent
+    VideoComponent,
+    AddEditVideoComponent
   ],
   imports: [
     BrowserModule,
