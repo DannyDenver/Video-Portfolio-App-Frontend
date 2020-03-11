@@ -12,12 +12,12 @@ img.avatar {
 .cover-photo {
   width: 100%;
   height: 35vh;
-  height: calc(var(--vh, 1vh) * 35);
+  height: calc(var(--vh, 1vh) * 50);
   background-size: cover;
   border: 1px solid black;
   border-radius: 5px;
   background-repeat: no-repeat;
-  background-position-y: 34%;
+  background-position-y: 100%;
 }
 
 .profile-details-row {
@@ -29,6 +29,10 @@ img.avatar {
 }
 
 @media only screen and (max-width: 575px) {
+  .cover-photo {
+    height: calc(var(--vh, 1vh) * 40);
+  }
+
   .profile-details-row .name-location-row {
     margin-top: -10px;
   }
