@@ -22,9 +22,9 @@ export class VideosService {
     return header;
   }
 
-  getVideos(timestamp = ''): Observable<any> {
-    let params = timestamp ? new HttpParams().set('timestamp', timestamp) : null;
-    return this.http.get(this.url + '/videos', { params });
+  getVideos(video?: Video): Observable<any> {
+    let params = video ? new HttpParams().set('video', JSON.stringify(video)) : null;
+    return this.http.get(this.url + '/videos', { params },);
   }
 
   getVideo(videoId:string):Observable<Video> {

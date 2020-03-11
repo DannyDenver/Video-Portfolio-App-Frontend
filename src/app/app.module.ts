@@ -34,6 +34,7 @@ import { CreateProfileComponent } from './pages/create-profile/create-profile.co
 import { AuthInterceptor } from './interceptors/NotAuthorizedInterceptor';
 import { VideoComponent } from './components/video/video.component';
 import { AddEditVideoComponent } from './components/add-edit-video/add-edit-video.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AddEditVideoComponent } from './components/add-edit-video/add-edit-vide
     ReactiveFormsModule,
     FormsModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    InfiniteScrollModule
   ],
   providers: [
     AuthService,

@@ -30,8 +30,7 @@ export class VideographerListComponent implements OnInit {
       });
 
       this.videosService.getVideos().subscribe((res) => {
-        this.videos = res.videos;
-        console.log(res);
+        this.videos = res.videos as Video[];
       })
   }
 
@@ -45,5 +44,14 @@ export class VideographerListComponent implements OnInit {
 
   getLink(vg: Videographer) {
     return vg.id;
+  }
+
+  onScroll() {
+    if(this.videos){
+      this.videosService.getVideos(this.videos[this.videos.length - 1]).subscribe((res) => {
+        let newVideos = res.videos as Video[];
+        this.videos.push(...newVideos);
+      });
+    }
   }
 }

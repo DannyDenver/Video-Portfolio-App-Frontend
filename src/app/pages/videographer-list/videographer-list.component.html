@@ -30,5 +30,10 @@
                     <video-card [video]="vd"></video-card>
                 </ng-container>
         </ng-container>
+
+        <div infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="1000"
+            (scrolled)="onScroll()"></div>
     </div>
 </div>
