@@ -7,6 +7,7 @@ img.avatar {
     margin: 20px;
     border: 5px solid white;
     background-color: white;
+    margin-top: -75px;
   }
 
 .cover-photo {
@@ -20,15 +21,15 @@ img.avatar {
   background-position-y: 100%;
 }
 
-.profile-details-row {
-  margin-top: -75px;
-}
-
 .profile-details-row .name-location-row {
   margin-top: 20px;
 }
 
 @media only screen and (max-width: 575px) {
+  .mt-3 {
+    margin-top: unset !important;
+  }
+  
   .cover-photo {
     height: calc(var(--vh, 1vh) * 40);
   }
