@@ -1,40 +1,43 @@
-<div class="row justify-content-center">
-    <div class="col-sm-offset-2 col-sm-8 col-xs-12">
-        <mat-card>
-            <h4>Welcome! This site is used to showcase up and coming videographers.</h4>
-        </mat-card>
-    </div>
-</div>
-<div class="row justify-content-center">
-    <div class="col-sm-offset-2 col-sm-8 col-xs-12">
-        <mat-card>
-            <mat-card-content>
-                <div class="row justify-content-center" *ngIf="loading">
-                    <mat-spinner></mat-spinner>
-                </div>
-                <mat-list *ngIf="!loading">
-                    <mat-list-item *ngFor="let vg of videographers; let i = index" class="pointer"
-                        routerLink="{{getLink(vg)}}">
-                        <img matListAvatar src="{{ vg.profilePic}}" alt="{{vg.firstName + ' ' + vg.lastName}}">
-                        <h2 matLine class="bold"> {{vg.firstName + ' ' + vg.lastName}} </h2>
-                        <p matLine>
-                            <span *ngIf="vg.location">{{vg.location}}</span>
-                        </p>
-                    </mat-list-item>
-                </mat-list>
-            </mat-card-content>
-        </mat-card>
-
-        <ng-container *ngIf="videos">
-            <ng-container *ngFor="let vd of videos">
-                <video-card [video]="vd"></video-card>
-            </ng-container>
-        </ng-container>
-
-        <div class="row justify-content-center" *ngIf="loadingVideos">
-            <mat-spinner></mat-spinner>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-xs-12">
+            <mat-card>
+                <h4>Welcome! This site is used to showcase up and coming videographers.</h4>
+            </mat-card>
         </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-xs-12">
+            <mat-card>
+                <mat-card-content>
+                    <div class="row justify-content-center" *ngIf="loading">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <mat-list *ngIf="!loading">
+                        <mat-list-item *ngFor="let vg of videographers; let i = index" class="pointer"
+                            routerLink="{{getLink(vg)}}">
+                            <img matListAvatar src="{{ vg.profilePic}}" alt="{{vg.firstName + ' ' + vg.lastName}}">
+                            <h2 matLine class="bold"> {{vg.firstName + ' ' + vg.lastName}} </h2>
+                            <p matLine>
+                                <span *ngIf="vg.location">{{vg.location}}</span>
+                            </p>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+            </mat-card>
 
-        <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()"></div>
+            <ng-container *ngIf="videos">
+                <ng-container *ngFor="let vd of videos">
+                    <video-card [video]="vd"></video-card>
+                </ng-container>
+            </ng-container>
+
+            <div class="row justify-content-center" *ngIf="loadingVideos">
+                <mat-spinner></mat-spinner>
+            </div>
+
+            <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
+            </div>
+        </div>
     </div>
 </div>
