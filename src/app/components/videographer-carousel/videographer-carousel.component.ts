@@ -11,7 +11,22 @@ import { OwlCarousel } from 'ngx-owl-carousel';
 export class VideographerCarouselComponent {
 @Input() videographers: Videographer[];
 @ViewChild('owlElement', {static: true}) owlElement: OwlCarousel
-mySlideOptions={items: 3, dots: true, nav: false, margin: 5};
+mySlideOptions={items: 3, dots: true, nav: false, margin: 5, responsiveClass:true,
+  responsive:{
+    0:{
+        items:1,
+    },
+    600:{
+        items:2,
+    },
+    900: {
+      items: 3
+    },
+    1200: {
+      items: 4
+    }
+  }
+  };
 
   constructor() { }
   getLink(vg: Videographer) {
