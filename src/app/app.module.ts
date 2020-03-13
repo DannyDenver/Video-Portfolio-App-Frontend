@@ -35,6 +35,8 @@ import { AuthInterceptor } from './interceptors/NotAuthorizedInterceptor';
 import { VideoComponent } from './components/video/video.component';
 import { AddEditVideoComponent } from './components/add-edit-video/add-edit-video.component';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { VideographerCarouselComponent } from './components/videographer-carousel/videographer-carousel.component';
+import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     EditVideoComponent,
     CreateProfileComponent,
     VideoComponent,
-    AddEditVideoComponent
+    AddEditVideoComponent,
+    VideographerCarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     FormsModule,
     MatDialogModule,
     MatCheckboxModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    OwlModule
   ],
   providers: [
     AuthService,

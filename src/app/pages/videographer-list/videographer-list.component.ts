@@ -12,13 +12,11 @@ import { Video } from 'src/app/shared/models/video';
   styleUrls: ['./videographer-list.component.scss']
 })
 export class VideographerListComponent implements OnInit {
-  greeting = "";
   videographers: Videographer[] = [];
-  title = 'video-portfolio-app';
   loading = true;
   loadingVideos = false;
   videos: Video[];
-
+ 
   constructor(
     public auth: AuthService,
     private videographerService: VideographerService,
@@ -27,7 +25,7 @@ export class VideographerListComponent implements OnInit {
   ngOnInit() {
     this.videographerService.getVideographers().pipe(finalize(() => this.loading = false))
       .subscribe(response => {
-        this.videographers = response as Videographer[]
+        this.videographers = response as Videographer[];
       });
 
       this.videosService.getVideos().subscribe((res) => {
@@ -38,13 +36,9 @@ export class VideographerListComponent implements OnInit {
   deletePortfolio(id: string, index: number) {
     this.videographerService.deleteVideographer(id).subscribe(res => {
       if (res['success'] == true) {
-        this.videographers.splice(index, 1)
+        this.videographers.splice(index, 1);
       }
     });
-  }
-
-  getLink(vg: Videographer) {
-    return vg.id;
   }
 
   onScroll() {

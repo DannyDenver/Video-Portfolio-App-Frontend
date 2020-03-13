@@ -25,8 +25,8 @@ a {
   margin: 5px !important;
 }
 
-h2 {
-    color: #3498DB !important;
+.name-link {
+  color: #3498db!important;
 }
 
 .mat-card {
