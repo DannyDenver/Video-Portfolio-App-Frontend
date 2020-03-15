@@ -1,73 +1,81 @@
 <div class="row justify-content-center" *ngIf="videoForm">
-        <div class="col-sm-10">
-            <mat-card>
-                <mat-card-content>
-                    <mat-card-title *ngIf="newVideo">Add a Video to your Portfolio:</mat-card-title>
-
-                    <mat-card-title *ngIf="!newVideo">Making edits to video <i>{{video.title}}</i>:</mat-card-title>
-                    <div class="row justify-content-center" *ngIf="loading">
-                        <mat-spinner></mat-spinner>
+    <div class="col-sm-10">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title *ngIf="newVideo">
+                    {{ loading ? "Adding New Video..." : "Add a Video to your Portfolio:" }}</mat-card-title>
+                <mat-card-title *ngIf="!newVideo">Making edits to video <i>{{video.title}}</i>:</mat-card-title>
+                <div class="row justify-content-center" *ngIf="loading">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <form *ngIf="!loading" [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <mat-form-field>
+                                <input matInput placeholder="Video Title" type="text" formControlName="title">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6">
+                            <mat-form-field>
+                                <input matInput placeholder="Description" type="text" formControlName="description">
+                            </mat-form-field>
+                        </div>
                     </div>
-                    <form *ngIf="!loading" [formGroup]="videoForm" (ngSubmit)="onSubmit()">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <mat-form-field>
-                                    <input matInput placeholder="Video Title" type="text" formControlName="title">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-6">
-                                <mat-form-field>
-                                    <input matInput placeholder="Description" type="text" formControlName="description">
-                                </mat-form-field>
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <mat-form-field>
+                                <input matInput placeholder="Genre" type="text" formControlName="genre">
+                            </mat-form-field>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <mat-form-field>
-                                    <input matInput placeholder="Genre" type="text" formControlName="genre">
-                                </mat-form-field>
-                            </div>
-                            <div *ngIf="!newVideo" class="col-sm-6">
-                                <button mat-raised-button color="primary" (click)="selectThumbnailPhoto($event)">Upload
-                                    Thumbnail
-                                    Photo</button>
-                                <ng-container *ngIf="thumbnailPhoto">
-                                    <span>{{thumbnailPhoto.name}}</span>
-                                    <button mat-icon-button color="primary" (click)="removeThumbnailPhoto()">
-                                        <mat-icon>close</mat-icon>
-                                    </button>
-                                </ng-container>
-                            </div>
+                        <div *ngIf="!newVideo" class="col-sm-6">
+                            <button mat-raised-button color="primary" (click)="selectThumbnailPhoto($event)">Upload
+                                Thumbnail
+                                Photo</button>
+                            <ng-container *ngIf="thumbnailPhoto">
+                                <span>{{thumbnailPhoto.name}}</span>
+                                <button mat-icon-button color="primary" (click)="removeThumbnailPhoto()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </ng-container>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <mat-checkbox [checked]="!orderPreference" (click)="toggleOrderPreference()">No
-                                    preference on
-                                    placement of video in list of videos.</mat-checkbox>
-                                <mat-form-field>
-                                    <input matInput placeholder="Video List Order" type="number" formControlName="order">
-                                </mat-form-field>
-                            </div>
-                            <div *ngIf="newVideo" class="col-sm-6">
-                                    <button mat-raised-button color="primary" (click)="selectVideo($event)">Select Video</button>
-                                    <ng-container *ngIf="videoFile">
-                                        <span>{{videoFile.name}}</span>
-                                        <button mat-icon-button color="primary" (click)="removeVideo($event)">
-                                            <mat-icon>close</mat-icon>
-                                        </button>
-                                    </ng-container>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <mat-checkbox [checked]="!orderPreference" (click)="toggleOrderPreference()">No
+                                preference on
+                                placement of video in list of videos.</mat-checkbox>
+                            <mat-form-field>
+                                <input matInput placeholder="Video List Order" type="number" formControlName="order">
+                            </mat-form-field>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12 justify-content-end">
-                                <button mat-raised-button [routerLink]="['../']">Cancel</button>
-                                <button mat-raised-button type="submit">Save Edits</button>
-                            </div>
+                        <div *ngIf="newVideo" class="col-sm-6">
+                            <button mat-raised-button color="primary" (click)="selectVideo($event)">Select
+                                Video*</button>
+                            <ng-container *ngIf="videoFile">
+                                <span>{{videoFile.name}}</span>
+                                <button mat-icon-button color="primary" (click)="removeVideo($event)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </ng-container>
                         </div>
-                    </form>
-                </mat-card-content>
-            </mat-card>
-        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 justify-content-end">
+                            <button mat-raised-button [routerLink]="['../']">Cancel</button>
+                            <button mat-raised-button type="submit">{{ newVideo ? "Save Video" : "Save Edits"}}</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div ><i>*Video cannot exceed 2 gigabytes and be of type .mp4 or .mov.</i></div>
+                            <div class="text-danger"><i>{{showFileSizeWarning}}</i></div>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
     </div>
-    <input #fileUpload type="file" (change)="onPictureSelect($event)" class="hide">
-    <input #videoUpload type="file" (change)="onVideoSelect($event)" class="hide">
+</div>
+
+<input #fileUpload type="file" (change)="onPictureSelect($event)" accept="image/*" class="hide">
+<input #videoUpload accept="video/mp4,video/x-m4v,video/*" type="file" (input)="onVideoSelect($event.target.files[0])" class="hide">

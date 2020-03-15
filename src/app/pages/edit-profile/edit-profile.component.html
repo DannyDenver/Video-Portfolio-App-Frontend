@@ -1,8 +1,9 @@
 <div class="row justify-content-center" *ngIf="profileForm">
     <div class="col-sm-10">
         <mat-card>
-            <mat-card-title *ngIf="!videogoo">Finish your profile:</mat-card-title>
-            <mat-card-title *ngIf="videogoo">Edit Profile:</mat-card-title>
+            <mat-card-title *ngIf="!videogoo">{{ loading ? "Creating your profile..." : "Finish your profile:" }}</mat-card-title>
+            <mat-card-title *ngIf="videogoo">{{ loading ? "Making Edits..." : "Edit Profile:" }}</mat-card-title>
+
             <div class="row justify-content-center" *ngIf="loading">
                 <mat-spinner></mat-spinner>
             </div>
@@ -66,5 +67,5 @@
         </mat-card>
     </div>
 </div>
-<input #fileUpload type="file" (change)="onPictureSelect($event)" class="hide">
-<input #coverPhotoUpload type="file" (change)="onCoverPhotoSelect($event)" class="hide">
+<input #fileUpload type="file" accept="image/*" (change)="onPictureSelect($event)" class="hide">
+<input #coverPhotoUpload type="file" accept="image/*" (change)="onCoverPhotoSelect($event)" class="hide">

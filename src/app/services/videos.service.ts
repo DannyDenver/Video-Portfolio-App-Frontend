@@ -49,6 +49,6 @@ export class VideosService {
   }
   
   deleteVideo(id: string, videoId: string) {
-    return this.http.delete(this.url +'/videographers/' + encodeURI(id) + '/videos/'+ videoId, this.getHeaders()).pipe(map((res) => res['deletedVideoUrl']));
+    return this.http.delete(this.url +'/videographers/' + encodeURI(id) + '/videos/'+ videoId, this.getHeaders());
   }
 }

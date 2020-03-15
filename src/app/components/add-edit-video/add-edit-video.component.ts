@@ -22,6 +22,7 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
   videoFile: File;
   loading = false;
   videographerId: string;
+  showFileSizeWarning = '';
 
   @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
   @ViewChild('videoUpload', { static: false }) videoUpload: ElementRef
@@ -79,23 +80,30 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
     this.thumbnailPhoto = $event.target.files[0];
   }
 
-  selectVideo(event) {
-    event.preventDefault()
+  selectVideo($event) {
+    $event.preventDefault()
     if (this.videoUpload)
       this.videoUpload.nativeElement.click()
   }
 
-  removeVideo(event) {
+  removeVideo($event) {
     event.preventDefault()
 
-    this.videoFile = null;
+    this.videoFile = undefined;
   }
 
-  onVideoSelect(event) {
-    this.videoFile = event.target.files[0]
+  onVideoSelect(file) {
+    this.videoFile = file
   }
 
   onSubmit() {
+    if (this.newVideo && this.videoFile.size > 2000000000) {
+      this.showFileSizeWarning = `Video is size ${this.videoFile.size} bytes cannot exceed 2 gigabytes.` ;
+      return;
+    }
+
+    this.showFileSizeWarning = '';
+
     if (this.videoForm.valid) {
       if (this.newVideo) {
         this.loading = true;
@@ -113,7 +121,6 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
             this.loading = false;
             this.router.navigate(['../'], { relativeTo: this.route })
           });
-        
       }else {
         this.loading = true;
         const video = new Video(
@@ -123,14 +130,13 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
           this.video.id,
           this.getValue('genre'),
           this.videoForm.get("order").enabled ? this.getValue('order') : null
-        )
+        );
   
         const observableArray = [this.videosService.editVideo(video)];
   
         if (this.thumbnailPhoto) {
           observableArray.push(this.videosService.addVideoThumbnail(video.id).pipe(switchMap((url: string) => this.bucketService.uploadFile(url, this.thumbnailPhoto))));
         }
-  
   
         forkJoin(...observableArray).subscribe((url: string) => {
           this.router.navigate(['../../..'], { relativeTo: this.route })
