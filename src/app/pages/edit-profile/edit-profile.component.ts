@@ -81,7 +81,6 @@ export class EditProfileComponent implements OnInit {
         this.getValue('lastName'),
         this.getValue('location'),
         this.getValue('bio'),
-        null,
         null);
 
       if (this.videogoo && this.videogoo.id === this.authService.activeUserId()) {
