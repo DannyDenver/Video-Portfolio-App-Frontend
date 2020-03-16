@@ -18,6 +18,7 @@ export class CreateProfileComponent implements OnInit {
   videogoo: Videographer;
   file: File;
   loading = false;
+  showProfilePicError = false;
   @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
 
   constructor(private fb: FormBuilder,
@@ -29,7 +30,7 @@ export class CreateProfileComponent implements OnInit {
 
   ngOnInit() {
     const userId = this.authService.activeUserId();
-    
+
     this.profileForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -50,39 +51,42 @@ export class CreateProfileComponent implements OnInit {
 
   onPictureSelect($event) {
     this.file = $event.target.files[0];
+    this.showProfilePicError = false;
   }
 
   async onSubmit() {
-    const videogoo = new Videographer(null,
-      this.getValue('firstName'),
-      this.getValue('lastName'),
-      this.getValue('location'),
-      this.getValue('bio'),
-      null,
-      null);
+    if (!this.file) {
+      this.showProfilePicError = true;
+      return;
+    } else {
+      this.showProfilePicError = false;
+    }
 
     if (this.profileForm.valid) {
       this.loading = true;
 
-      if (this.file) {
-        this.videographerService.postVideographer(videogoo).pipe(switchMap((val) => {
-          console.log(val);
-          return this.videographerService.addProfilePicture()}),
-          switchMap((url:string) => this.bucketService.uploadFile(url, this.file))
-        ).subscribe(() => this.navigateAway(), (error) => this.handleSubmitError(error));
-      } else{
-        this.videographerService.postVideographer(videogoo).subscribe(() => this.navigateAway(), (error) => this.handleSubmitError(error));
-      }
+      const videogoo = new Videographer(null,
+        this.getValue('firstName'),
+        this.getValue('lastName'),
+        this.getValue('location'),
+        this.getValue('bio'),
+        null);
+
+      this.videographerService.postVideographer(videogoo).pipe(switchMap((val) => {
+        return this.videographerService.addProfilePicture()
+      }),
+        switchMap((url: string) => this.bucketService.uploadFile(url, this.file))
+      ).subscribe(() => this.navigateAway(), (error) => this.handleSubmitError(error));
     }
   }
 
-  private handleSubmitError(error){
-      this.loading = false;
-      if (error instanceof HttpErrorResponse) {
-        if (error.status === 403) {
-          this.router.navigate(['login']);
-        }
+  private handleSubmitError(error) {
+    this.loading = false;
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 403) {
+        this.router.navigate(['login']);
       }
+    }
   }
 
   private navigateAway() {

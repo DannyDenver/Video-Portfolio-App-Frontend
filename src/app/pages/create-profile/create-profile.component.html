@@ -1,70 +1,70 @@
 <div class="row justify-content-center" *ngIf="profileForm">
-        <div class="col-sm-10">
-            <mat-card>
-                <mat-card-title>Finish your profile:</mat-card-title>
-                <div class="row justify-content-center" *ngIf="loading">
-                        <mat-spinner></mat-spinner>
+    <div class="col-sm-10">
+        <mat-card>
+            <mat-card-title>Finish your profile:</mat-card-title>
+            <div class="row justify-content-center" *ngIf="loading">
+                <mat-spinner></mat-spinner>
+            </div>
+
+            <form *ngIf="!loading" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <input matInput placeholder="First Name" type="text" formControlName="firstName" required>
+                            <mat-error *ngIf="profileForm.get('firstName').hasError('required')">
+                                First Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-    
-                <form *ngIf="!loading" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <mat-form-field>
-                                <input matInput placeholder="First Name" type="text" formControlName="firstName" required>
-                                <mat-error *ngIf="profileForm.get('firstName').hasError('required')">
-                                        First Name is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-sm-6">
-                            <mat-form-field>
-                                <input matInput placeholder="Last Name" type="text" formControlName="lastName" required>
-                                <mat-error *ngIf="profileForm.get('lastName').hasError('required')">
-                                        Last Name is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Last Name" type="text" formControlName="lastName" required>
+                            <mat-error *ngIf="profileForm.get('lastName').hasError('required')">
+                                Last Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <mat-form-field>
-                                <input matInput placeholder="Location" type="text" formControlName="location" required>
-                                <mat-error *ngIf="profileForm.get('location').hasError('required')">
-                                        Location Name is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-sm-6">
-                            <button mat-raised-button color="primary"
-                                (click)="selectPhoto($event)">Upload Profile Pic</button>
-                                <ng-container *ngIf="file">
-                                        <span>{{file.name}}</span>
-                                        <button mat-icon-button
-                                                color="primary"
-                                                (click)="removePhoto()">
-                                          <mat-icon>close</mat-icon>
-                                        </button>
-                                </ng-container>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Location" type="text" formControlName="location" required>
+                            <mat-error *ngIf="profileForm.get('location').hasError('required')">
+                                Location Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-                    <mat-form-field>
-                        <textarea matInput placeholder="Biography" type="text" formControlName="bio" required></textarea>
-                        <mat-error *ngIf="profileForm.get('bio').hasError('required')">
-                                Bio is <strong>required</strong>
+                    <div class="col-sm-6">
+                        <button mat-raised-button color="primary" (click)="selectPhoto($event)">Upload Profile
+                            Pic*</button>
+                        <mat-error *ngIf="showProfilePicError" class="profile-pic-error">
+                            Profile Picture is <strong>required</strong>
                         </mat-error>
-                    </mat-form-field>
-                    <div class="row">
-                        <div class="col-sm-12 justify-content-end">
-                            <button mat-raised-button (click)="authService.logoutLink()">Cancel Profile</button>
-                            <button mat-raised-button type="submit">Create Profile</button>
-                        </div>
+                        <input #fileUpload type="file" (change)="onPictureSelect($event)" class="hide">
+                        <ng-container *ngIf="file">
+                            <span>{{file.name}}</span>
+                            <button mat-icon-button color="primary" (click)="removePhoto()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </ng-container>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">* Might take a couple minutes for updates to take effect *</div>
+                </div>
+                <mat-form-field>
+                    <textarea matInput placeholder="Biography" type="text" formControlName="bio" required></textarea>
+                    <mat-error *ngIf="profileForm.get('bio').hasError('required')">
+                        Bio is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <div class="row">
+                    <div class="col-sm-12 justify-content-end">
+                        <button mat-raised-button (click)="authService.logoutLink()">Cancel Profile</button>
+                        <button mat-raised-button type="submit">Create Profile</button>
                     </div>
-                </form>
-            </mat-card>
-        </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">* Might take a couple minutes for updates to take effect *</div>
+                </div>
+            </form>
+        </mat-card>
     </div>
-    <input #fileUpload type="file" (change)="onPictureSelect($event)" class="hide" >
-    
+</div>

@@ -6,9 +6,6 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./add-video.component.scss']
 })
 export class AddVideoComponent {
-  @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
-  @ViewChild('videoUpload', { static: false }) videoUpload: ElementRef
-
   constructor() { }
 
 }

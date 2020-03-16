@@ -83,7 +83,7 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
   selectVideo($event) {
     $event.preventDefault()
     if (this.videoUpload)
-      this.videoUpload.nativeElement.click()
+      this.videoUpload.nativeElement.click();
   }
 
   removeVideo($event) {
