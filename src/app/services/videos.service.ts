@@ -30,11 +30,7 @@ export class VideosService {
   getVideo(videoId:string):Observable<Video> {
     return this.http.get(this.url + '/videos/' + videoId).pipe(map((res) => res['video']))
   }
-
-  getVideographerVideos(id: string) {
-    return this.http.get(this.url + '/videographers/' + encodeURI(id) + '/videos', this.getHeaders()).pipe(map((res) => res['videos']));
-  }
-
+  
   addVideo(video: Video) {
     const id = this.authService.activeUserId()
     return this.http.post(this.url + '/videographers/' + encodeURI(id) + '/videos', video, this.getHeaders()).pipe(map((res) => res['uploadUrl']));
