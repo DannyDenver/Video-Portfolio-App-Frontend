@@ -1,4 +1,4 @@
-import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,8 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from './core/header/header.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
-import { VideographerListComponent } from './pages/videographer-list/videographer-list.component';
-import { MatListModule, MatListAvatarCssMatStyler } from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -32,26 +31,19 @@ import { EditVideoComponent } from './pages/edit-video/edit-video.component';
 import { EmailService } from './services/email.service';
 import { CreateProfileComponent } from './pages/create-profile/create-profile.component';
 import { AuthInterceptor } from './interceptors/NotAuthorizedInterceptor';
-import { VideoComponent } from './components/video/video.component';
 import { AddEditVideoComponent } from './components/add-edit-video/add-edit-video.component';
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
-import { VideographerCarouselComponent } from './components/videographer-carousel/videographer-carousel.component';
-import { OwlModule } from 'ngx-owl-carousel';
+import { VideoModule } from './components/video/video.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    PortfolioComponent,
-    VideographerListComponent,
     EditProfileComponent,
     AddVideoComponent,
     ConfirmationDialog,
     EditVideoComponent,
     CreateProfileComponent,
-    VideoComponent,
     AddEditVideoComponent,
-    VideographerCarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,8 +62,7 @@ import { OwlModule } from 'ngx-owl-carousel';
     FormsModule,
     MatDialogModule,
     MatCheckboxModule,
-    InfiniteScrollModule,
-    OwlModule
+    VideoModule
   ],
   providers: [
     AuthService,

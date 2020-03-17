@@ -7,11 +7,11 @@ import { VideosService } from 'src/app/services/videos.service';
 import { Video } from 'src/app/shared/models/video';
 
 @Component({
-  selector: 'app-videographer-list',
-  templateUrl: './videographer-list.component.html',
-  styleUrls: ['./videographer-list.component.scss']
+  selector: 'home-page',
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss']
 })
-export class VideographerListComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   videographers: Videographer[] = [];
   loading = true;
   loadingVideos = false;

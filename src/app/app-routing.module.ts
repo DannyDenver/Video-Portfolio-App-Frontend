@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
-import { VideographerListComponent } from './pages/videographer-list/videographer-list.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { AddVideoComponent } from './pages/add-video/add-video.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -32,10 +31,15 @@ const routes: Routes = [
         component: AddVideoComponent,
         canActivate: [AuthGuard]
       },
-      { path: '', component: PortfolioComponent }
+      { path: '',
+      loadChildren: () => import('./pages/portfolio/portfolio.module').then(m => m.PortfolioModule)
+      }
     ]
   },
-  { path: '', component: VideographerListComponent }
+  {
+    path: '',
+    loadChildren: () => import('./pages/home-page/home-page.module').then(m => m.HomePageModule)
+  }
 ];
 
 @NgModule({

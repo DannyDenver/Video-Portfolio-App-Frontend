@@ -55,7 +55,7 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
       if(this.video) {
-        this.orderPreference = this.video.order ? false : true;
+        this.orderPreference = this.video.order ? true : false;
 
         this.videoForm = this.fb.group({
           title: [this.video.title, Validators.required],
