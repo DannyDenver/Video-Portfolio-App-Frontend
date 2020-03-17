@@ -1,6 +1,6 @@
 <owl-carousel [options]="mySlideOptions" [items]="videographers" [carouselClasses]="['owl-theme', 'sliding']">
   <div class="item" *ngFor="let videographer of videographers">
-    <img [src]="videographer.profilePic" alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}"
+    <img class="lazyload" data-src="{{videographer.profilePic}}" alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}"
       class="avatar pointer" routerLink="{{getLink(videographer)}}" />
     <div class="pointer text-center" routerLink="{{getLink(videographer)}}">
       <h4 matLine class="bold name-link">

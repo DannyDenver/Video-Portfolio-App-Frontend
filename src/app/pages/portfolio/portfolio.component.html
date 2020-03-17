@@ -15,7 +15,7 @@
                 <mat-card-content>
                     <div class="cover-photo" [style.background-image]="backgroundUrl"></div>
                     <div class="row profile-details-row">
-                        <img *ngIf="videographer.profilePic" [src]="videographer.profilePic"
+                        <img class="lazyload" data-src="{{videographer.profilePic}}" *ngIf="videographer.profilePic"
                             alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}"
                             class="avatar" />
                         <div class="col-sm-6 col-lg-8 mt-3">

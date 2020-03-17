@@ -2,7 +2,7 @@
     <mat-card-title class="container">
         <div class="flex-container">
             <div *ngIf="showAvatar" routerLink="{{getLink(video.videographerId)}}">
-                <img mat-card-avatar src="{{ video.profilePic}}" alt="{{video.firstName + ' ' + video.lastName}}">
+                <img mat-card-avatar class="lazyload" data-src="{{ video.profilePic}}" alt="{{video.firstName + ' ' + video.lastName}}">
             </div>
             <div>
                 {{video.title}}
