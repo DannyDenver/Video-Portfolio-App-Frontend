@@ -33,6 +33,7 @@ import { CreateProfileComponent } from './pages/create-profile/create-profile.co
 import { AuthInterceptor } from './interceptors/NotAuthorizedInterceptor';
 import { AddEditVideoComponent } from './components/add-edit-video/add-edit-video.component';
 import { VideoModule } from './components/video/video.module';
+import { Ng2ImgMaxModule } from 'ng2-img-max'; 
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { VideoModule } from './components/video/video.module';
     FormsModule,
     MatDialogModule,
     MatCheckboxModule,
-    VideoModule
+    VideoModule,
+    Ng2ImgMaxModule
   ],
   providers: [
     AuthService,

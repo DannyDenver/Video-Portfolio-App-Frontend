@@ -7,6 +7,7 @@ import { Videographer } from 'src/app/shared/models/videographer';
 import { BucketService } from 'src/app/services/bucket.service';
 import { switchMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 
 @Component({
   selector: 'app-create-profile',
@@ -26,7 +27,8 @@ export class CreateProfileComponent implements OnInit {
     private router: Router,
     private videographerService: VideographerService,
     public authService: AuthService,
-    private bucketService: BucketService) { }
+    private bucketService: BucketService,
+    private ng2ImgMaxService: Ng2ImgMaxService) { }
 
   ngOnInit() {
     const userId = this.authService.activeUserId();
@@ -50,7 +52,7 @@ export class CreateProfileComponent implements OnInit {
   }
 
   onPictureSelect($event) {
-    this.file = $event.target.files[0];
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],190, 190).subscribe(result => this.file = result);
     this.showProfilePicError = false;
   }
 

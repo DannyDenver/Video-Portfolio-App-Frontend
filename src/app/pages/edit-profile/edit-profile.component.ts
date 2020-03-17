@@ -8,6 +8,7 @@ import { BucketService } from 'src/app/services/bucket.service';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { Portfolio } from 'src/app/shared/models/portfolio';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 
 @Component({
   selector: 'app-edit-profile',
@@ -29,7 +30,8 @@ export class EditProfileComponent implements OnInit {
     private router: Router,
     private videographerService: VideographerService,
     private authService: AuthService,
-    private bucketService: BucketService) { }
+    private bucketService: BucketService,
+    private ng2ImgMaxService: Ng2ImgMaxService) { }
 
   ngOnInit() {
     const userId = this.authService.activeUserId();
@@ -58,7 +60,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   onPictureSelect($event) {
-    this.file = $event.target.files[0];
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],220, 220).subscribe(result => this.file = result);
   }
 
   selectCoverPhoto($event) {
@@ -73,7 +75,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   onCoverPhotoSelect($event) {
-    this.coverPhotoFile = $event.target.files[0];
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],1200, 630).subscribe(result => this.coverPhotoFile = result);
   }
 
   async onSubmit() {
@@ -92,7 +94,7 @@ export class EditProfileComponent implements OnInit {
         const observablesArray = [this.videographerService.patchVideographer(videogoo)];
 
         if(this.coverPhotoFile) {
-          observablesArray.push(this.videographerService.addCoverPhoto().pipe(switchMap((url: string) => this.bucketService.uploadFile(url, this.coverPhotoFile))));
+            observablesArray.push(this.videographerService.addCoverPhoto().pipe(switchMap((url: string) => this.bucketService.uploadFile(url, this.coverPhotoFile))));
         }
 
         if (this.file) {

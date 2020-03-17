@@ -7,6 +7,7 @@ import { forkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { BucketService } from 'src/app/services/bucket.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 
 @Component({
   selector: 'add-edit-video',
@@ -33,7 +34,8 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
     private router: Router,
     private videosService: VideosService,
     private bucketService: BucketService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private ng2ImgMaxService: Ng2ImgMaxService) { }
 
   ngOnInit() {
     if (this.newVideo) {
@@ -77,7 +79,7 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
   }
 
   onPictureSelect($event) {
-    this.thumbnailPhoto = $event.target.files[0];
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],900, 505).subscribe(result => this.thumbnailPhoto = result);
   }
 
   selectVideo($event) {
