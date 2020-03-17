@@ -52,7 +52,7 @@ export class CreateProfileComponent implements OnInit {
   }
 
   onPictureSelect($event) {
-    this.ng2ImgMaxService.resizeImage($event.target.files[0],190, 190).subscribe(result => this.file = result);
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],300, 300).subscribe(result => this.file = result);
     this.showProfilePicError = false;
   }
 

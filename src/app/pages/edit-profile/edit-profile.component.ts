@@ -60,7 +60,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   onPictureSelect($event) {
-    this.ng2ImgMaxService.resizeImage($event.target.files[0],220, 220).subscribe(result => this.file = result);
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],300, 300).subscribe(result => this.file = result);
   }
 
   selectCoverPhoto($event) {
