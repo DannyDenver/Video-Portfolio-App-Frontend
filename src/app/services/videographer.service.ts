@@ -32,8 +32,8 @@ constructor(private http: HttpClient, private authService: AuthService) { }
     return this.http.get<any>(this.url + '/portfolio/' + encodeURI(id), this.getHeaders())
   }
 
-  getVideographer(id:string): Observable<any> {
-    return this.http.get<any>(this.url + '/videographers/' + encodeURI(id));
+  getVideographer(id:string): Observable<Portfolio> {
+    return this.http.get<any>(this.url + '/videographers/' + encodeURI(id), this.getHeaders());
   }
 
   getVideographers(): Observable<Videographer[]> {

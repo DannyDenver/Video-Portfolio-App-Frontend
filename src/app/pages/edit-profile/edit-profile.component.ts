@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { BucketService } from 'src/app/services/bucket.service';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { Portfolio } from 'src/app/shared/models/portfolio';
 
 @Component({
   selector: 'app-edit-profile',
@@ -33,7 +34,8 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
     const userId = this.authService.activeUserId();
 
-    this.videographerService.getVideographer(userId).subscribe((videogoo: Videographer) => {
+    this.videographerService.getPortfolio(userId).subscribe((portfolio: Portfolio) => {
+      const videogoo = portfolio.profile;
       if (videogoo == null) return;
       this.videogoo = videogoo;
       this.profileForm = this.fb.group({
