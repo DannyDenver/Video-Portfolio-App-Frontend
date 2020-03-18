@@ -8,8 +8,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postbuild": "gzipper --verbose ./dist",
-    "heroku-postbuild": "ng build --prod && gzipper --verbose ./dist"
   },
   "private": true,
   "dependencies": {
