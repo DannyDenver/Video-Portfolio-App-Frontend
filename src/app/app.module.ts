@@ -33,7 +33,9 @@ import { CreateProfileComponent } from './pages/create-profile/create-profile.co
 import { AuthInterceptor } from './interceptors/NotAuthorizedInterceptor';
 import { AddEditVideoComponent } from './components/add-edit-video/add-edit-video.component';
 import { VideoModule } from './components/video/video.module';
-import { Ng2ImgMaxModule } from 'ng2-img-max'; 
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'; 
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     MatDialogModule,
     MatCheckboxModule,
     VideoModule,
-    Ng2ImgMaxModule
+    Ng2ImgMaxModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AuthService,
