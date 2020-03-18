@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideographerService } from 'src/app/services/videographer.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Videographer } from 'src/app/shared/models/videographer';

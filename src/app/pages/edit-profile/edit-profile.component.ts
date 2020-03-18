@@ -98,7 +98,9 @@ export class EditProfileComponent implements OnInit {
         }
 
         if (this.file) {
-          observablesArray.push(this.videographerService.addProfilePicture().pipe(switchMap((url: string) =>
+          let fileType = this.file.name.split('.') ? this.file.name.split('.')[1] : null;
+
+          observablesArray.push(this.videographerService.addProfilePicture(fileType).pipe(switchMap((url: string) =>
             this.bucketService.uploadFile(url, this.file))));
         }
 

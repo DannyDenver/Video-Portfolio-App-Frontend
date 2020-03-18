@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Videographer } from '../shared/models/videographer';
 import { Observable, of as observableOf } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
@@ -45,9 +45,11 @@ constructor(private http: HttpClient, private authService: AuthService) { }
     return this.http.post<string>(this.url + '/videographers/' + encodeURI(id) + '/coverPhoto', null, this.getHeaders()).pipe(map((res) => res['uploadUrl']))
   }
 
-  addProfilePicture(): Observable<string> {
-    const id = this.authService.activeUserId()
-    return this.http.post<string>(this.url + '/videographers/' + encodeURI(id) + '/profilePicture', null, this.getHeaders()).pipe(map((res) => res['uploadUrl']))
+  addProfilePicture(fileType: string = null): Observable<string> {
+    const id = this.authService.activeUserId();
+    let params = { 'fileType': fileType}
+
+    return this.http.post<string>(this.url + '/videographers/' + encodeURI(id) + '/profilePicture', params, this.getHeaders(),).pipe(map((res) => res['uploadUrl']))
   }
 
   patchVideographer(videographer: Videographer) {
