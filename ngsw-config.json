@@ -31,7 +31,8 @@
     {
       "name": "app",
       "urls":[ 
-        "/**"
+        "/**",
+        "www.reel-people.com/*"
       ],
       "cacheConfig": {
         "maxSize": 100,
