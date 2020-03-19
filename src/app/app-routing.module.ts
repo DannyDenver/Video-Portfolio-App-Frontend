@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: 'videos/:id/edit',
-        component: EditVideoComponent,
+        loadChildren: () => import('./pages/edit-video/edit-video.module').then(m => m.EditVideoModule),
         canActivate: [AuthGuard]
       },
       {
@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'add-video',
-        component: AddVideoComponent,
+        loadChildren: () => import('./pages/add-video/add-video.module').then(m => m.AddVideoModule),
         canActivate: [AuthGuard]
       },
       { path: '',

@@ -119,9 +119,11 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
           this.videoForm.get("order").enabled ? this.getValue('order') : null
         );
 
+
+
         this.videosService.addVideo(video).pipe(switchMap((url: string) => this.bucketService.uploadFile(url, this.videoFile))).subscribe(() => {
             this.loading = false;
-            this.router.navigate(['../'], { relativeTo: this.route })
+            this.router.navigate(['../'], { relativeTo: this.route.parent })
           });
       }else {
         this.loading = true;
@@ -141,7 +143,7 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
         }
   
         forkJoin(...observableArray).subscribe((url: string) => {
-          this.router.navigate(['../../..'], { relativeTo: this.route })
+          this.router.navigate(['../../../'], { relativeTo: this.route.parent });
         }, error => console.log,
         () => this.loading = false)
       }

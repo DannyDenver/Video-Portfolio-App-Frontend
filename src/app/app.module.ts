@@ -15,36 +15,31 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from './services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { AddVideoComponent } from './pages/add-video/add-video.component';
 import { VideosService } from './services/videos.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthErrorHandler } from './services/auth-error-handler';
 import { BucketService } from './services/bucket.service';
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { EditVideoComponent } from './pages/edit-video/edit-video.component';
 import { EmailService } from './services/email.service';
 import { CreateProfileComponent } from './pages/create-profile/create-profile.component';
 import { AuthInterceptor } from './interceptors/NotAuthorizedInterceptor';
-import { AddEditVideoComponent } from './components/add-edit-video/add-edit-video.component';
 import { VideoModule } from './components/video/video.module';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment'; 
+import { AddEditVideoModule } from './components/add-edit-video/add-edit-video.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     EditProfileComponent,
-    AddVideoComponent,
     ConfirmationDialog,
-    EditVideoComponent,
     CreateProfileComponent,
-    AddEditVideoComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,15 +49,12 @@ import { environment } from '../environments/environment';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
-    MatListModule,
     MatIconModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     FormsModule,
-    MatDialogModule,
     MatCheckboxModule,
-    VideoModule,
     Ng2ImgMaxModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
