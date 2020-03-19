@@ -18,7 +18,7 @@
     {
       "name": "assets",
       "installMode": "lazy",
-      "updateMode": "prefetch",
+      "updateMode": "lazy",
       "resources": {
         "files": [
           "/assets/**",
@@ -26,19 +26,6 @@
         ]
       }
     }
-  ],
-  "dataGroups": [
-    {
-      "name": "app",
-      "urls":[ 
-        "/**",
-        "www.reel-people.com/*"
-      ],
-      "cacheConfig": {
-        "maxSize": 100,
-        "maxAge": "2d",
-        "strategy": "performance"
-      }
-    }
   ]
 }
+
