@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 
 
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     RouterModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2ImgMaxModule
   ],
   exports: [ AddEditVideoComponent ]
 })

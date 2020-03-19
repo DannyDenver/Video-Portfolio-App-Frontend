@@ -114,7 +114,7 @@ export class EditProfileComponent implements OnInit {
 
   private navigateAway() {
     this.loading = false
-    this.router.navigate(['../'], { relativeTo: this.route })
+    this.router.navigate(['../'], { relativeTo: this.route.parent })
   }
 
   private getValue(field: string) {

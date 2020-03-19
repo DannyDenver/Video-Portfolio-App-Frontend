@@ -19,11 +19,11 @@ const routes: Routes = [
       },
       {
         path: 'edit',
-        component: EditProfileComponent,
+        loadChildren: () => import('./pages/edit-profile/edit-profile.module').then(m => m.EditProfileModule),
       },
       {
         path: 'create',
-        component: CreateProfileComponent,
+        loadChildren: () => import('./pages/create-profile/create-profile.module').then(m => m.CreateProfileModule),
         canActivate: [AuthGuard]
       },
       {
