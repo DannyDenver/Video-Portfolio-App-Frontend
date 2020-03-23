@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { EmailService } from 'src/app/services/email.service';
 import { map } from 'rxjs/operators';
 import { Portfolio } from 'src/app/shared/models/portfolio';
+import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'portfolio',
@@ -26,6 +27,12 @@ export class PortfolioComponent implements OnInit {
   name: string;
   subscribed: boolean;
   backgroundUrl: SafeStyle;
+
+  separateDialCode = true;
+	SearchCountryField = SearchCountryField;
+	TooltipLabel = TooltipLabel;
+	CountryISO = CountryISO;
+	preferredCountries: CountryISO[] = [CountryISO.UnitedStates];
 
   constructor(
     private fb: FormBuilder,
@@ -58,7 +65,7 @@ export class PortfolioComponent implements OnInit {
       });
   
       this.phoneNumberForm = this.fb.group({
-        phoneNumber: ["", Validators.pattern(/^\+(?:[0-9] ?){6,14}[0-9]$/)]
+        phoneNumber: [undefined, Validators.required]
       })
     });
   }
@@ -94,9 +101,11 @@ export class PortfolioComponent implements OnInit {
   };
 
   subscribeToPortfolio() {
-    if(this.phoneNumberForm.valid) {
-      const phoneNumber = this.phoneNumberForm.get('phoneNumber').value.trim();
-      this.videographerService.subscribeToPortfolio(this.videographer, phoneNumber).subscribe(subscribed => this.subscribed = subscribed);
+    if(this.phoneNumberForm.controls['phoneNumber'].valid) {
+      const phoneNumber = this.phoneNumberForm.get('phoneNumber').value.internationalNumber.replace(/\-/g, '').replace(/ /g,'');
+      this.phoneNumberForm.reset();
+      this.videographerService.subscribeToPortfolio(this.videographer, phoneNumber).subscribe(subscribed => {
+        this.subscribed = subscribed});
     }
   }
 

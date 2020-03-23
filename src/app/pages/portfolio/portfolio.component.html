@@ -15,12 +15,31 @@
                 <mat-card-content>
                     <div class="cover-photo" [style.background-image]="backgroundUrl"></div>
                     <div class="row profile-details-row">
-                        <img class="lazyload" data-src="{{videographer.profilePic}}" *ngIf="videographer.profilePic"
-                            alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}"
-                            class="avatar" />
-                        <div class="col-sm-6 col-lg-8 mt-3">
-                                <div class="row">
-                                    <div class="col-sm-12">
+                        <div>
+                            <img class="lazyload" data-src="{{videographer.profilePic}}" *ngIf="videographer.profilePic"
+                                alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}"
+                                class="avatar" />
+                            <form class="desktop" [formGroup]="phoneNumberForm" (ngSubmit)="subscribeToPortfolio()"
+                                *ngIf="!subscribed">
+                                <div class="form-group">
+                                    <label for="inputPhoneNumber">Subscribe to Portfolio:</label>
+                                    <div>
+                                        <ngx-intl-tel-input [cssClass]="'form-control'"
+                                            [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="false"
+                                            [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                            [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.UnitedStates"
+                                            [maxLength]="15" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                            [separateDialCode]="separateDialCode" name="phone" [id]="'inputPhoneNumber'"
+                                            formControlName="phoneNumber"></ngx-intl-tel-input>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </form>
+                        </div>
+                        <div class="col-sm-12 col-lg-8 mt-3">
+                            <div class="row">
+                                <div class="col-sm-12">
                                     <mat-list-item>
                                         <h3 matLine> {{ videographer.firstName || null }}
                                             {{videographer.lastName || null}}
@@ -30,35 +49,39 @@
                                         </p>
                                     </mat-list-item>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 bio">
+                                    {{videographer.bio || null}}
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 bio">
-                                        {{videographer.bio || null}}
-                                    </div>
-                                </div>
+                            </div>
                         </div>
                     </div>
 
                 </mat-card-content>
                 <mat-card-footer>
-                    <div class="container">
-                        <form [formGroup]="phoneNumberForm" (ngSubmit)="subscribeToPortfolio()" *ngIf="!subscribed">
-                            <div class="row">
-                                <div class="col-12 col-sm-6 col-md-5 offset-md-3">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Your Phone Number" type="text" formControlName="phoneNumber">
-                                    </mat-form-field>
+                    <div class="container mobile">
+                        <div class="row justify-content-center">
+                            <form [formGroup]="phoneNumberForm" (ngSubmit)="subscribeToPortfolio()" *ngIf="!subscribed">
+                                <div class="form-group">
+                                    <label for="inputPhoneNumber">Subscribe to Portfolio:</label>
+                                    <div>
+                                        <ngx-intl-tel-input [cssClass]="'form-control'"
+                                            [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="false"
+                                            [searchCountryFlag]="true"
+                                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                            [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.UnitedStates"
+                                            [maxLength]="15" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                            [separateDialCode]="separateDialCode" name="phone" [id]="'inputPhoneNumber'"
+                                            formControlName="phoneNumber"></ngx-intl-tel-input>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-sm-6 col-md-4">
-                                    <button type="button" class="btn btn-primary"
-                                        (click)="subscribeToPortfolio()">Subscribe to Portfolio</button>
-                                </div>
-                            </div>
-                        </form>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </form>
+                        </div>
                     </div>
                 </mat-card-footer>
             </mat-card>
-
             <ng-container *ngIf="videos">
                 <ng-container *ngFor="let vd of videos">
                     <video-card [video]="vd" [showAvatar]="false" (removeVideoEvent)="removeVideo($event)"></video-card>
