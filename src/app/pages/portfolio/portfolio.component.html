@@ -22,7 +22,7 @@
                             <form class="desktop" [formGroup]="phoneNumberForm" (ngSubmit)="subscribeToPortfolio()"
                                 *ngIf="!subscribed">
                                 <div class="form-group">
-                                    <label for="inputPhoneNumber">Subscribe to Portfolio:</label>
+                                    <label for="inputPhoneNumber">Subscribe to Text Notifications:</label>
                                     <div>
                                         <ngx-intl-tel-input [cssClass]="'form-control'"
                                             [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="false"
@@ -64,7 +64,7 @@
                         <div class="row justify-content-center">
                             <form [formGroup]="phoneNumberForm" (ngSubmit)="subscribeToPortfolio()" *ngIf="!subscribed">
                                 <div class="form-group">
-                                    <label for="inputPhoneNumber">Subscribe to Portfolio:</label>
+                                    <label for="inputPhoneNumber">Subscribe to Text Notifications:</label>
                                     <div>
                                         <ngx-intl-tel-input [cssClass]="'form-control'"
                                             [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="false"
