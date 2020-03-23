@@ -8,7 +8,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Video } from 'src/app/shared/models/video';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmationDialog } from 'src/app/core/confirmation-dialog/confirmation-dialog.component';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
 import { map } from 'rxjs/operators';
 import { Portfolio } from 'src/app/shared/models/portfolio';
@@ -19,7 +19,7 @@ import { Portfolio } from 'src/app/shared/models/portfolio';
   styleUrls: ['./portfolio.component.scss'],
 })
 export class PortfolioComponent implements OnInit {
-  emailForm: FormGroup;
+  phoneNumberForm: FormGroup;
   videographer: Videographer;
   videographerName: string;
   videos: Video[];
@@ -57,8 +57,8 @@ export class PortfolioComponent implements OnInit {
         }
       });
   
-      this.emailForm = this.fb.group({
-        email: ["", Validators.required]
+      this.phoneNumberForm = this.fb.group({
+        phoneNumber: ["", Validators.pattern(/^\+(?:[0-9] ?){6,14}[0-9]$/)]
       })
     });
   }
@@ -94,7 +94,16 @@ export class PortfolioComponent implements OnInit {
   };
 
   subscribeToPortfolio() {
-    const emailAddress = this.emailForm.get('email').value.trim();
-    this.emailService.verifyEmail(this.name, emailAddress).subscribe(subscribed => this.subscribed = subscribed);
+    if(this.phoneNumberForm.valid) {
+      const phoneNumber = this.phoneNumberForm.get('phoneNumber').value.trim();
+      this.videographerService.subscribeToPortfolio(this.videographer, phoneNumber).subscribe(subscribed => this.subscribed = subscribed);
+    }
+  }
+
+   ValidatePhone(control: AbstractControl): {[key: string]: any} | null  {
+    if (control.value && control.value.length != 12) {
+      return { 'phoneNumberInvalid': true };
+    }
+    return null;
   }
 }

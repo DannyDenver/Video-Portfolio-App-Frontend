@@ -40,13 +40,13 @@
                     </div>
 
                 </mat-card-content>
-                <mat-card-footer [hidden]="true">
+                <mat-card-footer>
                     <div class="container">
-                        <form [formGroup]="emailForm" (ngSubmit)="subscribeToPortfolio()" *ngIf="!subscribed">
+                        <form [formGroup]="phoneNumberForm" (ngSubmit)="subscribeToPortfolio()" *ngIf="!subscribed">
                             <div class="row">
                                 <div class="col-12 col-sm-6 col-md-5 offset-md-3">
                                     <mat-form-field>
-                                        <input matInput placeholder="Your Email" type="text" formControlName="email">
+                                        <input matInput placeholder="Your Phone Number" type="text" formControlName="phoneNumber">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-12 col-sm-6 col-md-4">
@@ -55,10 +55,6 @@
                                 </div>
                             </div>
                         </form>
-
-                        <div *ngIf="subscribed">
-                            To finish subscription, please check for an AWS email to verify your email address.
-                        </div>
                     </div>
                 </mat-card-footer>
             </mat-card>
