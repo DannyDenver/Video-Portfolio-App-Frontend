@@ -14,6 +14,9 @@
                             <mat-error *ngIf="profileForm.get('firstName').hasError('required')">
                                 First Name is <strong>required</strong>
                             </mat-error>
+                            <mat-error *ngIf="profileForm.get('firstName').hasError('pattern')">
+                                First Name can only contain letters.
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-sm-6">
@@ -21,6 +24,9 @@
                             <input matInput placeholder="Last Name" type="text" formControlName="lastName" required>
                             <mat-error *ngIf="profileForm.get('lastName').hasError('required')">
                                 Last Name is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="profileForm.get('lastName').hasError('pattern')">
+                                Last Name can only contain letters.
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -62,7 +68,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">* Must be JPG or JPEG. Might take a couple minutes for updates to take effect *</div>
+                    <div class="col-sm-12">* Must be JPG or JPEG. Might take a couple minutes for updates to take effect
+                        *</div>
                 </div>
             </form>
         </mat-card>

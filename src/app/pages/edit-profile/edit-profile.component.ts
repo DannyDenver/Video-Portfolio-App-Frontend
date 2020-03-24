@@ -36,13 +36,13 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
     const userId = this.authService.activeUserId();
 
-    this.videographerService.getPortfolio(userId).subscribe((portfolio: Portfolio) => {
+    this.videographerService.getVideographer(userId).subscribe((portfolio: Portfolio) => {
       const videogoo = portfolio.profile;
       if (videogoo == null) return;
       this.videogoo = videogoo;
       this.profileForm = this.fb.group({
-        firstName: [videogoo.firstName, Validators.required],
-        lastName: [videogoo.lastName, Validators.required],
+        firstName: [videogoo.firstName, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+        lastName: [videogoo.lastName, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
         location: [videogoo.location, Validators.required],
         bio: [videogoo.bio, Validators.required],
       })
@@ -81,8 +81,8 @@ export class EditProfileComponent implements OnInit {
   async onSubmit() {
     if (this.profileForm.valid) {
       const videogoo = new Videographer(null,
-        this.getValue('firstName'),
-        this.getValue('lastName'),
+        this.getValue('firstName').replace(/ /g,''),
+        this.getValue('lastName').replace(/ /g,''),
         this.getValue('location'),
         this.getValue('bio'),
         null);

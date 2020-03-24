@@ -34,8 +34,8 @@ export class CreateProfileComponent implements OnInit {
     const userId = this.authService.activeUserId();
 
     this.profileForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
       location: ['', Validators.required],
       bio: ['', Validators.required],
     });
@@ -68,8 +68,8 @@ export class CreateProfileComponent implements OnInit {
       this.loading = true;
 
       const videogoo = new Videographer(null,
-        this.getValue('firstName'),
-        this.getValue('lastName'),
+        this.getValue('firstName').replace(/ /g,''),
+        this.getValue('lastName').replace(/ /g,''),
         this.getValue('location'),
         this.getValue('bio'),
         null);

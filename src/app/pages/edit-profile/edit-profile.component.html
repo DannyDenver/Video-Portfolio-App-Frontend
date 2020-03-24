@@ -1,7 +1,8 @@
 <div class="row justify-content-center" *ngIf="profileForm">
     <div class="col-sm-10">
         <mat-card>
-            <mat-card-title *ngIf="!videogoo">{{ loading ? "Creating your profile..." : "Finish your profile:" }}</mat-card-title>
+            <mat-card-title *ngIf="!videogoo">{{ loading ? "Creating your profile..." : "Finish your profile:" }}
+            </mat-card-title>
             <mat-card-title *ngIf="videogoo">{{ loading ? "Making Edits..." : "Edit Profile:" }}</mat-card-title>
 
             <div class="row justify-content-center" *ngIf="loading">
@@ -12,11 +13,17 @@
                     <div class="col-sm-6">
                         <mat-form-field>
                             <input matInput placeholder="First Name" type="text" formControlName="firstName">
+                            <mat-error *ngIf="profileForm.get('firstName').hasError('pattern')">
+                                First Name can only contain letters.
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-sm-6">
                         <mat-form-field>
                             <input matInput placeholder="Last Name" type="text" formControlName="lastName">
+                            <mat-error *ngIf="profileForm.get('lastName').hasError('pattern')">
+                                Last Name can only contain letters.
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>

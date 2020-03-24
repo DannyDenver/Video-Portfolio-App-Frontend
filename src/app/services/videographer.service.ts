@@ -43,11 +43,7 @@ export class VideographerService {
   deleteVideographer(id: string) {
     return this.http.delete(this.url + '/videographers/' + encodeURI(id), this.getHeaders())
   }
-
-  getPortfolio(id: string): Observable<Portfolio> {
-    return this.http.get<any>(this.url + '/portfolio/' + encodeURI(id), this.getHeaders())
-  }
-
+  
   getVideographer(id: string): Observable<Portfolio> {
     return this.http.get<any>(this.url + '/videographers/' + encodeURI(id), this.getHeaders());
   }
