@@ -22,7 +22,6 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent,
     HeaderComponent,
-    ConfirmationDialog,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +45,6 @@ import { environment } from '../environments/environment';
       multi: true
     }
   ],
-  entryComponents: [ConfirmationDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

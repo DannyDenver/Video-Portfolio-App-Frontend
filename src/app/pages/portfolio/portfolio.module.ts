@@ -10,13 +10,15 @@ import { VideoModule } from 'src/app/components/video/video.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
+import { ConfirmationDialog } from 'src/app/core/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
     PortfolioComponent,
+    ConfirmationDialog,
   ],
   imports: [
     CommonModule,
@@ -32,12 +34,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
     MatDialogModule,
     NgxIntlTelInputModule,
     BsDropdownModule,
+    MatDialogModule,
     RouterModule.forChild([
       {
         path: '',
         component: PortfolioComponent
       }
     ])
-  ]
+  ],
+  entryComponents: [ConfirmationDialog],
 })
 export class PortfolioModule { }
