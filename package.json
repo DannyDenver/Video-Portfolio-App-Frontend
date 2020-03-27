@@ -29,7 +29,7 @@
     "@auth0/auth0-spa-js": "^1.6.4",
     "angular-jwt": "^0.1.11",
     "blueimp-canvas-to-blob": "^3.17.0",
-    "bootstrap": "4.1.1",
+    "bootstrap": "4.4.1",
     "express": "^4.17.1",
     "google-libphonenumber": "^3.2.8",
     "gulp": "^4.0.2",
