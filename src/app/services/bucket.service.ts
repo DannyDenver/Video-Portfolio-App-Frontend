@@ -10,7 +10,7 @@ export class BucketService {
 
     uploadFile(url: string, file: File): Observable<any> {
       let headers = new HttpHeaders();
-      headers = headers.set("Cache-Control", "max-age=2592000");
+      headers = headers.set("Cache-Control", "max-age=31104000");
         return this.http.put(url, file, {headers});
       }
 }
