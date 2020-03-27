@@ -4,19 +4,17 @@
   "assetGroups": [
     {
       "name": "app",
-      "installMode": "lazy",
-      "updateMode": "lazy",
+      "installMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
-          "./*.css",
-          "./*.js"
+          "/*.css",
+          "/*.js"
         ]
       }
-    }, 
-    {
+    }, {
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "lazy",
@@ -29,4 +27,3 @@
     }
   ]
 }
-
