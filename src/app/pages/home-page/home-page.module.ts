@@ -12,6 +12,7 @@ import { VideographerCarouselComponent } from '../../components/videographer-car
 import { HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './home-page.component';
 import { VideoModule } from 'src/app/components/video/video.module';
+import { VideosService } from 'src/app/services/videos.service';
 
 
 
@@ -22,7 +23,6 @@ import { VideoModule } from 'src/app/components/video/video.module';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     MatCardModule,
     MatListModule,
     MatIconModule,
@@ -36,6 +36,9 @@ import { VideoModule } from 'src/app/components/video/video.module';
         component: HomePageComponent
       }
     ])
+  ],
+  providers: [
+    VideosService,
   ]
 })
 export class HomePageModule { }

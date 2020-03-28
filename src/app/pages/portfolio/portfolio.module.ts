@@ -14,6 +14,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 import { ConfirmationDialog } from 'src/app/core/confirmation-dialog/confirmation-dialog.component';
+import { VideosService } from 'src/app/services/videos.service';
 
 @NgModule({
   declarations: [
@@ -35,12 +36,16 @@ import { ConfirmationDialog } from 'src/app/core/confirmation-dialog/confirmatio
     NgxIntlTelInputModule,
     BsDropdownModule,
     MatDialogModule,
+    HttpClientModule,
     RouterModule.forChild([
       {
         path: '',
         component: PortfolioComponent
       }
     ])
+  ],
+  providers: [
+    VideosService
   ],
   entryComponents: [ConfirmationDialog],
 })

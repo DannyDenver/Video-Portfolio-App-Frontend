@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { BucketService } from 'src/app/services/bucket.service';
+import { VideosService } from 'src/app/services/videos.service';
 
 
 
@@ -32,6 +34,10 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     MatInputModule,
     HttpClientModule,
     Ng2ImgMaxModule
+  ], 
+  providers: [
+    VideosService,
+    BucketService
   ],
   exports: [ AddEditVideoComponent ]
 })

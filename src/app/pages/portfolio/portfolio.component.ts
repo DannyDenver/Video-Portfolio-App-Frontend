@@ -43,7 +43,6 @@ export class PortfolioComponent implements OnInit {
     public auth: AuthService,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog,
-    private emailService: EmailService,
     private sanitization: DomSanitizer
   ) { }
 

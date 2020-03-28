@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateProfileComponent } from './create-profile.component';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { HttpClientModule } from '@angular/common/http';
+import { BucketService } from 'src/app/services/bucket.service';
 
 
 
@@ -26,12 +28,16 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     RouterModule,
     ReactiveFormsModule,
     Ng2ImgMaxModule,
+    HttpClientModule,
     RouterModule.forChild([
       {
         path: '',
         component: CreateProfileComponent
       }
     ])
+  ],
+  providers: [
+    BucketService
   ]
 })
 export class CreateProfileModule { }
