@@ -18,7 +18,7 @@
             </div>
         </div>
         <div [hidden]="!showingVideo" class="embed-responsive embed-responsive-16by9">
-            <video #videoPlayer controls="true" class="lazyload embed-responsive-item">
+            <video #videoPlayer preload="none" controls="true" class="lazyload embed-responsive-item">
                 <source data-src="{{video.url}}" type="video/mp4" />
             </video>
         </div>
