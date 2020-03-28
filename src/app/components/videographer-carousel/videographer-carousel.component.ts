@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { Videographer } from 'src/app/shared/models/videographer';
 import { OwlCarousel } from 'ngx-owl-carousel';
 
@@ -8,7 +8,7 @@ import { OwlCarousel } from 'ngx-owl-carousel';
   styleUrls: ['./videographer-carousel.component.scss']
 })
 
-export class VideographerCarouselComponent {
+export class VideographerCarouselComponent implements OnChanges {
 @Input() videographers: Videographer[];
 @ViewChild('owlElement', {static: true}) owlElement: OwlCarousel
 mySlideOptions={items: 3, dots: true, nav: false, margin: 5, responsiveClass:true,
@@ -29,6 +29,10 @@ mySlideOptions={items: 3, dots: true, nav: false, margin: 5, responsiveClass:tru
   };
 
   constructor() { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+  }
   getLink(vg: Videographer) {
     return vg.id;
   }
