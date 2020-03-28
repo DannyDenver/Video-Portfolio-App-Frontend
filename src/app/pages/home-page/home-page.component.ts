@@ -23,9 +23,10 @@ export class HomePageComponent implements OnInit {
     private videosService: VideosService) { }
 
   ngOnInit() {
-    this.videographerService.getVideographers().pipe(finalize(() => this.loading = false))
+    this.videographerService.getVideographers()
       .subscribe(response => {
         this.videographers = response as Videographer[];
+        this.loading = false;
       });
 
       this.videosService.getVideos().subscribe((res) => {
