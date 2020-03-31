@@ -5,7 +5,7 @@ import { VideographerService } from 'src/app/services/videographer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { BucketService } from 'src/app/services/bucket.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, finalize } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { Portfolio } from 'src/app/shared/models/portfolio';
 import { Ng2ImgMaxService } from 'ng2-img-max';
@@ -21,6 +21,9 @@ export class EditProfileComponent implements OnInit {
   file: File;
   coverPhotoFile: File;
   loading = false;
+
+  resizingCoverPhoto = false;
+  resizingProfilePic = false;
 
   @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
   @ViewChild('coverPhotoUpload', { static: false }) coverPhotoUpload: ElementRef
@@ -60,7 +63,14 @@ export class EditProfileComponent implements OnInit {
   }
 
   onPictureSelect($event) {
-    this.ng2ImgMaxService.resizeImage($event.target.files[0],300, 300).subscribe(result => this.file = result);
+    this.resizingProfilePic = true;
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],300, 300).subscribe(result => {
+      this.file = result;
+      this.resizingProfilePic = false;
+    }, err => {
+      console.log(err);
+      this.resizingProfilePic = false;
+    });
   }
 
   selectCoverPhoto($event) {
@@ -75,7 +85,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   onCoverPhotoSelect($event) {
-    this.ng2ImgMaxService.resizeImage($event.target.files[0],1200, 630).subscribe(result => this.coverPhotoFile = result);
+    this.resizingCoverPhoto = true;
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],1200, 630).subscribe((result) => {
+      this.coverPhotoFile = result; 
+      this.resizingCoverPhoto = false;
+    },(err) => {console.log(err); this.resizingCoverPhoto = false; })
   }
 
   async onSubmit() {

@@ -34,8 +34,8 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-6">
-                        <button mat-raised-button color="primary" (click)="selectCoverPhoto($event)">Upload Cover
-                            Photo</button>
+                        <button [disabled]="resizingCoverPhoto" mat-raised-button color="primary" (click)="selectCoverPhoto($event)">Upload Cover
+                            Photo</button><small-spinner *ngIf="resizingCoverPhoto"></small-spinner>
                         <ng-container *ngIf="coverPhotoFile">
                             <span>{{coverPhotoFile.name}}</span>
                             <button mat-icon-button color="primary" (click)="removeCoverPhoto()">
@@ -47,8 +47,8 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <button mat-raised-button color="primary" (click)="selectPhoto($event)">Upload Profile
-                            Pic</button>
+                        <button [disabled]="resizingProfilePic" mat-raised-button color="primary" (click)="selectPhoto($event)">Upload Profile
+                            Pic</button><small-spinner *ngIf="resizingProfilePic"></small-spinner>
                         <ng-container *ngIf="file">
                             <span>{{file.name}}</span>
                             <button mat-icon-button color="primary" (click)="removePhoto()">
@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-sm-12 justify-content-end">
                         <button mat-raised-button [routerLink]="['../']">Cancel</button>
-                        <button mat-raised-button
+                        <button mat-raised-button [disabled]="resizingProfilePic || resizingCoverPhoto"
                             type="submit">{{ videogoo ? 'Save Edits' : 'Update Profile'  }}</button>
                     </div>
                 </div>

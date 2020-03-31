@@ -24,6 +24,7 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
   loading = false;
   videographerId: string;
   showFileSizeWarning = '';
+  resizingThumbnail = false;
 
   @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef
   @ViewChild('videoUpload', { static: false }) videoUpload: ElementRef
@@ -79,7 +80,14 @@ export class AddEditVideoComponent implements OnChanges, OnInit {
   }
 
   onPictureSelect($event) {
-    this.ng2ImgMaxService.resizeImage($event.target.files[0],900, 505).subscribe(result => this.thumbnailPhoto = result);
+    this.resizingThumbnail = true;
+    this.ng2ImgMaxService.resizeImage($event.target.files[0],900, 505).subscribe(result => {
+      this.thumbnailPhoto = result;
+      this.resizingThumbnail = false;
+    }, err => {
+      console.log(err);
+      this.resizingThumbnail = false;
+    });
   }
 
   selectVideo($event) {

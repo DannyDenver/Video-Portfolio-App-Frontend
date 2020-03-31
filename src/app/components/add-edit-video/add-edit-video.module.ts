@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { BucketService } from 'src/app/services/bucket.service';
 import { VideosService } from 'src/app/services/videos.service';
+import { SmallSpinnerModule } from '../small-spinner/small-spinner.module';
 
 
 
@@ -33,7 +34,8 @@ import { VideosService } from 'src/app/services/videos.service';
     RouterModule,
     MatInputModule,
     HttpClientModule,
-    Ng2ImgMaxModule
+    Ng2ImgMaxModule,
+    SmallSpinnerModule
   ], 
   providers: [
     VideosService,

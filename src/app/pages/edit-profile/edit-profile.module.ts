@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { HttpClientModule } from '@angular/common/http';
 import { BucketService } from 'src/app/services/bucket.service';
+import { SmallSpinnerModule } from 'src/app/components/small-spinner/small-spinner.module';
 
 
 
@@ -29,6 +30,7 @@ import { BucketService } from 'src/app/services/bucket.service';
     ReactiveFormsModule,
     Ng2ImgMaxModule,
     HttpClientModule,
+    SmallSpinnerModule,
     RouterModule.forChild([
       {
         path: '',
