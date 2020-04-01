@@ -29,8 +29,4 @@ mySlideOptions={items: 3, dots: true, nav: false, margin: 5, responsiveClass:tru
   };
 
   constructor() { }
-
-  getLink(vg: Videographer) {
-    return vg.id;
-  }
 }

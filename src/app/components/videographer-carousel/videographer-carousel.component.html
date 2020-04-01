@@ -1,10 +1,15 @@
 <owl-carousel [options]="mySlideOptions" [items]="videographers" [carouselClasses]="['owl-theme', 'sliding']">
   <div class="item" *ngFor="let videographer of videographers">
-    <img data-src="{{videographer.profilePic}}" alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}"
-      class="lazyload avatar pointer" routerLink="{{getLink(videographer)}}" />
-    <div class="pointer text-center" routerLink="{{getLink(videographer)}}">
-      <h4 matLine class="bold name-link">
-        {{videographer.firstName + ' ' + videographer.lastName}} </h4>
+    <a class="no-style-link" href="{{videographer.firstName.toLowerCase()}}-{{videographer.lastName.toLowerCase()}}">
+      <img data-src="{{videographer.profilePic}}"
+        alt="{{videographer.firstName || null}}  {{videographer.lastName || null}}" class="lazyload avatar pointer" />
+    </a>
+    <div class="text-center">
+      <a class="no-style-link" href="{{videographer.firstName.toLowerCase()}}-{{videographer.lastName.toLowerCase()}}">
+        <h4 matLine class="bold name-link">
+          {{videographer.firstName + ' ' + videographer.lastName}}
+        </h4>
+      </a>
       <p matLine>
         <span *ngIf="videographer.location">{{videographer.location}}</span>
       </p>

@@ -5,7 +5,7 @@ import { VideographerService } from 'src/app/services/videographer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { BucketService } from 'src/app/services/bucket.service';
-import { switchMap, finalize } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { Portfolio } from 'src/app/shared/models/portfolio';
 import { Ng2ImgMaxService } from 'ng2-img-max';
@@ -44,8 +44,8 @@ export class EditProfileComponent implements OnInit {
       if (videogoo == null) return;
       this.videogoo = videogoo;
       this.profileForm = this.fb.group({
-        firstName: [videogoo.firstName, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
-        lastName: [videogoo.lastName, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+        firstName: [{value: videogoo.firstName, disabled: true }, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+        lastName: [{value: videogoo.lastName, disabled: true },, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
         location: [videogoo.location, Validators.required],
         bio: [videogoo.bio, Validators.required],
       })
@@ -64,7 +64,10 @@ export class EditProfileComponent implements OnInit {
 
   onPictureSelect($event) {
     this.resizingProfilePic = true;
-    this.ng2ImgMaxService.resizeImage($event.target.files[0],300, 300).subscribe(result => {
+    const file = $event.target.files[0];
+    if(!file.type.includes("jpeg")){ return; }
+
+    this.ng2ImgMaxService.resizeImage(file,300, 300).subscribe(result => {
       this.file = result;
       this.resizingProfilePic = false;
     }, err => {
@@ -85,11 +88,17 @@ export class EditProfileComponent implements OnInit {
   }
 
   onCoverPhotoSelect($event) {
+    const file: File = $event.target.files[0];
+    if(!file.type.includes("jpeg")){ return; }
+
     this.resizingCoverPhoto = true;
-    this.ng2ImgMaxService.resizeImage($event.target.files[0],1200, 630).subscribe((result) => {
-      this.coverPhotoFile = result; 
-      this.resizingCoverPhoto = false;
-    },(err) => {console.log(err); this.resizingCoverPhoto = false; })
+    this.ng2ImgMaxService.resizeImage(file,1200, 630).subscribe((result) => {
+        this.coverPhotoFile = result; 
+        this.resizingCoverPhoto = false;
+      }, () => {
+        this.resizingCoverPhoto = false;
+        return null;
+      });
   }
 
   async onSubmit() {

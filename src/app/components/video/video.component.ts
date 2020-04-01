@@ -24,11 +24,7 @@ export class VideoComponent implements OnInit {
     $event.preventDefault();
     this.removeVideoEvent.emit(video);
   }
-
-  getLink(id: string) {
-    return id;
-  }
-
+  
   showVideo() {
     this.showingVideo = true;
     this.videoPlayer.nativeElement.play();

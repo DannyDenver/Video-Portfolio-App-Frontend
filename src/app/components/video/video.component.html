@@ -1,24 +1,33 @@
 <mat-card>
     <mat-card-title class="container">
         <div class="flex-container">
-            <div *ngIf="showAvatar" routerLink="{{getLink(video.videographerId)}}">
-                <img mat-card-avatar alt="videographer's profile picture" class="lazyload" data-src="{{ video.profilePic}}" alt="{{video.firstName + ' ' + video.lastName}}">
+            <div *ngIf="showAvatar">
+                <a class="no-style-link" href="{{video.firstName.toLowerCase()}}-{{video.lastName.toLowerCase()}}">
+                    <img mat-card-avatar alt="videographer's profile picture" class="lazyload"
+                        data-src="{{ video.profilePic}}" alt="{{video.firstName + ' ' + video.lastName}}">
+                </a>
             </div>
             <div>
                 {{video.title}}
-                <div class="title-genre">{{video.genre}}</div>
+                <div class="title-genre"><span *ngIf="showAvatar">{{video.firstName}} {{video.lastName}} -
+                    </span>{{video.genre}}</div>
             </div>
         </div>
     </mat-card-title>
     <mat-card-content>
         <div *ngIf="!showingVideo" class="outer showing-thumbnail">
             <div class="inner img-overlay-wrap" title="Click to play video">
-                        <svg class="play-svg" clas xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                    <img (click)="showVideo()" alt="{{video.title}} thumbnailnail" class="lazyload video-thumbnail pointer" data-src="{{video.thumbnailUrl}}">
+                <svg class="play-svg" clas xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                </svg>
+                <img (click)="showVideo()" alt="{{video.title}} thumbnailnail" class="lazyload video-thumbnail pointer"
+                    data-src="{{video.thumbnailUrl}}">
             </div>
         </div>
         <div [hidden]="!showingVideo" class="embed-responsive embed-responsive-16by9">
-            <video #videoPlayer preload="metadata" controls="true" class="lazyload embed-responsive-item">
+            <video #videoPlayer preload="metadata" controls="true" class="lazyload pointer embed-responsive-item">
                 <source data-src="{{video.url}}" type="video/mp4" />
             </video>
         </div>
