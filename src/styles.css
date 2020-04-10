@@ -47,4 +47,8 @@ mat-form-field {
   font-weight: bold !important;
 }
 
+.no-style-link {
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=styles.css.map */
