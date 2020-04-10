@@ -5,13 +5,15 @@
     {
       "name": "app",
       "installMode": "lazy",
+      "updateMode": "lazy",
       "resources": {
         "files": [
           "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/*.mp4"
         ]
       }
     }, {
