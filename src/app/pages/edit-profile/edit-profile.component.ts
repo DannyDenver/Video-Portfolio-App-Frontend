@@ -106,6 +106,8 @@ export class EditProfileComponent implements OnInit {
       const videogoo = new Videographer(null,
         this.getValue('firstName').replace(/ /g,''),
         this.getValue('lastName').replace(/ /g,''),
+        this.getValue('camera'),
+        this.getValue('school'),
         this.getValue('location'),
         this.getValue('bio'),
         null);

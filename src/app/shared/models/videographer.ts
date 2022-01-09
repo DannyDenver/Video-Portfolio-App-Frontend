@@ -1,21 +1,17 @@
 import { Video } from './video';
+import { User } from './user';
 
-export class Videographer {
-    constructor(id, firstName, lastName, location, bio, profilePic) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.location = location,
+export class Videographer extends User {
+    constructor(id, firstName, lastName, camera, school, location, bio, profilePic) {
+        super(id, firstName, lastName, profilePic);
+        this.location = location;
         this.bio = bio;
-        this.profilePic = profilePic
+        this.camera = camera;
+        this.school = school;
     }
 
-    id: string;
-    firstName?: string;
-    lastName?: string;
+    camera?: string;
+    school?: string;
     location?: string;
     bio?: string;
-    profilePic?: string;
-    email?: string;
-    coverPhoto?: string;
 }

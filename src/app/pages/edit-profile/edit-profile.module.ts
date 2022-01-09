@@ -13,8 +13,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { HttpClientModule } from '@angular/common/http';
 import { BucketService } from 'src/app/services/bucket.service';
 import { SmallSpinnerModule } from 'src/app/components/small-spinner/small-spinner.module';
-
-
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [EditProfileComponent],
@@ -26,6 +25,7 @@ import { SmallSpinnerModule } from 'src/app/components/small-spinner/small-spinn
     MatButtonModule,
     MatInputModule,
     MatIconModule,
+    MatRadioModule,
     RouterModule,
     ReactiveFormsModule,
     Ng2ImgMaxModule,

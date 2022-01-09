@@ -41,8 +41,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-6">
-                        <button mat-raised-button color="primary" (click)="selectPhoto($event)">Upload Profile
-                            Pic*</button>
+                        <button mat-raised-button color="primary" (click)="selectPhoto($event)">Upload Profile Pic*</button>
                         <mat-error *ngIf="showProfilePicError" class="profile-pic-error">
                             Profile Picture is <strong>required</strong>
                         </mat-error>
@@ -55,12 +54,56 @@
                         </ng-container>
                     </div>
                 </div>
-                <mat-form-field>
-                    <textarea matInput placeholder="Biography" type="text" formControlName="bio" required></textarea>
-                    <mat-error *ngIf="profileForm.get('bio').hasError('required')">
-                        Bio is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
+            
+                <div class="row">
+                    <section class="example-section">
+                        <label >User Type:</label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" (change)="updateUserType()">
+                          <mat-radio-button value="commenter" [checked]="userType=='commenter'">
+                            Commenter
+                          </mat-radio-button>
+                          <mat-radio-button value="videographer" [checked]="userType=='videographer'">
+                            Videographer
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </section>
+                </div>
+                <div *ngIf="userType=='commenter'" class="row">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select a state</mat-label>
+                        <mat-select matInput formControlName="state">
+                          <mat-option *ngFor="let state of states" value="state">{{state}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+
+                <div *ngIf="userType=='videographer'" class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Camera Type" type="text" formControlName="camera" required>
+                            <mat-error *ngIf="profileForm.get('camera').hasError('required')">
+                                Camera Type is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <input matInput placeholder="School" type="text" formControlName="school" required>
+                            <mat-error *ngIf="profileForm.get('school').hasError('required')">
+                                School Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div *ngIf="userType=='videographer'" class="row">
+                    <mat-form-field>
+                        <textarea matInput placeholder="Biography" type="text" formControlName="bio" required></textarea>
+                        <mat-error *ngIf="profileForm.get('bio').hasError('required')">
+                            Bio is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>                    
+                </div>
+
                 <div class="row">
                     <div class="col-sm-12 justify-content-end">
                         <button mat-raised-button (click)="authService.logoutLink()">Cancel Profile</button>

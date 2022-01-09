@@ -7,13 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CreateProfileComponent } from './create-profile.component';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { HttpClientModule } from '@angular/common/http';
 import { BucketService } from 'src/app/services/bucket.service';
-
-
+import { MatRadioModule } from '@angular/material/radio';
+import { MatOptionModule, MatSelectModule } from '@angular/material';
 
 @NgModule({
   declarations: [CreateProfileComponent],
@@ -25,10 +25,14 @@ import { BucketService } from 'src/app/services/bucket.service';
     MatButtonModule,
     MatInputModule,
     MatIconModule,
+    MatRadioModule,
+    MatOptionModule,
+    MatSelectModule,
     RouterModule,
     ReactiveFormsModule,
     Ng2ImgMaxModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forChild([
       {
         path: '',
