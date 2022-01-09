@@ -30,7 +30,7 @@
     "bootstrap": "^4.4.1",
     "google-libphonenumber": "^3.2.8",
     "intl-tel-input": "^14.1.0",
-    "lazysizes": "^5.2.0",
+    "lazysizes": "^5.2.1",
     "ng2-img-max": "^2.2.1",
     "ngx-bootstrap": "^5.5.0",
     "ngx-infinite-scroll": "^8.0.1",
